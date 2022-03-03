@@ -21,6 +21,7 @@ class CreateChauffeursTable extends Migration
             ->onUpdate('cascade');
             $table->string('numero_cni')->unique();
             $table->string('numero_permis')->unique();
+            $table->boolean('statut_chauffeur');
             $table->timestamps();
         });
     

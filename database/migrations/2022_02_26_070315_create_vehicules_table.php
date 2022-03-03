@@ -31,6 +31,7 @@ class CreateVehiculesTable extends Migration
             $table->foreign('parking_id')->references('id')->on('parkings')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->boolean('statut_vehicule');
             $table->string('immatriculation')->unique();
             $table->float('kilometrage');
             $table->string('numero_chassi')->unique();
