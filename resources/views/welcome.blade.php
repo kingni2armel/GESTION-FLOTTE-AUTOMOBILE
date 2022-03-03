@@ -26,6 +26,7 @@
       </div>
     </div>
   </div>
+
   <main class="main-content  mt-0">
     <div class="page-header align-items-start min-vh-100">
       <span class="mask bg-gradient-dark opacity-6"></span>
@@ -45,14 +46,20 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
+              @foreach($errors->all() as $erro )
+
+{{$erro}}
+
+@endforeach
+                <form role="form" action = "{{route('Authenticate')}}" method="POST" class="text-start">
+                    @csrf
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
+                    <input type="email" name="email" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control">
+                    <input type="password" name="password" id="password" class="form-control">
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" onclick="ShowPassword()">
@@ -60,7 +67,7 @@
                   </div>
                
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Se connecter</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Se connecter</button>
                   </div>
                  
                 </form>
