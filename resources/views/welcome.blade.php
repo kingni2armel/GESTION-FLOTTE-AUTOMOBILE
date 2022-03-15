@@ -48,9 +48,9 @@
               <div class="card-body">
               @foreach($errors->all() as $erro )
 
-{{$erro}}
+                  <p>{{$erro}}</p>
 
-@endforeach
+              @endforeach
                 <form role="form" action = "{{route('Authenticate')}}" method="POST" class="text-start">
                     @csrf
                   <div class="input-group input-group-outline my-3">

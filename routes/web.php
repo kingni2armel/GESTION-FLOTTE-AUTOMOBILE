@@ -23,7 +23,14 @@ Route::get('/redirection',[UserController::class,'Redirection'])->name('Redirect
 Route::post('/login',[UserController::class,'Authenticate'])->name('Authenticate');
 Route::get('/logout',[UserController::class,'Logout'])->name('Logout');
 
-Route::get('/createuser',[UserController::class,'GetPage'])->name('GetPage')
+
+/*  les controlleurs de creation des utilisateurs*/
+Route::get('/dashboard',[UserController::class,'GetPage'])->name('GetPage')
 ->middleware('auth');
+
+Route::get('/adduser',[UserController::class,'GETPAGES'])->name('GETPAGES')
+->middleware('auth');
+
+
 Route::post('/adduser',[UserController::class,'AddUser'])->name('AddUser');
 

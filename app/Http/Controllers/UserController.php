@@ -18,6 +18,11 @@ class UserController extends Controller
     */
     public function GetPage()
     {
+        return view('dashboard.dashboard');
+    }
+
+    public function GETPAGES()
+    {
         return view('user.adduser');
     }
      /*
@@ -40,13 +45,13 @@ class UserController extends Controller
             ]);
 
             if(auth()->attempt($request->only('email','password')))
-            
+             
                 {
                         return redirect()->route('GetPage');
                 }
                return redirect()->back()->WithErrors('Les identifiants ne correspondent pas');
     }   
-    
+     
     /*
             function de deconnexion
     */
