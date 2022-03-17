@@ -30,12 +30,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+     
     </ul>
 
     <!-- Right navbar links -->
@@ -162,7 +157,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="height:105vh !important">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="height:110vh !important">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
       <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -250,7 +245,7 @@
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                            <a href="{{url('/listeuser')}} " class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Liste des users <span class="ai-users"></span></p>
                             </a>
@@ -615,15 +610,15 @@
 <script src="{{url('plug/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')}}"></script>
 <script src="{{url('plug/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 
-<script src="{{url('plug/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
+ <script src="{{url('plug/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 
 <script src="{{url('plug/bs-stepper/js/bs-stepper.min.js')}}"></script>
 
-<script src="{{url('plug/dropzone/min/dropzone.min.js')}}"></script>
+{{-- <script src="{{url('plug/dropzone/min/dropzone.min.js')}}"></script>
 
 <script src="{{url('dist/js/adminlte.min.js')}}"></script>
 
-<script src="{{url('dist/js/demo.js')}}"></script>
+<script src="{{url('dist/js/demo.js')}}"></script> --}} 
 <script>
   $(function () {
     //Initialize Select2 Elements

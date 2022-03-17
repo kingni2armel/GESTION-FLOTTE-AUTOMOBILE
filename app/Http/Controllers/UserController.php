@@ -8,6 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Dispactcheur;
+use App\Models\Superviseur;
+
 
 class UserController extends Controller 
 {
@@ -59,12 +62,10 @@ class UserController extends Controller
     {
 
     }
-
-
     /*
             function de creation d'un utilisateur
     */
-    public function AddUser(Request $request)
+    public function ADDUSER(Request $request)
     {
         $request->validate([
             'nom'=>['required'],
@@ -84,5 +85,34 @@ class UserController extends Controller
             'role'=>$request->role,
 
         ]);
+
+        if($createUser->role =='dispatcheur')
+        
+        {
+            Dispactcheur::create([
+                'user_id'=> $createUser->id,
+            ]);
+        } else if ($createUser->role == "superviseur") 
+        {
+            Superviseur::create([
+                    'user_id'=>$createUser->id,
+            ]);
+        }
+
     }
+
+    /**
+     *  function qui permet de recuper tout les utilisateurs 
+     * 
+     */
+
+    public function GETLISTEUSER(Request $request)
+    {
+
+            $listeuser = User::all();
+            return view('user.listeuser',['listeuser'=>$listeuser]);
+
+
+    }
+
 }

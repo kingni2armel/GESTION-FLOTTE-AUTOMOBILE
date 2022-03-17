@@ -2,22 +2,31 @@
 
 
     <div class="content-wrapper" style="margin-right: 15px">
-        <section class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1> Creer un utilisateur</h1>
-                </div>
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Advanced Form</li>
-                  </ol>
-                </div>
+      <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1> Creer un utilisateur</h1>
               </div>
-            </div><!-- /.container-fluid -->
-          </section>
+           
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
 
+        @if($errors->any())
+      {
+          @foreach($errors->all() as $error)
+               <div class="text-red-500">
+                          <p> {{$error}}</p>
+               </div>
+          @endforeach
+      } 
+
+  @endif
+
+        <form action="{{route('ADDUSER')}}"  method="post">
+
+          @csrf
 
           <div class="row">
             <div class="col-md-12">
@@ -42,44 +51,44 @@
                           <span class="bs-stepper-label">niveau 2</span>
                         </button>
                       </div>
-                    </div>
+                    </div> 
                     <div class="bs-stepper-content">
                       <!-- your steps content here -->
                       <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Nom</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre nom">
+                          <input name="nom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre nom">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Prenom</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre prenom">
+                            <input name="prenom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre prenom">
                           </div>
                        
                         <div class="form-group">
                           <label for="exampleInputPassword1">Numero de telephone</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Entrer votre numero">
+                          <input name="numero" type="number" class="form-control" id="exampleInputPassword1" placeholder="Entrer votre numero">
                         </div>
-                        <button class="btn btn-primary" onclick="stepper.next()">Suivant</button>
+                        <p class="btn btn-primary" onclick="stepper.next()">Suivant</p>
                       </div>
                       <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre email">
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre email">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre email">
+                            <input  name = "password" type="password" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre password">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Role</label>
                                 <select name="role" class="form-control select2" style="width: 100%;">
-                                    <option>dispatcheur</option>
-                                    <option>superviseur</option>
+                                    <option value="dispatcheur" >dispatcheur</option>
+                                    <option value="superviseur">superviseur</option>
                                    
                                 </select> 
                        </div>
-                        <button class="btn btn-primary" onclick="stepper.previous()">Precedent</button>
-                        <button type="submit" class="btn btn-primary">Creer</button>
+                        <p class="btn btn-primary" onclick="stepper.previous()">Precedent</p>
+                        <button type="submit" class="btn btn-primary" style="margin-top: -15px">Creer</button>
                       </div>
                     </div>
                   </div>
@@ -92,6 +101,9 @@
               <!-- /.card -->
             </div>
           </div>
-          
-    </div>
+        </form>
+        
+        
+  </div>
+
 

@@ -32,5 +32,9 @@ Route::get('/adduser',[UserController::class,'GETPAGES'])->name('GETPAGES')
 ->middleware('auth');
 
 
-Route::post('/adduser',[UserController::class,'AddUser'])->name('AddUser');
+Route::post('/adduser',[UserController::class,'ADDUSER'])->name('ADDUSER')
+->middleware('auth');
+
+Route::get('/listeuser',[UserController::class,'GETLISTEUSER'])->name('GETLISTEUSER')
+->middleware('auth');
 
