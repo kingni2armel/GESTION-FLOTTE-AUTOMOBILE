@@ -57,11 +57,11 @@
                       <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Nom</label>
-                          <input name="nom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre nom">
+                          <input name="nom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre nom">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Prenom</label>
-                            <input name="prenom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre prenom">
+                            <input name="prenom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre prenom">
                           </div>
                        
                         <div class="form-group">
@@ -73,11 +73,11 @@
                       <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre email">
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre email">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
-                            <input  name = "password" type="password" class="form-control" id="exampleInputEmail1" placeholder="Enter  votre password">
+                            <input  name = "password" type="password" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre password">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Role</label>

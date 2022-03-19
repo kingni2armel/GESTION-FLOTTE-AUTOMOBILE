@@ -34,7 +34,10 @@ Route::get('/adduser',[UserController::class,'GETPAGES'])->name('GETPAGES')
 
 Route::post('/adduser',[UserController::class,'ADDUSER'])->name('ADDUSER')
 ->middleware('auth');
-
+Route::get('/updateuser',[UserController::class,'GETPAGEUPDATE'])->name('GETPAGEUPDATE')
+->middleware('auth');
 Route::get('/listeuser',[UserController::class,'GETLISTEUSER'])->name('GETLISTEUSER')
+->middleware('auth');
+Route::post('userupdate/{id}',[UserController::class,'UPDATEUSER'])->name('UPDATEUSER')
 ->middleware('auth');
 
