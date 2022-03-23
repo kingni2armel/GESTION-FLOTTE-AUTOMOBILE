@@ -9,7 +9,7 @@ class Parking extends Model
 {
     protected $fillable = [
         'ville_id',
-        'nom',
+        'nomparking',
         'description',
         'nombre_de_place'
     ];

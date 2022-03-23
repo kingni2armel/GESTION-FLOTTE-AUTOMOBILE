@@ -3,3 +3,11 @@ body{
     background-size: cover !important;
     background-repeat: no-repeat !important;
 }
+
+.items-but{
+    padding: 5px !important;
+}
+.parent {
+    display: flex;
+    justify-content: space-around;
+}

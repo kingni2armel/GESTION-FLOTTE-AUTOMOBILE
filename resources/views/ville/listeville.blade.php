@@ -2,33 +2,31 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">LISTE DES UTILISATEURS</h3>
+          <h3 class="card-title">LISTE DES VILLES</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body"> 
-                    @if($listeuser->count()>0)
+                    @if($listeville->count()>0)
 
                             <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                                 <tr>
-                                                <th>Nom et Prenom</th>
-                                                <th>numero de telephone</th>
-                                                <th>email</th>
-                                                <th>Role</th>
-                                                <th>Operation</th>
+                                                    <th>Nom </th>
+                                                    <th>Description</th>
+                                                    <th>Operation</th>
+                                        
                                                 </tr>
                                         </thead>
                                         <tbody>
-                                                    @foreach ($listeuser as $listeusers )
+                                                    @foreach ($listeville as $listevilles )
                                                             <tr>
-                                                                    <td>{{$listeusers->nom }} {{$listeusers->prenom}}</td>
-                                                                    <td>{{$listeusers->numero_telephone}}</td>    
-                                                                    <td>{{$listeusers->email}}</td>
-                                                                    <td>{{$listeusers->role}} </td>
+                                                                    <td>{{$listevilles->nom }}</td>
+                                                                    <td>{{$listevilles->description}}</td>    
+                                                                    
                                                                     <td>
                                                                              <div class="parent">
                                                                                  <div class="parent_items">
-                                                                                    <form action="{{route('DELETEUSER',['id'=>$listeusers->id])}}" method="post">
+                                                                                    <form action="{{route('DELETEVILLE',['id'=>$listevilles->id])}}" method="post">
                                                                                        @csrf
                                                                                         <button type="su" class="btn btn-navbar items-but" style=
                                                                                         "background-color:red !important;color:white;pa"type="submit">
@@ -40,7 +38,7 @@
                                                                                  </div>
                                                                                  <div class="parent_items">
                                                                                     <a 
-                                                                                    href="{{route('GETPAGEUPDATE',['id'=>$listeusers->id])}}"
+                                                                                    href="{{route('GETPAGEUPDATEVILLE',['id'=>$listevilles->id])}}"
                                                                                        class="btn btn-navbar items-but" style=
                                                                                          "  background-color: #212529;!important;color:white"
                                                                                              type="button"
@@ -59,9 +57,9 @@
                                     
                                         </tbody>
                             </table>
-                            <span>{{$listeuser->links()}}</span>
+                            <span>{{$listeville->links()}}</span>
                         @else
-                                <span> Il n'existe aucun utilisateur</span>
+                                <span> Il n'existe aucune ville</span>
                      @endif
         </div>
         <!-- /.card-body -->

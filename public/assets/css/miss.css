@@ -1,0 +1,11 @@
+
+.items-but{
+    padding: 5px !important;
+}
+.parent {
+    display: flex;
+    justify-content: space-around;
+}
+.nameuppercae{
+    text-transform: uppercase;
+}

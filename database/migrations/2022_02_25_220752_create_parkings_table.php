@@ -19,9 +19,9 @@ class CreateParkingsTable extends Migration
             $table->foreign('ville_id')->references('id')->on('villes')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->string('nom');
+            $table->string('nomparking');
             $table->text('description');
-            $table->float('nombre_de_place');
+            $table->double('nombre_de_place');
             $table->timestamps();
         });
     }

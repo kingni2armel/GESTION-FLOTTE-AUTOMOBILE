@@ -1,34 +1,31 @@
 @include('layout.header');
 
 
-<div class="content-wrapper" style="margin-right: 15px">
-    <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-                @foreach ( $infouser as $infousers )
-                <h1> Modification de l' utilisateur {{$infousers->nom}}  {{$infousers->prenom}}  </h1>
 
-                @endforeach
+    <div class="content-wrapper" style="margin-right: 15px">
+      <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1> Creer un chauffeur</h1>
+              </div>
+           
             </div>
-         
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
+          </div><!-- /.container-fluid -->
+        </section>
 
-      @if($errors->any())
-    {
-        @foreach($errors->all() as $error)
-             <div class="text-red-500">
-                        <p> {{$error}}</p>
-             </div>
-        @endforeach
-    } 
+        @if($errors->any())
+      {
+          @foreach($errors->all() as $error)
+               <div class="text-red-500">
+                          <p> {{$error}}</p>
+               </div>
+          @endforeach
+      } 
 
-@endif
+  @endif
 
-@foreach ( $infouser as $infousers )
-        <form action="{{route('UPDATEUSER',['id'=>$id=$_GET['id']])}}"  method="post">
+        <form action="{{route('CREATECHAUFFEUR')}}"  method="post">
 
           @csrf
 
@@ -60,50 +57,60 @@
                       <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Nom</label>
-                          <input name="nomupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infousers->nom}}">
+                          <input name="nom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  le nom">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Prenom</label>
-                            <input name="prenomupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infousers->prenom}}">
+                            <input name="prenom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  le prenom">
                           </div>
-                      
+                       
                         <div class="form-group">
                           <label for="exampleInputPassword1">Numero de telephone</label>
-                          <input name="numeroupdate" type="number" class="form-control" id="exampleInputPassword1" value="{{$infousers->numero_telephone}}">
+                          <input name="numero" type="number" class="form-control" id="exampleInputPassword1" placeholder="Entrer le numero">
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Entrer  l'email">
+                        </div>
+                
                         <p class="btn btn-primary" onclick="stepper.next()">Suivant</p>
                       </div>
                       <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email</label>
-                            <input name="emailupdate" type="email" class="form-control" id="exampleInputEmail1" value="{{$infousers->email}}">
+                            <label for="exampleInputEmail1">Numero cni</label>
+                            <input name="numcni" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  le numero cni">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Password</label>
-                            <input  name = "passwordupdate" type="password" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre password">
+                            <label for="exampleInputEmail1">Numero permis de conduire</label>
+                            <input name="numpermis" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  le numero de permis">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Role</label>
-                                <select name="roleupdate" class="form-control select2" style="width: 100%;">
-                                    <option value="dispatcheur" >dispatcheur</option>
-                                    <option value="superviseur">superviseur</option>
-                                  
+                            <label for="exampleInputEmail1">Statut</label>
+                                <select name="status" class="form-control select2" style="width: 100%;">
+                                    <option value="1" >Libre</option>                                   
                                 </select> 
-                      </div>
+                       </div>
+
+                       <div class="form-group">
+                        <label for="exampleInputEmail1">Password</label>
+                        <input name="password" type="password" class="form-control" id="exampleInputEmail1" placeholder="Entrer  le  password">
+                    </div>
+                    
                         <p class="btn btn-primary" onclick="stepper.previous()">Precedent</p>
-                        <button type="submit" class="btn btn-primary" style="margin-top: -15px">Mettre a jour</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top: -15px">Creer</button>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
-
+              
               </div>
               <!-- /.card -->
             </div>
           </div>
         </form>
-@endforeach
+        
+        
+  </div>
 
-</div>
-      
+

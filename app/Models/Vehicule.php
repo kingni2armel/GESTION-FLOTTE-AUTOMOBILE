@@ -20,5 +20,6 @@ class Vehicule extends Model
 
 
     ];
+    protected $dates =['expired_at'];
     use HasFactory;
 }

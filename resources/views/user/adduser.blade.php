@@ -32,7 +32,6 @@
             <div class="col-md-12">
               <div class="card card-default">
                 <div class="card-header">
-                  <h3 class="card-title">bs-stepper</h3>
                 </div>
                 <div class="card-body p-0">
                   <div class="bs-stepper">
@@ -94,9 +93,7 @@
                   </div>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                  Visit <a href="https://github.com/Johann-S/bs-stepper/#how-to-use-it">bs-stepper documentation</a> for more examples and information about the plugin.
-                </div>
+                
               </div>
               <!-- /.card -->
             </div>

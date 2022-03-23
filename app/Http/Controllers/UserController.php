@@ -122,6 +122,9 @@ class UserController extends Controller
             'password'=>['required'],
             'role'=>['required'],
 
+
+
+
         ]);
         $createUser = User::create([
             'nom'=>$request->nom,
@@ -157,10 +160,8 @@ class UserController extends Controller
 
     public function GETLISTEUSER(Request $request)
     {
-
-            $listeuser = User::all();
-            return view('user.listeuser',['listeuser'=>$listeuser]);
-
+            $listeuser = User::paginate(7);
+            return view('user.listeuser',['listeuser'=>$listeuser]);    
 
     }
 
@@ -171,6 +172,15 @@ class UserController extends Controller
 
      public function UPDATEUSER(Request $request,$id)
      {
+        $request->validate([
+            'nomupdate'=>['required'],
+            'prenomupdate'=>['required'],
+            'numeroupdate'=>['required'],
+            'emailupdate'=>['required'],
+            'passwordupdate'=>['required'],
+            'roleupdate'=>['required'],
+
+        ]);
          $update = User::find($id);
          $update->update([
             'nom'=>$request->nomupdate,
@@ -190,7 +200,11 @@ class UserController extends Controller
       */
      public function DELETEUSER(Request $request,$id)
      {
-            $deleteuser = User::delete('id',$id)->delete();
+            $deleteuser = User::find($id);
+            $deleteuser->delete();
+            
+            return redirect()->route('GETLISTEUSER');
+
      }
 
    

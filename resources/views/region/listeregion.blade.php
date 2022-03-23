@@ -2,33 +2,31 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">LISTE DES UTILISATEURS</h3>
+          <h3 class="card-title">LISTE DES REGIONS</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body"> 
-                    @if($listeuser->count()>0)
+                    @if($listeregion->count()>0)
 
                             <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                                 <tr>
-                                                <th>Nom et Prenom</th>
-                                                <th>numero de telephone</th>
-                                                <th>email</th>
-                                                <th>Role</th>
-                                                <th>Operation</th>
+                                                    <th>Nom </th>
+                                                    <th>Commentaire</th>
+                                                    <th>Operation</th>
+                                        
                                                 </tr>
                                         </thead>
                                         <tbody>
-                                                    @foreach ($listeuser as $listeusers )
+                                                    @foreach ($listeregion as $listeregions )
                                                             <tr>
-                                                                    <td>{{$listeusers->nom }} {{$listeusers->prenom}}</td>
-                                                                    <td>{{$listeusers->numero_telephone}}</td>    
-                                                                    <td>{{$listeusers->email}}</td>
-                                                                    <td>{{$listeusers->role}} </td>
+                                                                    <td>{{$listeregions->nom }}</td>
+                                                                    <td>{{$listeregions->commentaire}}</td>    
+                                                                    
                                                                     <td>
                                                                              <div class="parent">
                                                                                  <div class="parent_items">
-                                                                                    <form action="{{route('DELETEUSER',['id'=>$listeusers->id])}}" method="post">
+                                                                                    <form action="{{route('DELETEREGION',['id'=>$listeregions->id])}}" method="post">
                                                                                        @csrf
                                                                                         <button type="su" class="btn btn-navbar items-but" style=
                                                                                         "background-color:red !important;color:white;pa"type="submit">
@@ -40,7 +38,7 @@
                                                                                  </div>
                                                                                  <div class="parent_items">
                                                                                     <a 
-                                                                                    href="{{route('GETPAGEUPDATE',['id'=>$listeusers->id])}}"
+                                                                                    href="{{route('GETPAGEUPDATEREGION',['id'=>$listeregions->id])}}"
                                                                                        class="btn btn-navbar items-but" style=
                                                                                          "  background-color: #212529;!important;color:white"
                                                                                              type="button"
@@ -59,7 +57,7 @@
                                     
                                         </tbody>
                             </table>
-                            <span>{{$listeuser->links()}}</span>
+                            <span>{{$listeregion->links()}}</span>
                         @else
                                 <span> Il n'existe aucun utilisateur</span>
                      @endif

@@ -10,7 +10,8 @@ class Chauffeur extends Model
     protected $fillable = [
         'user_id',
         'numero_cni',
-        'numero_permis'
+        'numero_permis',
+        'statut_chauffeur'
     ];
     use HasFactory;
 }

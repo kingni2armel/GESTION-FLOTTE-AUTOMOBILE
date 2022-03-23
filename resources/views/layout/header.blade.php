@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="{{url('plug/bs-stepper/css/bs-stepper.min.css' )}}">
   <link rel="stylesheet" href="{{url('plug/dropzone/min/dropzone.min.css')}}">
   <link rel="stylesheet" href="{{url('dist/css/adminlte.min.css' )}}">
+  <link rel="stylesheet" href="{{url('assets/css/miss.css' )}}">
+
+  
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -203,13 +206,13 @@
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
-                          <a href="../../index.html" class="nav-link">
+                          <a href="{{url('addchauffeur')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Creer  chauffeur</p>
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="../../index2.html" class="nav-link">
+                          <a href="{{url('listechauffeur')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p> Liste  chauffeurs</p>
                           </a>
@@ -254,6 +257,78 @@
              
         @if(auth()->user()->role == 'admin' || auth()->user()->role == 'dispatcheur' || auth()->user()->role == 'superviseur')
  
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Gestion clients
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../UI/general.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ajouter  client</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../UI/icons.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Liste  clients</p>
+              </a>
+            </li>
+           
+          
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon far fa-envelope"></i>
+            <p>
+              Gestion direction
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../mailbox/mailbox.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Creer Direction</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../mailbox/compose.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Liste directions</p>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Gestion departement
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="../examples/invoice.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Creer departement</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../examples/profile.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Liste departement</p>
+              </a>
+            </li>
+            
+          </ul>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-car"></i>
@@ -264,7 +339,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../charts/chartjs.html" class="nav-link">
+                <a href="{{route('GETPAGECREATEVEHICULE')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Creer vehicule</p>
                 </a>
@@ -278,35 +353,154 @@
             
             </ul>
           </li>
-        @endif
-        @if(auth()->user()->role == 'admin' || auth()->user()->role == 'dispatcheur' || auth()->user()->role == 'superviseur')
-
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-car"></i>
               <p>
-                Gestion clients
+                Gestion  marque
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('GETPAGECREATEMARQUE')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creer marque</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('GETLISTEMARQUE')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Liste  marque</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-car"></i>
+              <p>
+                Gestion  Modele
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('GETPAGECREATEMODELE')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creer modele</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('GETLISTEMODELE')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Liste  modeles</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+        
+       
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Gestion region
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../UI/general.html" class="nav-link">
+                <a href="{{route('GETPAGEREGION')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ajouter  client</p>
+                  <p>Creer region</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="{{route('GETLISTEREGION')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Liste  clients</p>
+                  <p>Liste region</p>
                 </a>
               </li>
-             
+              
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Gestion Ville
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('GETPAGECREATEVILLE')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creer ville</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('GETLISTEVILLE')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Liste ville</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-car"></i>
+              <p>
+                Gestion  type carburant
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('GETPAGECREATETYPECARBURANT')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creer un  carburant</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('GETLISTETYPECARBURANT')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Liste  carburants</p>
+                </a>
+              </li>
             
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Gestion parking
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('GETPAGECREATEPARKING')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creer parking</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('GETLISTEPARKING')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Liste parking</p>
+                </a>
+              </li>
+              
+            </ul> 
         @endif
+     
         @if(auth()->user()->role == 'admin' || auth()->user()->role == 'dispatcheur' || auth()->user()->role == 'superviseur')
 
           <li class="nav-item">
@@ -375,103 +569,7 @@
                 </li>
             @endif
         
-           
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Gestion direction
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../mailbox/mailbox.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Creer Direction</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../mailbox/compose.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liste directions</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Gestion Departement
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../examples/invoice.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Creer departement</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/profile.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liste departement</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Gestion Region
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../examples/invoice.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Creer region</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/profile.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liste region</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Gestion Ville
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../examples/invoice.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Creer ville</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/profile.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Liste ville</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
+       
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
@@ -659,35 +757,28 @@
 <script src="{{url('plug/bs-stepper/js/bs-stepper.min.js')}}"></script>
 
 {{-- <script src="{{url('plug/dropzone/min/dropzone.min.js')}}"></script>
-
 <script src="{{url('dist/js/adminlte.min.js')}}"></script>
-
 <script src="{{url('dist/js/demo.js')}}"></script> --}} 
 <script>
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
-
     //Initialize Select2 Elements
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
-
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     //Datemask2 mm/dd/yyyy
     $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     //Money Euro
     $('[data-mask]').inputmask()
-
     //Date picker
     $('#reservationdate').datetimepicker({
         format: 'L'
     });
-
     //Date and time picker
     $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-
     //Date range picker
     $('#reservation').daterangepicker()
     //Date range picker with time picker
@@ -716,43 +807,34 @@
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
       }
     )
-
     //Timepicker
     $('#timepicker').datetimepicker({
       format: 'LT'
     })
-
     //Bootstrap Duallistbox
     $('.duallistbox').bootstrapDualListbox()
-
     //Colorpicker
     $('.my-colorpicker1').colorpicker()
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
-
     $('.my-colorpicker2').on('colorpickerChange', function(event) {
       $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
     })
-
     $("input[data-bootstrap-switch]").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
-
   })
   // BS-Stepper Init
   document.addEventListener('DOMContentLoaded', function () {
     window.stepper = new Stepper(document.querySelector('.bs-stepper'))
   })
-
   // DropzoneJS Demo Code Start
   Dropzone.autoDiscover = false
-
   // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
   var previewNode = document.querySelector("#template")
   previewNode.id = ""
   var previewTemplate = previewNode.parentNode.innerHTML
   previewNode.parentNode.removeChild(previewNode)
-
   var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
     url: "/target-url", // Set the url
     thumbnailWidth: 80,
@@ -763,29 +845,24 @@
     previewsContainer: "#previews", // Define the container to display the previews
     clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
   })
-
   myDropzone.on("addedfile", function(file) {
     // Hookup the start button
     file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
   })
-
   // Update the total progress bar
   myDropzone.on("totaluploadprogress", function(progress) {
     document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
   })
-
   myDropzone.on("sending", function(file) {
     // Show the total progress bar when upload starts
     document.querySelector("#total-progress").style.opacity = "1"
     // And disable the start button
     file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
   })
-
   // Hide the total progress bar when nothing's uploading anymore
   myDropzone.on("queuecomplete", function(progress) {
     document.querySelector("#total-progress").style.opacity = "0"
   })
-
   // Setup the buttons for all transfers
   // The "add files" button doesn't need to be setup because the config
   // `clickable` has already been specified.

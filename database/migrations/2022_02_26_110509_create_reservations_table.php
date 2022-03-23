@@ -25,11 +25,11 @@ class CreateReservationsTable extends Migration
             ->onUpdate('cascade');
             $table->string('nom_client');
             $table->string('prenom');
-            $table->float('telephone');
+            $table->double('telephone');
             $table->text('motid_demande');
             $table->date('date_depart');
             $table->date('date_retour');
-            $table->float('nombre_de_place');
+            $table->double('nombre_de_place');
             $table->boolean('statut_convoiture');
             $table->timestamps();
         });
