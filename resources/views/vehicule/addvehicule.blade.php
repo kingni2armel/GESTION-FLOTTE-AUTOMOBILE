@@ -58,7 +58,7 @@
                                         <label for="exampleInputEmail1">Marque</label>
                                             <select name="marquevehicule" class="form-control select2" style="width: 100%;">
                                                 @foreach ($listemarque as $listemarques )
-                                                     <option value="{{$listemarques->id}}" >{{$listemarques->nom}}</option>
+                                                     <option value="{{$listemarques->id}}" >{{$listemarques->nommarque}}</option>
 
                                                 @endforeach
                                             
@@ -68,7 +68,7 @@
                                             <label for="exampleInputEmail1">Modele</label>
                                             <select name="modelevehicule" class="form-control select2" style="width: 100%;">
                                                 @foreach ($listemodele as $listemodeles )
-                                                     <option value="{{$listemodeles->id}}" >{{$listemodeles->nom}}</option>
+                                                     <option value="{{$listemodeles->id}}" >{{$listemodeles->nommodele}}</option>
 
                                                 @endforeach
                                             
@@ -78,7 +78,7 @@
                                     <label for="exampleInputEmail1">Type Carburant</label>
                                     <select name="typecarburantvehicule" class="form-control select2" style="width: 100%;">
                                         @foreach ($listetypecarburant as $listetypecarburants )
-                                             <option value="{{$listetypecarburants->id}}" >{{$listetypecarburants->nom}}</option>
+                                             <option value="{{$listetypecarburants->id}}" >{{$listetypecarburants->nomtypecarburant}}</option>
 
                                         @endforeach
                                     

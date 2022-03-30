@@ -5,7 +5,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
                     @foreach ($infocarburant as $infocarburants)
-                            <h1> Modification du type carburant {{$infocarburants->nom}}</h1>
+                            <h1> Modification du type carburant {{$infocarburants->nomtypecarburant}}</h1>
                         
                     @endforeach 
             </div>
@@ -55,12 +55,12 @@
                                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Nom</label>
-                                                        <input name="nomcarburantupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infocarburants->nom}}">
+                                                        <input name="nomcarburantupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infocarburants->nomtypecarburant}}">
                                                     </div>
                                      
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Commentaire</label>
-                                                        <textarea name="libelleupdate" value="{{$infocarburants->libelle}}" class="form-control" id="" cols="30" rows="10"></textarea>
+                                                        <textarea name="libelleupdate" value="{{$infocarburants->libellecarburant}}" class="form-control" id="" cols="30" rows="10"></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-primary" style="margin-top: -15px">Mettre a jour</button>

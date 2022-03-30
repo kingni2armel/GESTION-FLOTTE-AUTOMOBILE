@@ -51,8 +51,8 @@ class MarqueController extends Controller
         ]);
 
         $createcarburant = Marque::create([
-                'nom'=>$request->nommarque,
-                'commentaire'=>$request->commentairemarque,
+                'nommarque'=>$request->nommarque,
+                'commentairemarque'=>$request->commentairemarque,
         ]);
 
         return redirect()->route('GETLISTEMARQUE');
@@ -90,8 +90,8 @@ class MarqueController extends Controller
         $findmarque = Marque::find($id);
 
         $findmarque->update([
-            'nom'=>$request->nommarqueupdate,
-            'commentaire'=>$request->commentaireupdate,
+            'nommarque'=>$request->nommarqueupdate,
+            'commentairemarque'=>$request->commentaireupdate,
         ]);
 
         return redirect()->route('GETLISTEMARQUE');

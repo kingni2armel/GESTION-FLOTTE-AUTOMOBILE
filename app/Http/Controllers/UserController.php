@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Dispactcheur;
@@ -22,6 +24,14 @@ class UserController extends Controller
         
     }    
     
+    /**
+     * page de connexion
+     */
+
+     public function GOCONNECT()
+     {
+         return view('welcome');
+     }
     
     /*
 
@@ -29,7 +39,7 @@ class UserController extends Controller
 
     */
 
-
+    
 
     public function GetPage()
     {
@@ -107,7 +117,9 @@ class UserController extends Controller
     */
     public function Logout()
     {
-
+                Session::flush();
+                Auth::logout();
+                return redirect()->route('GOCONNECT');
     }
     /*
             function de creation d'un utilisateur

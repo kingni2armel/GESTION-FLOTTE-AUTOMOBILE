@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TypeCarburant extends Model
 {
     protected $fillable = [
-            'nom',
-            'libelle'
+            'nomtypecarburant',
+            'libellecarburant'
     ];
     use HasFactory;
 }

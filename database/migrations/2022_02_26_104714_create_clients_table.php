@@ -19,6 +19,18 @@ class CreateClientsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->unsignedBigInteger('direction_id');
+            $table->foreign('direction_id')->references('id')->on('directions')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->unsignedBigInteger('departement_id');
+            $table->foreign('departement_id')->references('id')->on('departements')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('id')->on('services')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

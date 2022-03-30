@@ -19,8 +19,8 @@
                                         <tbody>
                                                     @foreach ($listecarburant as $listecarburants )
                                                             <tr>
-                                                                    <td>{{$listecarburants->nom}}</td>
-                                                                    <td>{{$listecarburants->libelle}}</td>    
+                                                                    <td>{{$listecarburants->nomtypecarburant}}</td>
+                                                                    <td>{{$listecarburants->libellecarburant}}</td>    
 
 
                                                                     

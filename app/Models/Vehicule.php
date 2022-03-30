@@ -10,8 +10,9 @@ class Vehicule extends Model
     protected $fillable =[
             'marque_id',
             'modele_id',
-            'type_carburant_id',
+            'typeCarburant_id',
             'parking_id',
+            'statut_vehicule',
             'immatriculation',
             'kilometrage',
             'numero_chassi',

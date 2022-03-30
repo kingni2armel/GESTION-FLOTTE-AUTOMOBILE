@@ -44,8 +44,8 @@ class TypeCarburantController extends Controller
             ]);
 
             $createcarburant = TypeCarburant::create([
-                    'nom'=>$request->nomcarburant,
-                    'libelle'=>$request->libellecarburant,
+                    'nomtypecarburant'=>$request->nomcarburant,
+                    'libellecarburant'=>$request->libellecarburant,
             ]);
 
             return redirect()->route('GETLISTETYPECARBURANT');
@@ -80,8 +80,8 @@ class TypeCarburantController extends Controller
         $findcarburant = TypeCarburant::find($id);
 
         $findcarburant->update([
-            'nom'=>$request->nomcarburantupdate,
-            'libelle'=>$request->libelleupdate,
+            'nomtypecarburant'=>$request->nomcarburantupdate,
+            'libellecarburant'=>$request->libelleupdate,
         ]);
 
         return redirect()->route('GETLISTETYPECARBURANT');

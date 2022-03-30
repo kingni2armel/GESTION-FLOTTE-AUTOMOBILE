@@ -9,8 +9,8 @@ class Modele extends Model
 {
 
     protected $fillable = [
-            'nom',
-            'commentaire',
+            'nommodele',
+            'commentairemodele',
     ];
     use HasFactory;
 }

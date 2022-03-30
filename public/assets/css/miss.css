@@ -9,3 +9,10 @@
 .nameuppercae{
     text-transform: uppercase;
 }
+.button-deconnect{
+    width: 80%;
+    margin-left: 25px;
+    border-radius: 10px;
+    border:none;
+    height: 40px;
+}

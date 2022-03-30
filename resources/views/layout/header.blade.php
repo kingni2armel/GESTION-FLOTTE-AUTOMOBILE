@@ -224,36 +224,30 @@
                     @endif
           </li>
 
-        
-              @if(auth()->user()->role == 'admin')
-                   
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                                        Gestion  users
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right"></span>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                            <a href="{{url('/adduser')}} " class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Creer user</p>
-                            </a>
-                            </li>
-                            <li class="nav-item">
-                            <a href="{{url('/listeuser')}} " class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Liste des users <span class="ai-users"></span></p>
-                            </a>
-                            </li>
-                            
-                            
-                        </ul>
-                    </li>
-              @endif
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                     Gestion  compte
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="../tables/simple.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Supprimer compte</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="../tables/data.html" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Mise a jour</p>
+                    </a>
+                  </li>
+                 
+                </ul>
+              </li>
              
         @if(auth()->user()->role == 'admin' || auth()->user()->role == 'dispatcheur' || auth()->user()->role == 'superviseur')
  
@@ -267,7 +261,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../UI/general.html" class="nav-link">
+              <a href="{{route('GETPAGECREATECLIENT')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Ajouter  client</p>
               </a>
@@ -292,13 +286,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../mailbox/mailbox.html" class="nav-link">
+              <a href="{{route('GETPAGECREATEDIRECTION')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Creer Direction</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../mailbox/compose.html" class="nav-link">
+              <a href="{{route('GETLISTEDIRECTION')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Liste directions</p>
               </a>
@@ -316,13 +310,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../examples/invoice.html" class="nav-link">
+              <a href="{{route('GETPAGECREATEDEPARTEMENT')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Creer departement</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="../examples/profile.html" class="nav-link">
+              <a href="{{route('GETLISTEDEPARTEMENT')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Liste departement</p>
               </a>
@@ -345,7 +339,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../charts/flot.html" class="nav-link">
+                <a href="{{route('GETLISTEVEHICULE')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Liste  vehicules</p>
                 </a>
@@ -428,6 +422,37 @@
               
             </ul>
           </li>
+
+        
+          @if(auth()->user()->role == 'admin')
+                   
+          <li class="nav-item">
+              <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                              Gestion  users
+                          <i class="fas fa-angle-left right"></i>
+                          <span class="badge badge-info right"></span>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                  <a href="{{url('/adduser')}} " class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Creer user</p>
+                  </a>
+                  </li>
+                  <li class="nav-item">
+                  <a href="{{url('/listeuser')}} " class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Liste des users <span class="ai-users"></span></p>
+                  </a>
+                  </li>
+                  
+                  
+              </ul>
+          </li>
+    @endif
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -513,45 +538,66 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="{{route('GETLISTERESERVATIONONTRAITE')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 13px">Liste reservations non traite</p>
+                </a>
+              </li>
+              
+             
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
                 <a href="../forms/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Liste reservations</p>
+                  <p style="font-size: 13px">Liste reservations</p>
+                </a>
+              </li>
+              
+             
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../forms/general.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 13px">Liste reservations  traite</p>
                 </a>
               </li>
               
              
             </ul>
           </li>
-    @endif
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon fas fa-car"></i>
               <p>
-                 Gestion  compte
-                <i class="fas fa-angle-left right"></i>
+                Gestion  services
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../tables/simple.html" class="nav-link">
+                <a href="{{route('GETPAGECREATESERVICE')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Supprimer compte</p>
+                  <p>Creer service</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../tables/data.html" class="nav-link">
+                <a href="{{route('GETLISTEMODELE')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mise a jour</p>
+                  <p>Liste  services</p>
                 </a>
               </li>
-             
+            
             </ul>
           </li>
+    @endif
+        
           @if(auth()->user()->role == 'client')
 
             <li class="nav-header">Autres</li>
                 <li class="nav-item">
-                    <a href="../calendar.html" class="nav-link">
+                    <a href="{{route('GETPAGELISTERESERVATIONBYID')}}" class="nav-link">
                     <i class="nav-icon far fa-calendar-alt"></i>
                     <p>
                         Liste  reservations
@@ -560,7 +606,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../gallery.html" class="nav-link">
+                    <a href="{{route('GETPAGECREATERESERVATION')}}" class="nav-link">
                     <i class="nav-icon far fa-image"></i>
                     <p>
                         Creer reservation
@@ -570,143 +616,12 @@
             @endif
         
        
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Extras
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Login & Register v1
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="../examples/login.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Login v1</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../examples/register.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Register v1</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../examples/forgot-password.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Forgot Password v1</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../examples/recover-password.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Recover Password v1</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Login & Register v2
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="../examples/login-v2.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Login v2</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../examples/register-v2.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Register v2</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../examples/forgot-password-v2.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Forgot Password v2</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../examples/recover-password-v2.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Recover Password v2</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/lockscreen.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lockscreen</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/legacy-user-menu.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Legacy User Menu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/language-menu.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Language Menu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/404.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Error 404</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/500.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Error 500</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/pace.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pace</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../examples/blank.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Blank Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../../starter.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Starter Page</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-        
+
         
           <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-              <i class="nav-icon fas fa-file    "></i>
-              <p>Deconnexion</p>
-             
-            </a>
+                <form action="{{route('Logout')}}" method="get">
+                      <button class="button-deconnect" type="submit">Deconnexion</button>
+                </form>
           </li>
           
        

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Direction extends Model
 {
     protected $fillable=[
-        'nom',
-        'commentaire'
+        'nomdirection',
+        'descriptiondirection'
     ];
     use HasFactory;
 }

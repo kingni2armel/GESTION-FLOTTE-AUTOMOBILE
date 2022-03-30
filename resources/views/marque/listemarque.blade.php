@@ -19,8 +19,8 @@
                                         <tbody>
                                                     @foreach ($listemarque as $listemarques )
                                                             <tr>
-                                                                    <td>{{$listemarques->nom}}</td>
-                                                                    <td>{{$listemarques->commentaire}}</td>    
+                                                                    <td>{{$listemarques->nomarque}}</td>
+                                                                    <td>{{$listemarques->commentairemarque}}</td>    
 
 
                                                                     

@@ -19,8 +19,8 @@ class CreateServicesTable extends Migration
             $table->foreign('departement_id')->references('id')->on('departements')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->string('nom');
-            $table->text('commentaire');
+            $table->string('nom_service');
+            $table->text('commentaire_service');
             $table->timestamps();
         });
     }

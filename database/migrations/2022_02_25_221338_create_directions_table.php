@@ -15,8 +15,8 @@ class CreateDirectionsTable extends Migration
     {
         Schema::create('directions', function (Blueprint $table) {
             $table->id();
-            $table->string('nom')->unique();
-            $table->text('description');
+            $table->string('nomdirection')->unique();
+            $table->text('descriptiondirection');
             $table->timestamps();
         });
     }

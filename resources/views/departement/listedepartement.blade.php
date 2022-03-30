@@ -2,32 +2,31 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">LISTE DES MODELES DE VEHICULE</h3>
+          <h3 class="card-title">LISTE DES DEPARTEMENTS</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body"> 
-                    @if($listemodele->count()>0)
+                    @if($listedepartement->count()>0)
 
                             <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                                 <tr>
                                                     <th>Nom </th>
-                                                    <th>Commentaire</th>
+                                                    <th>Description</th>
                                                     <th>Operation</th>
+                                        
                                                 </tr>
                                         </thead>
                                         <tbody>
-                                                    @foreach ($listemodele as $listemodeles )
+                                                    @foreach ($listedepartement as $listedepartements )
                                                             <tr>
-                                                                    <td>{{$listemodeles->nommodele}}</td>
-                                                                    <td>{{$listemodeles->commentairemodele}}</td>    
-
-
+                                                                    <td>{{$listedepartements->nom_departement}}</td>
+                                                                    <td>{{$listedepartements->commentaire_departement}}</td>    
                                                                     
                                                                     <td>
                                                                              <div class="parent">
                                                                                  <div class="parent_items">
-                                                                                    <form action="{{route('DELETEMODELE',['id'=>$listemodeles->id])}}" method="post">
+                                                                                    <form action="{{route('DELETEDEPARTEMENT',['id'=>$listedepartements->id])}}" method="post">
                                                                                        @csrf
                                                                                         <button type="su" class="btn btn-navbar items-but" style=
                                                                                         "background-color:red !important;color:white;pa"type="submit">
@@ -39,7 +38,7 @@
                                                                                  </div>
                                                                                  <div class="parent_items">
                                                                                     <a 
-                                                                                    href="{{route('GETPAGEUPDATEMODELE',['id'=>$listemodeles->id])}}"
+                                                                                    href="{{route('GETPAGEUPDATEDEPARTEMENT',['id'=>$listedepartements->id])}}"
                                                                                        class="btn btn-navbar items-but" style=
                                                                                          "  background-color: #212529;!important;color:white"
                                                                                              type="button"
@@ -58,17 +57,17 @@
                                     
                                         </tbody>
                             </table>
-                            <span>{{$listemodele->links()}}</span>
+                            <span>{{$listedepartement->links()}}</span>
                         @else
-                                <span> Il n'existe aucune modele de vehicule</span>
+                                <span> Il n'existe aucun departement</span>
                      @endif
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
-</div>
-<!-- /.col -->
+    <!-- /.col -->
+  </div>
   <!-- /.row -->
 </div>
 </div>

@@ -35,8 +35,8 @@ class ModeleController extends Controller
       ]);
 
       $createmodele = Modele::create([
-              'nom'=>$request->nommodele,
-              'commentaire'=>$request->commentairemodele,
+              'nommodele'=>$request->nommodele,
+              'commentairemodele'=>$request->commentairemodele,
       ]);
 
       return redirect()->route('GETLISTEMODELE');
@@ -86,8 +86,8 @@ class ModeleController extends Controller
         $findmarque = Modele::find($id);
 
         $findmarque->update([
-            'nom'=>$request->nommodeleupdate,
-            'commentaire'=>$request->commentaireupdate,
+            'nommodele'=>$request->nommodeleupdate,
+            'commentairemodele'=>$request->commentaireupdate,
         ]);
 
         return redirect()->route('GETLISTEMODELE');

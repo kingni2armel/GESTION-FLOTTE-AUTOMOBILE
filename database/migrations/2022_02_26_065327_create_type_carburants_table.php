@@ -15,8 +15,8 @@ class CreateTypeCarburantsTable extends Migration
     {
         Schema::create('type_carburants', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->text('libelle');
+            $table->string('nomtypecarburant');
+            $table->text('libellecarburant');
             $table->timestamps();
         });
     }

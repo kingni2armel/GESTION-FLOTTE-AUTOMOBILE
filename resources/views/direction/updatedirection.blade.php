@@ -4,10 +4,10 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-                    @foreach ($infomarque as $infomarques)
-                            <h1> Modification la marque {{$infomarques->nommarque}}</h1>
-                        
-                    @endforeach 
+                @foreach ( $infodirection as $infodirections )
+                                      <h1> Modification de la direction {{$infodirections->nomdirection}}</h1>
+                    
+                @endforeach
             </div>
          
           </div>
@@ -26,9 +26,9 @@
 @endif
 
 
-                @foreach ($infomarque as $infomarques)
+                @foreach ( $infodirection as $infodirections )
                                                         
-                            <form action="{{route('UPDATEMARQUE',['id'=>$id=$infomarques->id])}}"  method="post">
+                            <form action="{{route('UPDATEDIRECTION',['id'=>$id=$infodirections->id])}}"  method="post">
 
                                 @csrf
 
@@ -55,12 +55,11 @@
                                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Nom</label>
-                                                        <input name="nommarqueupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infomarques->nommarque}}">
+                                                        <input name="nomdirectionupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infodirections->nomdirection}}">
                                                     </div>
-                                     
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Commentaire</label>
-                                                        <textarea name="commentaireupdate" value="{{$infomarques->commentairemarque}}" class="form-control" id="" cols="30" rows="10"></textarea>
+                                                        <textarea name="descriptiondirectionupdate" placeholder="{{$infodirections->descriptiondirection}}" class="form-control" id="" cols="30" rows="10"></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-primary" style="margin-top: -15px">Mettre a jour</button>

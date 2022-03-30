@@ -4,10 +4,10 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-                    @foreach ($infomarque as $infomarques)
-                            <h1> Modification la marque {{$infomarques->nommarque}}</h1>
-                        
-                    @endforeach 
+                @foreach ( $informationservice as $informationservices )
+                                      <h1> Modification du service {{$informationservices->nom_service}}</h1>
+                    
+                @endforeach
             </div>
          
           </div>
@@ -26,9 +26,9 @@
 @endif
 
 
-                @foreach ($infomarque as $infomarques)
+                @foreach ( $informationservice as $informationservices )
                                                         
-                            <form action="{{route('UPDATEMARQUE',['id'=>$id=$infomarques->id])}}"  method="post">
+                            <form action="{{route('UPDATESERVICE',['id'=>$id=$informationservices->id])}}"  method="post">
 
                                 @csrf
 
@@ -55,12 +55,19 @@
                                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Nom</label>
-                                                        <input name="nommarqueupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infomarques->nommarque}}">
+                                                        <input name="nomserviceupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$informationservices->nom_service}}">
                                                     </div>
-                                     
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Commentaire</label>
-                                                        <textarea name="commentaireupdate" value="{{$infomarques->commentairemarque}}" class="form-control" id="" cols="30" rows="10"></textarea>
+                                                        <label for="exampleInputEmail1">Nom service</label>
+                                                        <select name="nomdepartementupdate" type="text" class="form-control" id="exampleInputEmail1">
+                                                                    @foreach ($listedepartement as $listedepartements)
+                                                                            <option value="{{$listedepartements->id}}">{{$listedepartements->nom_departement}}</option>
+                                                                    @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Description</label>
+                                                        <textarea name="commentaireserviceupdate" placeholder="{{$informationservices->commentaire_service}}" class="form-control" id="" cols="30" rows="10"></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-primary" style="margin-top: -15px">Mettre a jour</button>

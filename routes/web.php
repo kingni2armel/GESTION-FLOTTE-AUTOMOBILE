@@ -8,8 +8,18 @@ use  App\Http\Controllers\VilleController;
 use  App\Http\Controllers\ParkingController;
 use  App\Http\Controllers\TypeCarburantController;
 use  App\Http\Controllers\MarqueController;
-use App\Http\Controllers\ModeleController;
-use App\Http\Controllers\VehiculeController;
+use  App\Http\Controllers\ModeleController;
+use  App\Http\Controllers\VehiculeController;
+use  App\Http\Controllers\DirectionController;
+use  App\Http\Controllers\DepartementController;
+use  App\Http\Controllers\ServiceController;
+use  App\Http\Controllers\ClientController;
+use  App\Http\Controllers\ReservationController;
+
+
+
+
+
 
 
 
@@ -30,6 +40,8 @@ use App\Http\Controllers\VehiculeController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/connect',[UserController::class,'GOCONNECT'])->name('GOCONNECT');
+
 Route::get('/redirection',[UserController::class,'Redirection'])->name('Redirection');
 
 Route::post('/login',[UserController::class,'Authenticate'])->name('Authenticate');
@@ -185,7 +197,8 @@ Route::post('deleteville/{id}',[VilleController::class,'DELETEVILLE'])->name('DE
     ->middleware('auth');
     Route::post('updatemodele/{id}',[ModeleController::class,'UPDATEMODELE'])->name('UPDATEMODELE')
     ->middleware('auth');
-    Route::post('deletemodele/{id}',[ModeleController::class,'DELETEMODELE'])->name('DELETEMODELE')
+    Route::post('deletemodele/{id}',[ModeleController::class,'DELETEMODELE'])->name('DELE
+    TEMODELE')
     ->middleware('auth');
 
     /***
@@ -205,3 +218,101 @@ Route::post('deleteville/{id}',[VilleController::class,'DELETEVILLE'])->name('DE
   ->middleware('auth');
   Route::post('deletevehicule/{id}',[VehiculeController::class,'DELETEVEHICULE'])->name('DELETEVEHICULE')
   ->middleware('auth');
+
+  /**
+   * les controlleurs de direction
+   */
+
+  Route::get('adddirection',[DirectionController::class,'GETPAGECREATEDIRECTION'])->name('GETPAGECREATEDIRECTION')
+  ->middleware('auth');
+  Route::post('createdirection',[DirectionController::class,'CREATEVEDIRECTION'])->name('CREATEVEDIRECTION')
+  ->middleware('auth');
+  Route::get('listedirection',[DirectionController::class,'GETLISTEDIRECTION'])->name('GETLISTEDIRECTION')
+  ->middleware('auth');
+  Route::get('updatedirection',[DirectionController::class,'GETPAGEUPDATEDIRECTION'])->name('GETPAGEUPDATEDIRECTION')
+  ->middleware('auth');
+  Route::post('updatedirection/{id}',[DirectionController::class,'UPDATEDIRECTION'])->name('UPDATEDIRECTION')
+  ->middleware('auth');
+  Route::post('deletedirection/{id}',[DirectionController::class,'DELETEDIRECTION'])->name('DELETEDIRECTION')
+  ->middleware('auth');
+
+
+  /**
+   * les controlleurs des departements
+   */
+
+
+  Route::get('adddepartement',[DepartementController::class,'GETPAGECREATEDEPARTEMENT'])->name('GETPAGECREATEDEPARTEMENT')
+  ->middleware('auth');
+  Route::post('createdepartement',[DepartementController::class,'CREATEVEDEPARTEMENT'])->name('CREATEVEDEPARTEMENT')
+  ->middleware('auth');
+  Route::get('listedepartement',[DepartementController::class,'GETLISTEDEPARTEMENT'])->name('GETLISTEDEPARTEMENT')
+  ->middleware('auth');
+  Route::get('updatedepartement',[DepartementController::class,'GETPAGEUPDATEDEPARTEMENT'])->name('GETPAGEUPDATEDEPARTEMENT')
+  ->middleware('auth');
+  Route::post('updatedepartement/{id}',[DepartementController::class,'UPDATEDEPARTEMENT'])->name('UPDATEDEPARTEMENT')
+  ->middleware('auth');
+  Route::post('deletedepartement/{id}',[DepartementController::class,'DELETEDEPARTEMENT'])->name('DELETEDEPARTEMENT')
+  ->middleware('auth');
+
+  /***
+   * les controlleurs de services
+   */
+
+  Route::get('addservice',[ServiceController::class,'GETPAGECREATESERVICE'])->name('GETPAGECREATESERVICE')
+  ->middleware('auth');
+  Route::post('createservice',[ServiceController::class,'CREATESERVICE'])->name('CREATEVESERVICE')
+  ->middleware('auth');
+  Route::get('listeservice',[ServiceController::class,'GETLISTESERVICE'])->name('GETLISTESERVICE')
+  ->middleware('auth');
+  Route::get('updateservice',[ServiceController::class,'GETPAGEUPDATESERVICE'])->name('GETPAGEUPDATESERVICE')
+  ->middleware('auth');
+  Route::post('updateservice/{id}',[ServiceController::class,'UPDATESERVICE'])->name('UPDATESERVICE')
+  ->middleware('auth');
+  Route::post('deleteservice/{id}',[ServiceController::class,'DELETESERVICE'])->name('DELETESERVICE')
+  ->middleware('auth');
+
+    /***
+   * les controlleurs du client
+   */
+
+  Route::get('addclient',[ClientController::class,'GETPAGECREATECLIENT'])->name('GETPAGECREATECLIENT')
+  ->middleware('auth');
+  Route::post('createclient',[ClientController::class,'CREATECLIENT'])->name('CREATECLIENT')
+  ->middleware('auth');
+  Route::get('listeclient',[ClientController::class,'GETLISTECLIENT'])->name('GETLISTECLIENT')
+  ->middleware('auth');
+  Route::get('updateclient',[ClientController::class,'GETPAGEUPDATECLIENT'])->name('GETPAGEUPDATECLIENT')
+  ->middleware('auth');
+  Route::post('updateclient/{id}',[ClientController::class,'UPDATECLIENT'])->name('UPDATECLIENT')
+  ->middleware('auth');
+  Route::post('deleteclient/{id}',[ClientController::class,'DELETECLIENT'])->name('DELETECLIENT')
+  ->middleware('auth');
+
+
+  /**
+   * 
+   * les routes du client concernand la reservation 
+   */
+
+  Route::get('createreservation',[ReservationController::class,'GETPAGECREATERESERVATION'])->name('GETPAGECREATERESERVATION')
+  ->middleware('auth');
+
+  Route::post('/createreservation',[ReservationController::class,'CREATERSERVATION'])->name('CREATERSERVATION')
+  ->middleware('auth');
+  Route::get('/mesreservations',[ReservationController::class,'GETPAGELISTERESERVATIONBYID'])->name('GETPAGELISTERESERVATIONBYID')
+  ->middleware('auth');
+
+  Route::get('/updatereservation',[ReservationController::class,'GETPAGEUPDATRESERVATION'])->name('GETPAGEUPDATRESERVATION')
+  ->middleware('auth');
+  
+  Route::post('updatereservation/{id}',[ReservationController::class,'UPDATERESERVATION'])->name('UPDATERESERVATION')
+  ->middleware('auth');
+   
+  Route::post('deletereservation/{id}',[ReservationController::class,'DELETERESERVATION'])->name('DELETERESERVATION')
+  ->middleware('auth');
+  
+/** ROUTE QUI PERMET AUX UTILISATEURS SAUF LE CLIENT D'AVOIR ACCESS A LA LISTE DES RESERVATION */
+
+Route::get('listereservation',[ReservationController::class,'GETLISTERESERVATIONONTRAITE'])->name('GETLISTERESERVATIONONTRAITE')
+->middleware('auth');

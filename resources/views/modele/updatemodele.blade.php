@@ -5,7 +5,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
                     @foreach ($infomodele as $infomodeles)
-                            <h1> Modification du modele {{$infomodeles->nom}}</h1>
+                            <h1> Modification du modele {{$infomodeles->nommodele}}</h1>
                         
                     @endforeach 
             </div>
@@ -55,12 +55,12 @@
                                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Nom</label>
-                                                        <input name="nommodeleupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infomodeles->nom}}">
+                                                        <input name="nommodeleupdate" type="text" class="form-control" id="exampleInputEmail1" value="{{$infomodeles->nommodele}}">
                                                     </div>
                                      
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Commentaire</label>
-                                                        <textarea name="commentaireupdate" value="{{$infomodeles->commentaire}}" class="form-control" id="" cols="30" rows="10"></textarea>
+                                                        <textarea name="commentaireupdate" value="{{$infomodeles->commentairemodele}}" class="form-control" id="" cols="30" rows="10"></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-primary" style="margin-top: -15px">Mettre a jour</button>

@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Departement extends Model
 {
     protected $fillable=[
-        'nom',
+        'nom_departement',
         'direction_id',
-        'commentaire'
+        'commentaire_departement'
     ];
     use HasFactory;
 }

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Marque extends Model
 {
     protected $fillable = [
-            'nom',
-            'commentaire',
+            'nommarque',
+            'commentairemarque',
             
     ];
     use HasFactory;

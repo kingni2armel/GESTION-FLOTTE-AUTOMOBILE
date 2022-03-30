@@ -19,8 +19,8 @@ class CreateDepartementsTable extends Migration
             $table->foreign('direction_id')->references('id')->on('directions')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->string('nom');
-            $table->text('commentaire');
+            $table->string('nom_departement');
+            $table->text('commentaire_departement');
             $table->timestamps();
         });
     }

@@ -15,22 +15,22 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->unsignedBigInteger('vehicule_id');
-            $table->foreign('vehicule_id')->references('id')->on('vehicules')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
             $table->string('nom_client');
-            $table->string('prenom');
-            $table->double('telephone');
-            $table->text('motid_demande');
+            $table->string('prenom_client');
+            $table->double('telephone_client');
+            $table->text('motif_demande');
+            $table->string('ville_depart');
+            $table->string('ville_destination');
             $table->date('date_depart');
             $table->date('date_retour');
             $table->double('nombre_de_place');
             $table->boolean('statut_convoiture');
+            $table->boolean('statut_reservation');
             $table->timestamps();
         });
     }

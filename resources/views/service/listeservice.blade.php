@@ -2,32 +2,32 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">LISTE DES MODELES DE VEHICULE</h3>
+          <h3 class="card-title">LISTE DES SERVICES</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body"> 
-                    @if($listemodele->count()>0)
+                    @if($listeservice->count()>0)
 
                             <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                                 <tr>
                                                     <th>Nom </th>
                                                     <th>Commentaire</th>
+                                                    <th>Nom departement</th>
                                                     <th>Operation</th>
+                                        
                                                 </tr>
                                         </thead>
                                         <tbody>
-                                                    @foreach ($listemodele as $listemodeles )
+                                                    @foreach ($infoservice as $infoservices )
                                                             <tr>
-                                                                    <td>{{$listemodeles->nommodele}}</td>
-                                                                    <td>{{$listemodeles->commentairemodele}}</td>    
-
-
-                                                                    
+                                                                    <td>{{$infoservices->nom_service}}</td>
+                                                                    <td>{{$infoservices->commentaire_service}}</td>    
+                                                                    <td>{{$infoservices->nom_departement}}</td>
                                                                     <td>
                                                                              <div class="parent">
                                                                                  <div class="parent_items">
-                                                                                    <form action="{{route('DELETEMODELE',['id'=>$listemodeles->id])}}" method="post">
+                                                                                    <form action="{{route('DELETESERVICE',['id'=>$infoservices->id])}}" method="post">
                                                                                        @csrf
                                                                                         <button type="su" class="btn btn-navbar items-but" style=
                                                                                         "background-color:red !important;color:white;pa"type="submit">
@@ -39,7 +39,7 @@
                                                                                  </div>
                                                                                  <div class="parent_items">
                                                                                     <a 
-                                                                                    href="{{route('GETPAGEUPDATEMODELE',['id'=>$listemodeles->id])}}"
+                                                                                    href="{{route('GETPAGEUPDATESERVICE',['id'=>$infoservices->id])}}"
                                                                                        class="btn btn-navbar items-but" style=
                                                                                          "  background-color: #212529;!important;color:white"
                                                                                              type="button"
@@ -58,17 +58,17 @@
                                     
                                         </tbody>
                             </table>
-                            <span>{{$listemodele->links()}}</span>
+                            <span>{{$listeservice->links()}}</span>
                         @else
-                                <span> Il n'existe aucune modele de vehicule</span>
+                                <span> Il n'existe aucun service</span>
                      @endif
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
-</div>
-<!-- /.col -->
+    <!-- /.col -->
+  </div>
   <!-- /.row -->
 </div>
 </div>
