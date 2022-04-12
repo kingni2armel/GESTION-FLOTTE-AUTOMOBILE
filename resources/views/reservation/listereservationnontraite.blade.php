@@ -73,7 +73,7 @@
                                                                           </div>
                                                                           <div class="parent_items">
                                                                              <a 
-                                                                             href="{{route('GETPAGEUPDATRESERVATION',['id'=>$listereservations->id])}}"
+                                                                             href="{{route('GETPAGETRAITEMENT',['id'=>$listereservations->id])}}"
                                                                                 class="btn btn-navbar items-but" style=
                                                                                   "  background-color: #212529;!important;color:white"
                                                                                       type="button"
@@ -114,6 +114,6 @@
     }
 
     th,td{
-      font-size: 15px
+      font-size: 13px
     }
 </style>

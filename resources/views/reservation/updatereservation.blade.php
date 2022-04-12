@@ -10,6 +10,20 @@
                                  <h1> Motif {{$informationdelareservations->motif_demande}}</h1>
     
                                @endforeach
+
+                               @if($statutraitement->count()>0)
+
+
+                                      <p>votre reservation a deja ete <i class="mdi mdi-transit-detour:"></i></p>
+
+
+                                     <a href="{{route('GETPAGEDOWNLOADFILE',['id'=>$_GET['id']])}} "  class="btn-telechargement">
+                                                   
+                                              <button class="btn btn-primary">VOIR MON RECU</button>
+                                        
+                                     </a>
+               
+                                @endif
               </div>
            
             </div>
@@ -138,7 +152,14 @@
                             </form>
           
         @endforeach                         
-        
+
+
+
+
+    
+
+                    
+
   </div>
 
 

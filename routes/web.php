@@ -40,7 +40,7 @@ use  App\Http\Controllers\ReservationController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/connect',[UserController::class,'GOCONNECT'])->name('GOCONNECT');
+Route::get('/login',[UserController::class,'GOCONNECT'])->name('GOCONNECT');
 
 Route::get('/redirection',[UserController::class,'Redirection'])->name('Redirection');
 
@@ -197,8 +197,7 @@ Route::post('deleteville/{id}',[VilleController::class,'DELETEVILLE'])->name('DE
     ->middleware('auth');
     Route::post('updatemodele/{id}',[ModeleController::class,'UPDATEMODELE'])->name('UPDATEMODELE')
     ->middleware('auth');
-    Route::post('deletemodele/{id}',[ModeleController::class,'DELETEMODELE'])->name('DELE
-    TEMODELE')
+    Route::post('deletemodele/{id}',[ModeleController::class,'DELETEMODELE'])->name('DELETEMODELE')
     ->middleware('auth');
 
     /***
@@ -273,7 +272,7 @@ Route::post('deleteville/{id}',[VilleController::class,'DELETEVILLE'])->name('DE
   ->middleware('auth');
 
     /***
-   * les controlleurs du client
+   * les controlleurs du client+
    */
 
   Route::get('addclient',[ClientController::class,'GETPAGECREATECLIENT'])->name('GETPAGECREATECLIENT')
@@ -316,3 +315,16 @@ Route::post('deleteville/{id}',[VilleController::class,'DELETEVILLE'])->name('DE
 
 Route::get('listereservation',[ReservationController::class,'GETLISTERESERVATIONONTRAITE'])->name('GETLISTERESERVATIONONTRAITE')
 ->middleware('auth');
+
+/**
+ * route qui permet d'aller a la page de traitement d'une reservation;
+ */
+
+ Route::get('traitement',[ReservationController::class,'GETPAGETRAITEMENT'])->name('GETPAGETRAITEMENT')
+ ->middleware('auth');
+
+ Route::get('telechargement',[ReservationController::class,'GETPAGEDOWNLOADFILE'])->name('GETPAGEDOWNLOADFILE')
+->middleware('auth');
+
+ Route::post('traitement/{id}',[ReservationController::class,'TraitementReservation'])->name('TraitementReservation')
+ ->middleware('auth');

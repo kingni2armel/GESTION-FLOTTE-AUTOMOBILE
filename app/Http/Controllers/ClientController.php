@@ -72,4 +72,98 @@ class ClientController extends Controller
 
               return redirect()->route('GETPAGECREATECLIENT');
       }
+
+           /**
+        * function qui renvoie la liste des clients et les informations sur ce dernier
+        */
+        public function GETLISTECLIENT()
+
+        {
+               $numerotationclient = 1;
+               
+               $listeclient = DB::table('users')
+               ->join('clients','users.id','=','clients.user_id')
+               ->join('departements','clients.departement_id','=','departements.id')
+               ->join('directions','clients.direction_id','=','directions.id')
+               ->join('services','clients.service_id','=','services.id')
+               ->select(
+                            'clients.*',
+                            'users.nom',
+                            'users.prenom',
+                            'users.numero_telephone',
+                            'users.email',
+                            'users.role',
+                            'departements.nom_departement',
+                            'directions.nomdirection',
+                            'services.nom_service'
+               )
+               ->get();
+             //  die($listeclient);
+               return view('client.listeclient',
+               [
+                      'listeclient'=>$listeclient,
+                      'numerotationclient'=>$numerotationclient
+         
+         ]);
+        }
+
+        /**
+         * function qui renvoie a la page de modification d'un client
+         */
+
+         public function GETPAGEUPDATECLIENT()
+         {
+              $id = $_GET['id'];
+              $informationclient = DB::table('users')
+              ->join('clients','users.id','=','clients.user_id')
+              ->join('departements','clients.departement_id','=','departements.id')
+              ->join('directions','clients.direction_id','=','directions.id')
+              ->join('services','clients.service_id','=','services.id')
+              ->select(
+                            'users.nom',
+                            'users.prenom',
+                            'users.numero_telephone',
+                            'users.email',
+                            'users.role',
+                            'departements.nom_departement',
+                            'directions.nomdirection',
+                            'services.nom_service'
+              )
+                     ->where('clients.id',$id)
+                     ->get(); 
+
+                     $listedirection = Direction::all();
+                     $listedepartement = Departement::all();
+                     $listeservice = Service::all();
+
+              
+              return view('client.updateclient',[
+                     'informationclient'=>$informationclient,
+                     'listedirection'=>$listedirection,
+                      'listedepartement'=>$listedepartement,
+                      'listeservice'=>$listeservice
+              ]);
+         }
+
+         public function UPDATECLIENT (Request $request,$id)
+         {
+
+                     $clientfind = Client::find($id);
+                     $request->validate([
+                            'nomclientupdate'=>['required'],
+                            'prenomclientupdate'=>['required'],
+                            'numeroclientupdate'=>['required'],
+                            'emailclientupdate'=>['required'],
+                            'nomdirectionclientupdate'=>['required'],
+                            'nomdepartementclientupdate'=>['required'],
+                            'nomserviceclientupdate'=>['required'],
+                            'passwordclientupdate'=>['required'],
+                          
+                     ]);
+
+                     $clientfind->update([
+                            ''
+                     ]);
+         }
+
 }

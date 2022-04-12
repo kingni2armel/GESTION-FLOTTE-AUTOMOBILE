@@ -4,7 +4,7 @@
 }
 .parent {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .nameuppercae{
     text-transform: uppercase;
@@ -15,4 +15,45 @@
     border-radius: 10px;
     border:none;
     height: 40px;
+}
+.btn-telechargement{
+    margin-top: 155px !important;
+    margin-left: 3px;
+}
+
+.nameagence{
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 18px;
+}
+
+.conteiner_information{
+    
+    display: flex;
+    justify-content: flex-end;
+}
+.items-data{
+    margin-left: -255px !important;
+}
+
+.title-information{
+    font-size: 20px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.data-information{
+        margin-left: 15px;
+}
+
+.datas {
+    display: flex;
+    justify-content: space-between;
+}
+
+.skip{
+    margin-left:-835px !important;
+}
+.but-imprimer{
+    margin-left: 18px;
 }

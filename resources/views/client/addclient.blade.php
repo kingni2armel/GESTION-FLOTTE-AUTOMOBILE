@@ -13,16 +13,16 @@
           </div><!-- /.container-fluid -->
         </section>
 
-        @if($errors->any())
-      {
+          @if($errors->any())
+        {
           @foreach($errors->all() as $error)
-               <div class="text-red-500">
-                          <p> {{$error}}</p>
-               </div>
-          @endforeach
+                <div class="text-red-500">
+                            <p> {{$error}}</p>
+                </div>
+            @endforeach
       } 
 
-  @endif
+      @endif
 
         <form action="{{route('CREATECLIENT')}}"  method="post">
 

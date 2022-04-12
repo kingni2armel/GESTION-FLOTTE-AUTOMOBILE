@@ -19,7 +19,7 @@
                                         <tbody>
                                                     @foreach ($listemarque as $listemarques )
                                                             <tr>
-                                                                    <td>{{$listemarques->nomarque}}</td>
+                                                                    <td>{{$listemarques->nommarque}}</td>
                                                                     <td>{{$listemarques->commentairemarque}}</td>    
 
 

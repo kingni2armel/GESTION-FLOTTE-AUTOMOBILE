@@ -156,7 +156,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="height:110vh !important">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="height:120vh !important">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
       <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -267,7 +267,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="../UI/icons.html" class="nav-link">
+              <a href="{{route('GETLISTECLIENT')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Liste  clients</p>
               </a>
@@ -658,6 +658,8 @@
 <script src="{{url('plug/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>
 
 <script src="{{url('plug/moment/moment.min.js')}}"></script>
+<script src="{{url('plug/moment/moment.min.js')}}"></script>
+
 
 
 <script src="{{url('plug/inputmask/jquery.inputmask.min.js')}}"></script>
@@ -669,7 +671,7 @@
 
  <script src="{{url('plug/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 
-<script src="{{url('plug/bs-stepper/js/bs-stepper.min.js')}}"></script>
+<script src="{{url('assets/js/print.js')}}"></script>
 
 {{-- <script src="{{url('plug/dropzone/min/dropzone.min.js')}}"></script>
 <script src="{{url('dist/js/adminlte.min.js')}}"></script>

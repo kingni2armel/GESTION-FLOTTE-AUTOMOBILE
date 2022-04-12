@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use App\Models\User;
 use App\Models\Client;
 use App\Models\Vehicule;
 use App\Models\Chauffeur;
 use App\Models\Ville;
+use App\Models\ReservationTraite;
 
 
 class ReservationController extends Controller
@@ -88,7 +90,7 @@ class ReservationController extends Controller
         }
 
       /**
-       * function qui renvoie a la page de modification  de la reservation
+       * function qui renvoie a la page de modification  de la reservation par le client
       */
 
 
@@ -99,10 +101,16 @@ class ReservationController extends Controller
             $informationdelareservation = DB::table('reservations')
             ->where('id',$idreservation)
             ->get();
+
+            $statutraitement = DB::table('reservation_traites')
+            ->where('reservation_traites.reservation_id',$idreservation)
+            ->get();
+
             return view('reservation.updatereservation',
             [
                 'informationdelareservation'=>$informationdelareservation,
                 'listedesville'=>$listedesville,
+                'statutraitement'=>$statutraitement,
             
             ]);
         }
@@ -146,6 +154,8 @@ class ReservationController extends Controller
                 'statut_traitement'=>'0',
 
             ]);
+
+            return redirect()->route('GETPAGELISTERESERVATIONBYID');
      }
 
      /***
@@ -179,4 +189,110 @@ class ReservationController extends Controller
             ->get(); 
            return view('reservation.listereservationnontraite',['listereservation'=>$listereservation,'nombrereservation'=>$nombrereservation]);
        }
+
+       /**
+        *   function qui renvoie a la page de traitement d'une reservation
+        */
+
+        public function GETPAGETRAITEMENT()
+        {
+                $id = $_GET['id'];
+
+                /**collection de la liste des chauffeurs libes */
+
+                $listechauffeurlibre = DB::table('users')
+                ->join('chauffeurs','users.id','=','chauffeurs.user_id')
+                ->select('users.nom','users.prenom','users.numero_telephone','users.email','users.password','chauffeurs.id','chauffeurs.numero_cni','chauffeurs.numero_permis')
+                ->where('chauffeurs.statut_chauffeur',1)
+                ->get();
+
+                /** collection de la liste des vehicules libres */
+
+                $listevehicule_libre = DB::table('vehicules')
+                ->select('vehicules.*')
+                ->where('statut_vehicule',1)
+                ->get();
+
+                /** collection de la liste des vehicules libres */
+                
+                $infosurlareservation = DB::table('reservations')
+                ->select('reservations.*')
+                ->where('id',$id)
+                ->get();
+
+                return view('reservation.traitementreservation',
+                [
+                    'infosurlareservation'=>$infosurlareservation,
+                     'listechauffeurlibre'=>$listechauffeurlibre,
+                     'listevehiulelibre'=>$listevehicule_libre,
+
+
+                
+                ]);
+        }
+
+        /**
+         * function qui permet de traiter une reservation
+         * @param['id'] est l'identifiant de la reservation que l'on veut traiter
+         * 
+         */
+
+       public function TraitementReservation(Request $request,$id)
+
+       {
+            $reservation = Reservation::find($id);
+            $request->validate([
+                'nomchauffeur'=>['required'],
+                'nomvehicule'=>['required']
+            ]);
+
+            $reservationtraite  = ReservationTraite::create([
+                    'reservation_id'=>$id,
+                    'chauffeur_id'=>$request->nomchauffeur,
+                    'vehicule_id'=>$request->nomvehicule,
+            ]);
+
+            $reservation->update([
+                'statut_traitement'=>'1'
+            ]);
+        
+            return redirect()->route('GETLISTERESERVATIONONTRAITE');
+       }
+
+
+
+       /**
+        *  function qui permet d'aller a la page de telechargement du fichier de la reservation deja traite
+        */
+
+
+        public function GETPAGEDOWNLOADFILE()
+        
+        {
+            $idreservation = $_GET['id'];
+            $iduser  = auth()->user()->id;
+            $informationreservationfiledownload= DB::table('reservation_traites')
+            ->join('vehicules','reservation_traites.vehicule_id','=','vehicules.id')
+            ->join('reservations','reservation_traites.reservation_id','=','reservations.id')
+            ->join('chauffeurs','reservation_traites.chauffeur_id','=','chauffeurs.id')
+            ->join('users','chauffeurs.user_id','=','users.id')
+            ->join('type_carburants','vehicules.typeCarburant_id','=','type_carburants.id')
+            ->select('vehicules.*',
+            'vehicules.created_at',
+                'reservations.*',
+                'chauffeurs.*',
+                'users.*',
+                'type_carburants.*', 
+            )
+            ->where('reservation_traites.reservation_id',$idreservation)
+            ->get();
+           //   die($informationreservationfiledownload);  
+                return view('reservation.telechargement',
+                [
+                    'informationreservationfiledownload'=>$informationreservationfiledownload,
+                ]
+            );
+        }
 }
+
+
