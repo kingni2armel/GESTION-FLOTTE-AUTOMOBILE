@@ -57,10 +57,10 @@ class VehiculeController extends Controller
                     'modelevehicule'=>['required'],
                     'typecarburantvehicule'=>['required'],
                     'parkingvehicule'=>['required'],
-                    'immatriculationvehicule'=>['required'],
+                    'immatriculationvehicule'=>['required','max:50','min:5'],
                     'statutvehicule'=>['required'],
-                    'kilometragevehicule'=>['required'],
-                    'numerochassivehicule'=>['required'],
+                    'kilometragevehicule'=>['required','max:500','min:3'],
+                    'numerochassivehicule'=>['required','max:50','min:3'],
                     'datedebutasurancevehicule'=>['required'],
                     'datefinasurancevehicule'=>['required'],
                     
@@ -86,6 +86,9 @@ class VehiculeController extends Controller
 
                 ]);
                 // die($datedebut);
+                session()->flash('notification.message','Véhicule crée  avec sucess!');
+                session()->flash('notification.type','success');
+                
                 return redirect()->route('GETPAGECREATEVEHICULE');
             
         
@@ -194,8 +197,8 @@ class VehiculeController extends Controller
                             'parkingvehiculeupdate'=>['required'],
                             'immatriculationvehiculeupdate'=>['required'],
                             'statutvehiculeupdate'=>['required'],
-                            'kilometragevehiculeupdate'=>['required'],
-                            'numerochassivehiculeupdate'=>['required'],
+                            'kilometragevehiculeupdate'=>['required','max:50','min:2'],
+                            'numerochassivehiculeupdate'=>['required','max:50','min:5'],
                             'datedebutasurancevehiculeupdate'=>['required'],
                             'datefinasurancevehiculeupdate'=>['required'],
                             
@@ -217,6 +220,9 @@ class VehiculeController extends Controller
                             
         
                         ]);
+                        session()->flash('notification.message','Véhicule modifié  avec sucess!');
+                        session()->flash('notification.type','success');
+                        
 
                         return redirect()->route('GETLISTEVEHICULE');
 
@@ -234,6 +240,9 @@ class VehiculeController extends Controller
         {
             $vehiculedelete = Vehicule::find($id);
             $vehiculedelete->delete();
+            session()->flash('notification.message','Véhicule supprimé  avec sucess!');
+            session()->flash('notification.type','danger');
+            
             return redirect()->route('GETLISTEVEHICULE');
 
         }   

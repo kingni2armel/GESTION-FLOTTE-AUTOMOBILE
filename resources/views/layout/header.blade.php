@@ -14,11 +14,11 @@
   <link rel="stylesheet" href="{{url('plug/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css' )}}">
   <link rel="stylesheet" href="{{url('plug/select2/css/select2.min.css' )}}">
   <link rel="stylesheet" href="{{url('plug/select2-bootstrap4-theme/select2-bootstrap4.min.css' )}}">
-  <link rel="stylesheet" href="{{url('plug/bootstrap4-duallistbox/bootstrap-duallistbox.min.css' )}}">
+  <link rel="stylesheet" href="{{url('plug/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
   <link rel="stylesheet" href="{{url('plug/bs-stepper/css/bs-stepper.min.css' )}}">
   <link rel="stylesheet" href="{{url('plug/dropzone/min/dropzone.min.css')}}">
   <link rel="stylesheet" href="{{url('dist/css/adminlte.min.css' )}}">
-  <link rel="stylesheet" href="{{url('assets/css/miss.css' )}}">
+  <link rel="stylesheet" href="{{url('assets/css/miss.css')}}">
 
   
 
@@ -583,7 +583,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('GETLISTEMODELE')}}" class="nav-link">
+                <a href="{{route('GETLISTESERVICE')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Liste  services</p>
                 </a>
@@ -663,6 +663,9 @@
 
 
 <script src="{{url('plug/inputmask/jquery.inputmask.min.js')}}"></script>
+
+
+<script src="{{url('plug/bs-stepper/js/bs-stepper.min.js')}}"></script>
 
 <script src="{{url('plug/daterangepicker/daterangepicker.js')}}"></script>
 

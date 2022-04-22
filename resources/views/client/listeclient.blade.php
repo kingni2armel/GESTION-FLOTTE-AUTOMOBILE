@@ -4,6 +4,11 @@
         <div class="card-header">
           <h3 class="card-title">LISTE DES CLIENTS</h3>
         </div>
+        @if (session()->has('notification.message'))
+            <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+              {{session()->get('notification.message')}}
+            </div>
+        @endif
         <!-- /.card-header -->
         <div class="card-body"> 
                     @if($listeclient->count()>0)
@@ -36,7 +41,7 @@
                                                                     <td>
                                                                              <div class="parent">
                                                                                  <div class="parent_items">
-                                                                                    <form action="{{route('DELETEUSER',['id'=>$listeclientS->id])}}" method="post">
+                                                                                    <form action="{{route('DELETECLIENT',['id'=>$listeclientS->id])}}" method="post">
                                                                                        @csrf
                                                                                         <button type="su" class="btn btn-navbar items-but" style=
                                                                                         "background-color:red !important;color:white;pa"type="submit">

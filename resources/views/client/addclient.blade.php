@@ -13,14 +13,18 @@
           </div><!-- /.container-fluid -->
         </section>
 
-          @if($errors->any())
-        {
-          @foreach($errors->all() as $error)
-                <div class="text-red-500">
-                            <p> {{$error}}</p>
+              @if($errors->any())
+              {
+                <div class="alert alert-danger">
+                      @foreach($errors->all() as $error)
+                      <div class="text-red-500 ">
+                                  <p> {{$error}}</p>
+                      </div>
+                  @endforeach
                 </div>
-            @endforeach
-      } 
+          
+              } 
+
 
       @endif
 
@@ -51,6 +55,11 @@
                         </button>
                       </div>
                     </div> 
+                        @if (session()->has('notification.message'))
+                          <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                            {{session()->get('notification.message')}}
+                          </div>
+                       @endif
                     <div class="bs-stepper-content">
                       <!-- your steps content here -->
                       <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
@@ -121,7 +130,7 @@
           </div>
         </form>
         
-        
+      
   </div>
 
 

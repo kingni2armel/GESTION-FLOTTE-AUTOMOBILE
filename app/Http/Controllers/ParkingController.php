@@ -49,6 +49,8 @@ class ParkingController extends Controller
 
             ]);
 
+            session()->flash('notification.message','Parking crée  avec sucess!');
+            session()->flash('notification.type','success');
             return redirect()->route('GETLISTEPARKING');
      }
 
@@ -96,10 +98,10 @@ class ParkingController extends Controller
       public function UPDATEPARKING(Request $request,$idparking)
       {
                      $request->validate([
-                            'nomupdate'=>['required'],
+                            'nomupdate'=>['required','max:250','min:3'],
                             'nomvilleupdate'=>['required'],
-                            'nombredeplaceupdate'=>['required'],
-                            'commentaireupdate'=>['required']
+                            'nombredeplaceupdate'=>['required','max:8','min:1'],
+                            'commentaireupdate'=>['required','max:250','min:3']
                      ]);
                  $parkingupdate=  Parking::find($idparking);
                  $parkingupdate->update([
@@ -109,6 +111,8 @@ class ParkingController extends Controller
                      'description'=>$request->commentaireupdate
 
               ]);
+              session()->flash('notification.message','Parking modifié  avec sucess!');
+              session()->flash('notification.type','success');
 
               return redirect()->route('GETLISTEPARKING');
 
@@ -123,6 +127,8 @@ class ParkingController extends Controller
        {
               $parkingdelete = Parking::find($id);
               $parkingdelete->delete();
+              session()->flash('notification.message','Parking supprimé  avec sucess!');
+              session()->flash('notification.type','danger');
               return redirect()->route('GETLISTEPARKING');
 
               

@@ -5,6 +5,14 @@
           <h3 class="card-title">LISTE DES DIRECTIONS</h3>
         </div>
         <!-- /.card-header -->
+
+                @if (session()->has('notification.message'))
+                      <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                              {{session('notification.message')}}
+                      </div>
+                 @endif
+
+                 
         <div class="card-body"> 
                     @if($listedirection->count()>0)
 

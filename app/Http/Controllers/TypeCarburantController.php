@@ -39,14 +39,17 @@ class TypeCarburantController extends Controller
 
     {
             $request->validate([
-                'nomcarburant'=>['required'],
-                'libellecarburant'=>['required'] 
+                'nomcarburant'=>['required','max:70','min:3'],
+                'libellecarburant'=>['required','max:250','min:3'] 
             ]);
 
             $createcarburant = TypeCarburant::create([
                     'nomtypecarburant'=>$request->nomcarburant,
                     'libellecarburant'=>$request->libellecarburant,
             ]);
+            session()->flash('notification.message','Type carburant crée  avec sucess!');
+            session()->flash('notification.type','success');
+
 
             return redirect()->route('GETLISTETYPECARBURANT');
     }
@@ -73,8 +76,8 @@ class TypeCarburantController extends Controller
 
       {
         $request->validate([
-            'nomcarburantupdate'=>['required'],
-            'libelleupdate'=>['required'] 
+            'nomcarburantupdate'=>['required','max:80','min:3'],
+            'libelleupdate'=>['required','max:250','min:3'] 
         ]);
 
         $findcarburant = TypeCarburant::find($id);
@@ -83,6 +86,9 @@ class TypeCarburantController extends Controller
             'nomtypecarburant'=>$request->nomcarburantupdate,
             'libellecarburant'=>$request->libelleupdate,
         ]);
+
+        session()->flash('notification.message','Type carburant modifié  avec sucess!');
+            session()->flash('notification.type','success');
 
         return redirect()->route('GETLISTETYPECARBURANT');
 
@@ -97,6 +103,9 @@ class TypeCarburantController extends Controller
        {
             $carburantdelete = TypeCarburant::find($id);
             $carburantdelete->delete();
+
+            session()->flash('notification.message','Type carburant supprimé  avec sucess!');
+            session()->flash('notification.type','danger');
             return redirect()->route('GETLISTETYPECARBURANT');
 
 

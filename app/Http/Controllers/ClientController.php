@@ -43,14 +43,14 @@ class ClientController extends Controller
       public function CREATECLIENT(Request $request)
       {
               $request->validate([
-                     'nomclient'=>['required'],
-                     'prenomclient'=>['required'],
-                     'numeroclient'=>['required'],
-                     'emailclient'=>['required'],
-                     'nomdirectionclient'=>['required'],
-                     'nomdepartementclient'=>['required'],
-                     'nomserviceclient'=>['required'],
-                     'passwordclient'=>['required'],
+                     'nomclient'=>['required','max:250','min:3'],
+                     'prenomclient'=>['required','max:250','min:3'],
+                     'numeroclient'=>['required','max:250','min:3'],
+                     'emailclient'=>['required','max:250','min:3'],
+                     'nomdirectionclient'=>['required','max:250','min:3'],
+                     'nomdepartementclient'=>['required','max:250','min:3'],
+                     'nomserviceclient'=>['required','max:250','min:3'],
+                     'passwordclient'=>['required','max:250','min:3'],
                    
               ]);
 
@@ -69,6 +69,9 @@ class ClientController extends Controller
                      'service_id'=>$request->nomserviceclient
 
               ]);
+              session()->flash('notification.message',sprintf("Client   crée avec succes!"));
+              session()->flash('notification.type','success');
+
 
               return redirect()->route('GETPAGECREATECLIENT');
       }
@@ -120,6 +123,7 @@ class ClientController extends Controller
               ->join('directions','clients.direction_id','=','directions.id')
               ->join('services','clients.service_id','=','services.id')
               ->select(
+                            'clients.id',
                             'users.nom',
                             'users.prenom',
                             'users.numero_telephone',
@@ -147,23 +151,64 @@ class ClientController extends Controller
 
          public function UPDATECLIENT (Request $request,$id)
          {
-
+                     $user = DB::table('users')
+                     ->join('clients','users.id','=','clients.user_id')
+                     ->select('users.id')
+                     ->where('clients.id',$id)
+                     ->get();
+                           //die($user);
+                      $users = $user->first();
+                      $userid = $users->id;
+                   
+                     $userfind =  User::find($userid);
                      $clientfind = Client::find($id);
                      $request->validate([
-                            'nomclientupdate'=>['required'],
-                            'prenomclientupdate'=>['required'],
-                            'numeroclientupdate'=>['required'],
-                            'emailclientupdate'=>['required'],
-                            'nomdirectionclientupdate'=>['required'],
-                            'nomdepartementclientupdate'=>['required'],
-                            'nomserviceclientupdate'=>['required'],
-                            'passwordclientupdate'=>['required'],
+                            'nomclientupdate'=>['required','max:250','min:3'],
+                            'prenomclientupdate'=>['required','max:250','min:3'],
+                            'numeroclientupdate'=>['required','max:250','min:3'],
+                            'emailclientupdate'=>['required','max:250','min:3'],
+                            'nomdirectionclientupdate'=>['required','max:250','min:3'],
+                            'nomdepartementclientupdate'=>['required','max:250','min:3'],
+                            'nomserviceclientupdate'=>['required','max:250','min:3'],
+                            'passwordclientupdate'=>['required','max:250','min:3'],
                           
                      ]);
 
                      $clientfind->update([
-                            ''
+                            'direction_id'=>$request->nomdirectionclientupdate,
+                            'departement_id'=>$request->nomdepartementclientupdate,
+                            'service_id'=>$request->nomserviceclientupdate
                      ]);
+
+                     $userfind->update([
+                            'nom'=>$request->nomclientupdate,
+                            'prenom'=>$request->prenomclientupdate,
+                            'numero_telephone'=>$request->numeroclientupdate,
+                            'email'=>$request->emailclientupdate,
+                            'password'=>$request->passwordclientupdate,
+                     ]);
+
+                     session()->flash('notification.message',sprintf(" Client modifié avec succes!"));
+                     session()->flash('notification.type','success');
+                     return redirect()->route('GETLISTECLIENT');
+
          }
+
+
+         /** function qui permet de supprimer un client */
+
+
+              public function DELETECLIENT(Request $request,$id)
+
+       {
+              $client = Client::find($id);
+              $client->delete();
+              session()->flash('notification.message',sprintf("Suppresion du client éffectué avec sucess !"));
+              session()->flash('notification.type','danger');
+              return redirect()->route('GETLISTECLIENT');
+
+
+
+       }
 
 }

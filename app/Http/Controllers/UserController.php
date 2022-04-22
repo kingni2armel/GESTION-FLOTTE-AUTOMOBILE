@@ -100,8 +100,8 @@ class UserController extends Controller
     public function Authenticate(Request $request)
     {
             $request->validate([
-                'email'=>['required'],
-                'password'=>['required'],
+                'email'=>['required','max:10','min:1'],
+                'password'=>['required','max:10','min:1'],
             ]);
 
             if(auth()->attempt($request->only('email','password')))
@@ -127,11 +127,11 @@ class UserController extends Controller
     public function ADDUSER(Request $request)
     {
         $request->validate([
-            'nom'=>['required'],
-            'prenom'=>['required'],
-            'numero'=>['required'],
-            'email'=>['required'],
-            'password'=>['required'],
+            'nom'=>['required','max:250','min:3'],
+            'prenom'=>['required','max:250','min:3'],
+            'numero'=>['required','max:250','min:3'],
+            'email'=>['required','max:50','min:3'],
+            'password'=>['required','max:8','min:4'],
             'role'=>['required'],
 
 
@@ -160,6 +160,11 @@ class UserController extends Controller
                     'user_id'=>$createUser->id,
             ]);
         }
+
+        session()->flash('notification.message','Utilisateur crée  avec sucess!');
+        session()->flash('notification.type','success');
+
+
         return redirect()->route('GETLISTEUSER');
 
 
@@ -185,11 +190,11 @@ class UserController extends Controller
      public function UPDATEUSER(Request $request,$id)
      {
         $request->validate([
-            'nomupdate'=>['required'],
-            'prenomupdate'=>['required'],
-            'numeroupdate'=>['required'],
-            'emailupdate'=>['required'],
-            'passwordupdate'=>['required'],
+            'nomupdate'=>['required','max:250','min:3'],
+            'prenomupdate'=>['required','max:250','min:3'],
+            'numeroupdate'=>['required','max:250','min:3'],
+            'emailupdate'=>['required','max:50','min:8'],
+            'passwordupdate'=>['required','max:8','min:4'],
             'roleupdate'=>['required'],
 
         ]);
@@ -202,6 +207,11 @@ class UserController extends Controller
             'password'=>$request->passwordupdate,
             'role'=>$request->roleupdate
          ]);
+
+         session()->flash('notification.message','Utilisateur modifié  avec sucess!');
+         session()->flash('notification.type','success');
+
+
          return redirect()->route('GETLISTEUSER');
 
 
@@ -214,6 +224,10 @@ class UserController extends Controller
      {
             $deleteuser = User::find($id);
             $deleteuser->delete();
+            session()->flash('notification.message','Utilisateur supprimé  avec sucess!');
+            session()->flash('notification.type','danger');
+
+
             
             return redirect()->route('GETLISTEUSER');
 

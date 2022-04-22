@@ -33,14 +33,14 @@ class ChauffeurController extends Controller
 
     {
         $request->validate([
-            'nom'=>['required'],
-            'prenom'=>['required'],
-            'numero'=>['required'],
-            'email'=>['required'],
-            'numcni'=>['required'],
-            'numpermis'=>['required'],
-            'status'=>['required'],
-            'password'=>['required'],
+            'nom'=>['required','max:250','min:3'],
+            'prenom'=>['required','max:250','min:3'],
+            'numero'=>['required','max:250','min:3'],
+            'email'=>['required','max:250','min:3'],
+            'numcni'=>['required','max:250','min:3'],
+            'numpermis'=>['required','max:250','min:3'],
+            'status'=>['required','max:250','min:3'],
+            'password'=>['required','max:250','min:3'],
             
 
         ]);
@@ -59,6 +59,8 @@ class ChauffeurController extends Controller
             'numero_permis'=>$request->numpermis,
             'statut_chauffeur'=>$request->status
         ]);
+        session()->flash('notification.message',sprintf("Chauffeur   crée avec succes!"));
+        session()->flash('notification.type','success');
         return redirect()->route('GETPAGE');
 
     }
@@ -106,14 +108,14 @@ class ChauffeurController extends Controller
 
      {
         $request->validate([
-            'nomupdate'=>['required'],
-            'prenomupdate'=>['required'],
-            'numeroupdate'=>['required'],
-            'emailupdate'=>['required'],
-            'numcniupdate'=>['required'],
-            'numpermisupdate'=>['required'],
+            'nomupdate'=>['required','max:250','min:3'],
+            'prenomupdate'=>['required','max:250','min:3'],
+            'numeroupdate'=>['required','max:250','min:3'],
+            'emailupdate'=>['required','max:250','min:3'],
+            'numcniupdate'=>['required','max:250','min:3'],
+            'numpermisupdate'=>['required','max:250','min:3'],
             'statusupdate'=>['required'],
-            'passwordupdate'=>['required'],
+            'passwordupdate'=>['required','max:250','min:3'],
             
         ]);
         $infouserupdate= User::find($idu);
@@ -131,6 +133,8 @@ class ChauffeurController extends Controller
                 'numero_permis'=>$request->numpermisupdate,
                 'statut_chauffeur'=>$request->statusupdate
          ]);
+         session()->flash('notification.message',sprintf("Chauffeur modifié avec succes!"));
+         session()->flash('notification.type','success');
          return redirect()->route('GETLISTECHAUFFEUR');
 
         
@@ -146,6 +150,8 @@ class ChauffeurController extends Controller
 
         $deleteuser = User::find($id);
         $deleteuser->delete();
+        session()->flash('notification.message',sprintf("Chauffeur supprimé avec succes!"));
+        session()->flash('notification.type','danger');
         return redirect()->route('GETLISTECHAUFFEUR');
 
       }

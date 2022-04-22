@@ -4,6 +4,11 @@
         <div class="card-header">
           <h3 class="card-title">LISTE DES DEPARTEMENTS</h3>
         </div>
+        @if (session()->has('notification.message'))
+            <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                    {{session('notification.message')}}
+            </div>
+         @endif
         <!-- /.card-header -->
         <div class="card-body"> 
                     @if($listedepartement->count()>0)
@@ -11,6 +16,8 @@
                             <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                                 <tr>
+
+                                                    <th>Numero</th>
                                                     <th>Nom </th>
                                                     <th>Description</th>
                                                     <th>Operation</th>
@@ -20,6 +27,10 @@
                                         <tbody>
                                                     @foreach ($listedepartement as $listedepartements )
                                                             <tr>
+
+                                                                <td>
+                                                                    {{ $numerotation ++}}
+                                                                </td>
                                                                     <td>{{$listedepartements->nom_departement}}</td>
                                                                     <td>{{$listedepartements->commentaire_departement}}</td>    
                                                                     

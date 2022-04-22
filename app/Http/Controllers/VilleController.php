@@ -37,9 +37,9 @@ class VilleController extends Controller
 
       {
           $request->validate([
-                    'nom'=>['required'],
+                    'nom'=>['required','max:50','min:5'],
                     'nomregion'=>['required'],
-                    'commentaire'=>['required']
+                    'commentaire'=>['required','max:250','min:5']
           ]);
 
           $createville = Ville::create([
@@ -47,6 +47,9 @@ class VilleController extends Controller
                 'region_id'=>$request->nomregion,
                 'description'=>$request->commentaire
           ]);
+
+          session()->flash('notification.message','Ville crée  avec sucess!');
+          session()->flash('notification.type','success');
 
           return redirect()->route('GETLISTEVILLE');
       }
@@ -85,9 +88,9 @@ class VilleController extends Controller
        public function UPDATEVILLE(Request $request,$id)
        {
         $request->validate([
-            'nomupdate'=>['required'],
+            'nomupdate'=>['required','max:50','min:5'],
             'nomregionupdate'=>['required'],
-            'commentaireupdate'=>['required']
+            'commentaireupdate'=>['required','max:250','min:5']
        ]);
            $villeupdate = Ville::find($id);
            $villeupdate->update([
@@ -95,6 +98,9 @@ class VilleController extends Controller
                 'region_id'=>$request->nomregionupdate,
                 'description'=>$request->commentaireupdate,
            ]);
+
+           session()->flash('notification.message','Ville modifié  avec sucess!');
+           session()->flash('notification.type','success');
 
            return redirect()->route('GETLISTEVILLE');
        }
@@ -109,6 +115,9 @@ class VilleController extends Controller
         {
                 $villedelete =  Ville::find($id);
                 $villedelete->delete();
+
+                session()->flash('notification.message','Ville supprimé  avec sucess!');
+                session()->flash('notification.type','danger');
                 return redirect()->route('GETLISTEVILLE');
                 
         }

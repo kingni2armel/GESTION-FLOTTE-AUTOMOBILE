@@ -35,14 +35,14 @@ class ReservationController extends Controller
 
      {
             $request->validate([
-                'motifreservation'=>['required'],
+                'motifreservation'=>['required','max:250','min:3'],
                 'datedebut'=>['required'],
                 'dateretour'=>['required'],
+                'statutconvoiture'=>['required'],
                 'villedepart'=>['required'],
                 'villedestination'=>['required'],
-                'nombredeplace'=>['required'],
+                'nombredeplace'=>['required','max:1','min:8'],
                 'statutchauffeur'=>['required'],        
-                'statutconvoiture'=>['required'],
             ]);
 
               $clientcreatereservation  = Reservation::create([
@@ -115,6 +115,7 @@ class ReservationController extends Controller
             ]);
         }
 
+    
 
 
     /**\
@@ -128,12 +129,12 @@ class ReservationController extends Controller
             $reservationfind  = Reservation::find($id);
 
             $request->validate([
-                'motifreservationupdate'=>['required'],
+                'motifreservationupdate'=>['required','max:250','min:3'],
                 'datedebutupdate'=>['required'],
                 'dateretourupdate'=>['required'],
                 'villedepartupdate'=>['required'],
                 'villedestinationupdate'=>['required'],
-                'nombredeplaceupdate'=>['required'],
+                'nombredeplaceupdate'=>['required','max:8','min:1'],
                 'statutchauffeurupdate'=>['required'],        
                 'statutconvoitureupdate'=>['required'],
             ]);
@@ -259,7 +260,10 @@ class ReservationController extends Controller
             return redirect()->route('GETLISTERESERVATIONONTRAITE');
        }
 
-
+       public function GETMARGE()
+       {
+            
+       }
 
        /**
         *  function qui permet d'aller a la page de telechargement du fichier de la reservation deja traite

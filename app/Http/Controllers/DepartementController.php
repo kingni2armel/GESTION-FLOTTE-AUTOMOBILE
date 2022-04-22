@@ -31,8 +31,16 @@ class DepartementController extends Controller
      public function GETLISTEDEPARTEMENT()
 
      {
+        $numerodepartement = 1;
          $listedepartement = Departement::paginate(7);
-         return view('departement.listedepartement',['listedepartement'=>$listedepartement]);
+         return view('departement.listedepartement',[
+             'listedepartement'=>$listedepartement,
+
+             'numerotation'=> $numerodepartement
+        
+
+        
+        ]);
      }
 
         /**
@@ -44,8 +52,8 @@ class DepartementController extends Controller
         {
             $request->validate([
                         'nomdirection'=>['required'],
-                        'nomdepartement'=>['required'],
-                        'commentairedepartement'=>['required'],
+                        'nomdepartement'=>['required','max:250','min:3'],
+                        'commentairedepartement'=>['required','max:250','min:3'],
             ]);
 
             $createdepartement = Departement::create([
@@ -53,6 +61,9 @@ class DepartementController extends Controller
                         'nom_departement'=>$request->nomdepartement,
                         'commentaire_departement'=>$request->commentairedepartement
             ]);
+            session()->flash('notification.message','Département crée  avec sucess!');
+            session()->flash('notification.type','success');
+
             return redirect()->route('GETLISTEDEPARTEMENT');
         }
 
@@ -79,9 +90,9 @@ class DepartementController extends Controller
           public function UPDATEDEPARTEMENT(Request $request,$id)
           {
             $request->validate([
-                'nomdepartementupdate'=>['required'],
+                'nomdepartementupdate'=>['required','max:250','min:3'],
                 'nomdirectionupdate'=>['required'],
-                'descriptiondepartementupdate'=>['required'],
+                'descriptiondepartementupdate'=>['required','max:250','min:3'],
     ]);
                 $updatedepartement= Departement::find($id);
 
@@ -90,6 +101,9 @@ class DepartementController extends Controller
                     'direction_id'=>$request->nomdirectionupdate,
                     'commentaire_departement'=>$request->descriptiondepartementupdate
                 ]);
+                session()->flash('notification.message','Département modifié  avec sucess!');
+                session()->flash('notification.type','success');
+                
                 return redirect()->route('GETLISTEDEPARTEMENT');
 
           }
@@ -102,6 +116,8 @@ class DepartementController extends Controller
            {
                $departementdelete = Departement::find($id);
                $departementdelete->delete();
+               session()->flash('notification.message','Département supprimé  avec sucess!');
+               session()->flash('notification.type','danger');
                return redirect()->route('GETLISTEDEPARTEMENT');
 
 

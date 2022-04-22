@@ -4,6 +4,14 @@
         <div class="card-header">
           <h3 class="card-title">LISTE DES REGIONS</h3>
         </div>
+
+        @if (session()->has('notification.message'))
+              <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                      {{session('notification.message')}}
+              </div>
+        @endif
+
+
         <!-- /.card-header -->
         <div class="card-body"> 
                     @if($listeregion->count()>0)
@@ -59,7 +67,7 @@
                             </table>
                             <span>{{$listeregion->links()}}</span>
                         @else
-                                <span> Il n'existe aucun utilisateur</span>
+                                <span> Il n'existe aucune region </span>
                      @endif
         </div>
         <!-- /.card-body -->

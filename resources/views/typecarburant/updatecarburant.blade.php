@@ -14,16 +14,20 @@
         </div><!-- /.container-fluid -->
       </section>
 
-      @if($errors->any())
-    {
-        @foreach($errors->all() as $error)
-             <div class="text-red-500">
-                        <p> {{$error}}</p>
-             </div>
-        @endforeach
-    } 
+            @if($errors->any())
+                        {
+                            <div class="alert alert-danger">
+                                @foreach($errors->all() as $error)
+                                <div class="text-red-500 ">
+                                            <p> {{$error}}</p>
+                                </div>
+                            @endforeach
+                            </div>
+                    
+                        } 
 
-@endif
+
+                @endif
 
 
                 @foreach ($infocarburant as $infocarburants)

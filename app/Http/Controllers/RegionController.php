@@ -36,14 +36,16 @@ class RegionController extends Controller
     public function CREATEREGION(Request $request)
     {
             $request->validate([
-                'nom'=>['required'],
-                'commentaire'=>['required']
+                'nom'=>['required','max:250','min:3'],
+                'commentaire'=>['required','max:250','min:3']
             ]);
             $createregion =  Region::create([
                     'nom'=>$request->nom,
                     'commentaire'=>$request->commentaire
             ]);
 
+            session()->flash('notification.message','Région  crée  avec sucess!');
+            session()->flash('notification.type','success');
            return redirect()->route('GETLISTEREGION');
     }
 
@@ -71,14 +73,17 @@ class RegionController extends Controller
 
      {
             $request->validate([
-                'nomupdate'=>['required'],
-                'commentaireupdate'=>['required'],
+                'nomupdate'=>['required','max:250','min:3'],
+                'commentaireupdate'=>['required','max:250','min:3'],
             ]);
             $regionupdate = Region::find($id);
             $regionupdate ->update([
                     'nom'=>$request->nomupdate,
                     'commentaire'=>$request->commentaireupdate
             ]);
+
+            session()->flash('notification.message','Région  modifié  avec sucess!');
+            session()->flash('notification.type','success');
 
             return redirect()->route('GETLISTEREGION');
      }
@@ -92,6 +97,8 @@ class RegionController extends Controller
       {
                 $regiondelete = Region::find($id);
                 $regiondelete->delete();
+                session()->flash('notification.message','Région  supprimé  avec sucess!');
+                session()->flash('notification.type','danger');
                 return redirect()->route('GETLISTEREGION');
       }
 }

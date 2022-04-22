@@ -15,17 +15,20 @@
           </div>
         </div><!-- /.container-fluid -->
       </section>
-
       @if($errors->any())
-    {
-        @foreach($errors->all() as $error)
-             <div class="text-red-500">
-                        <p> {{$error}}</p>
-             </div>
-        @endforeach
-    } 
+            {
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                    <div class="text-red-500 ">
+                                <p> {{$error}}</p>
+                    </div>
+                @endforeach
+                </div>
+        
+            } 
 
-@endif
+
+ @endif
 
 @foreach ( $infouser as $infousers )
         <form action="{{route('UPDATEUSER',['id'=>$id=$_GET['id']])}}"  method="post">

@@ -46,14 +46,17 @@ class MarqueController extends Controller
 
       {
         $request->validate([
-            'nommarque'=>['required'],
-            'commentairemarque'=>['required'] 
+            'nommarque'=>['required','max:250','min:3'],
+            'commentairemarque'=>['required','max:250','min:3'] 
         ]);
 
         $createcarburant = Marque::create([
                 'nommarque'=>$request->nommarque,
                 'commentairemarque'=>$request->commentairemarque,
         ]);
+        session()->flash('notification.message','Marque crée  avec sucess!');
+        session()->flash('notification.type','success');
+        
 
         return redirect()->route('GETLISTEMARQUE');
 
@@ -83,8 +86,8 @@ class MarqueController extends Controller
 
       {
         $request->validate([
-            'nommarqueupdate'=>['required'],
-            'commentaireupdate'=>['required'] 
+            'nommarqueupdate'=>['required','max:250','min:3'],
+            'commentaireupdate'=>['required','max:250','min:3'] 
         ]);
 
         $findmarque = Marque::find($id);
@@ -94,6 +97,9 @@ class MarqueController extends Controller
             'commentairemarque'=>$request->commentaireupdate,
         ]);
 
+          session()->flash('notification.message','Marque modifié  avec sucess!');
+          session()->flash('notification.type','success');
+        
         return redirect()->route('GETLISTEMARQUE');
 
       }
@@ -110,6 +116,9 @@ class MarqueController extends Controller
       {
             $marquedelete = Marque::find($id);
             $marquedelete->delete();
+            session()->flash('notification.message','Marque supprimé  avec sucess!');
+            session()->flash('notification.type','danger');
+            
             return redirect()->route('GETLISTEMARQUE');
 
       }

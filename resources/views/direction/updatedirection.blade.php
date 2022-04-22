@@ -14,16 +14,21 @@
         </div><!-- /.container-fluid -->
       </section>
 
-      @if($errors->any())
-    {
-        @foreach($errors->all() as $error)
-             <div class="text-red-500">
-                        <p> {{$error}}</p>
-             </div>
-        @endforeach
-    } 
+                        @if($errors->any())
+                                    {
+                                        <div class="alert alert-danger">
+                                                @foreach($errors->all() as $error)
+                                                            <ul>
+                                                                    <li>{{$error}}</li>
+                                                            </ul>     
+                                                
+                                                @endforeach
+                                        </div>
+                                
+                                    } 
 
-@endif
+
+                         @endif
 
 
                 @foreach ( $infodirection as $infodirections )
@@ -50,6 +55,7 @@
                                                 <div class="line"></div>
                                         
                                             </div> 
+                                    
                                             <div class="bs-stepper-content">
                                                 <!-- your steps content here -->
                                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">

@@ -6,6 +6,17 @@
         <div class="card-header">
           <h3 class="card-title">LISTE DES CHAUFFEURS</h3>
         </div>
+
+
+        @if (session()->has('notification.message'))
+            <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+              {{session()->get('notification.message')}}
+            </div>
+        @endif
+
+
+
+        
         <!-- /.card-header -->
         <div class="card-body"> 
                     @if($listechauffeur->count()>0)

@@ -49,9 +49,9 @@ class ServiceController extends Controller
 
         {
             $request->validate([
-                        'nomservice'=>['required'],
+                        'nomservice'=>['required','max:250','min:3'],
                         'nomdepartement'=>['required'],
-                        'commentaireservice'=>['required'],
+                        'commentaireservice'=>['required','max:250','min:3'],
             ]);
 
             $createservice = Service::create([
@@ -59,6 +59,8 @@ class ServiceController extends Controller
                         'nom_service'=>$request->nomservice,
                         'commentaire_service'=>$request->commentaireservice
             ]);
+            session()->flash('notification.message','Service crée  avec sucess!');
+            session()->flash('notification.type','danger');
             return redirect()->route('GETLISTESERVICE');
         }
 
@@ -90,7 +92,7 @@ class ServiceController extends Controller
             $request->validate([
                 'nomserviceupdate'=>['required'],
                 'nomdepartementupdate'=>['required'],
-                'commentaireserviceupdate'=>['required'],
+                'commentaireserviceupdate'=>['required','max:250','min:3'],
                  ]);
 
             $serviceupdate = Service::find($id);
@@ -99,6 +101,8 @@ class ServiceController extends Controller
                 'nom_service'=>$request->nomserviceupdate,
                 'commentaire_service'=>$request->commentaireserviceupdate
             ]);
+            session()->flash('notification.message','Service modifié  avec sucess!');
+            session()->flash('notification.type','success');
             return redirect()->route('GETLISTESERVICE');
 
           }
@@ -111,6 +115,8 @@ class ServiceController extends Controller
            {
                 $servicedelete =  Service::find($id);
                 $servicedelete->delete();
+                session()->flash('notification.message','Service supprimé  avec sucess!');
+                session()->flash('notification.type','danger');
                 return redirect()->route('GETLISTESERVICE');
 
            }

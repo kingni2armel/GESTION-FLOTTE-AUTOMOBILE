@@ -30,15 +30,16 @@ class ModeleController extends Controller
 
     {
       $request->validate([
-          'nommodele'=>['required'],
-          'commentairemodele'=>['required'] 
+          'nommodele'=>['required','max:250','min:3'],
+          'commentairemodele'=>['required','max:250','min:3'] 
       ]);
 
       $createmodele = Modele::create([
               'nommodele'=>$request->nommodele,
               'commentairemodele'=>$request->commentairemodele,
       ]);
-
+      session()->flash('notification.message','Modele crée  avec sucess!');
+      session()->flash('notification.type','success');
       return redirect()->route('GETLISTEMODELE');
 
     }
@@ -79,8 +80,8 @@ class ModeleController extends Controller
 
       {
         $request->validate([
-            'nommodeleupdate'=>['required'],
-            'commentaireupdate'=>['required'] 
+            'nommodeleupdate'=>['required','max:250','min:3'],
+            'commentaireupdate'=>['required','max:250','min:3'] 
         ]);
 
         $findmarque = Modele::find($id);
@@ -89,6 +90,8 @@ class ModeleController extends Controller
             'nommodele'=>$request->nommodeleupdate,
             'commentairemodele'=>$request->commentaireupdate,
         ]);
+        session()->flash('notification.message','Modele modifié  avec sucess!');
+        session()->flash('notification.type','success');
 
         return redirect()->route('GETLISTEMODELE');
 
@@ -106,6 +109,8 @@ class ModeleController extends Controller
       {
             $modeledelete = Modele::find($id);
             $modeledelete->delete();
+            session()->flash('notification.message','Modele supprimé  avec sucess!');
+            session()->flash('notification.type','danger');
             return redirect()->route('GETLISTEMODELE');
 
       }

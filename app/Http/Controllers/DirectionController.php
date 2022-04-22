@@ -40,16 +40,19 @@ class DirectionController extends Controller
       public function CREATEVEDIRECTION(Request $request)
       {
             $request->validate([
-                'nomdirection'=>['required'],
-                'commentairedirection'=>['required']
+                'nomdirection'=>['required','max:250','min:3'],
+                'commentairedirection'=>['required','max:250','min:3']
             ]);
 
             $creationdirection = Direction::create([
                     'nomdirection'=>$request->nomdirection,
                     'descriptiondirection'=>$request->commentairedirection
             ]);
+            session()->flash('notification.message','Direction  crée  avec sucess!');
+            session()->flash('notification.type','success');
 
-            return redirect()->route('GETLISTEDIRECTION');
+
+            return redirect()->route('GETPAGECREATEDIRECTION');
 
 
             /**
@@ -75,7 +78,7 @@ class DirectionController extends Controller
 
       {
         $request->validate([
-            'nomdirectionupdate'=>['required'],
+            'nomdirectionupdate'=>['required','max:255','min:5'],
             'descriptiondirectionupdate'=>['required']
         ]);
             $directionupdate = Direction::find($id);
@@ -83,7 +86,8 @@ class DirectionController extends Controller
                     'nomdirection'=>$request->nomdirectionupdate,
                     'descriptiondirection'=>$request->descriptiondirectionupdate
             ]);
-
+            session()->flash('notification.message',sprintf("Direction  modifié  avec sucess!"));
+            session()->flash('notification.type','success');
             return redirect()->route('GETLISTEDIRECTION');
 
       }
@@ -96,6 +100,8 @@ class DirectionController extends Controller
        {
             $directiondelete  = Direction::find($id);
             $directiondelete->delete();
+            session()->flash('notification.message',sprintf("Direction  supprimé avec sucess!"));
+            session()->flash('notification.type','danger');
             return redirect()->route('GETLISTEDIRECTION');
 
        }

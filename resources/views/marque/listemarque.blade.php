@@ -4,6 +4,15 @@
         <div class="card-header">
           <h3 class="card-title">LISTE DES MARQUES DES VOITURES</h3>
         </div>
+
+
+        @if (session()->has('notification.message'))
+              <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                      {{session('notification.message')}}
+              </div>
+         @endif
+
+
         <!-- /.card-header -->
         <div class="card-body"> 
                     @if($listemarque->count()>0)

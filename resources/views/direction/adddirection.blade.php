@@ -11,16 +11,21 @@
         </div><!-- /.container-fluid -->
       </section>
 
-      @if($errors->any())
-    {
-        @foreach($errors->all() as $error)
-             <div class="text-red-500">
-                        <p> {{$error}}</p>
-             </div>
-        @endforeach
-    } 
+ 
+          @if($errors->any())
+                  {
+                    <div class="alert alert-danger">
+                          @foreach($errors->all() as $error)
+                          <div class="text-red-500 ">
+                                      <p> {{$error}}</p>
+                          </div>
+                      @endforeach
+                    </div>
+              
+                  } 
+ 
 
-@endif
+          @endif
 
       <form action="{{route('CREATEVEDIRECTION')}}"  method="post">
 
@@ -44,6 +49,11 @@
                     <div class="line"></div>
             
                   </div> 
+                  @if (session()->has('notification.message'))
+                        <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                                {{session('notification.message')}}
+                        </div>
+                  @endif
                   <div class="bs-stepper-content">
                     <!-- your steps content here -->
                     <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
