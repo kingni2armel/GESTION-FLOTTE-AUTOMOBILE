@@ -37,6 +37,8 @@ class CreateVehiculesTable extends Migration
             $table->string('numero_chassi')->unique();
             $table->date('date_debut_assurance');
             $table->date('date_fin_assurance');
+            $table->string('path');
+
 
 
             $table->timestamps();

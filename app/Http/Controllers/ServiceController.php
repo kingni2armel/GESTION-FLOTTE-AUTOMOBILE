@@ -60,7 +60,7 @@ class ServiceController extends Controller
                         'commentaire_service'=>$request->commentaireservice
             ]);
             session()->flash('notification.message','Service crée  avec sucess!');
-            session()->flash('notification.type','danger');
+            session()->flash('notification.type','success');
             return redirect()->route('GETLISTESERVICE');
         }
 

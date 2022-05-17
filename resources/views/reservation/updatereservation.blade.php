@@ -11,10 +11,12 @@
     
                                @endforeach
 
+                               <p>Votre reservation est encour de traitement</p>
+
                                @if($statutraitement->count()>0)
 
 
-                                      <p>votre reservation a deja ete <i class="mdi mdi-transit-detour:"></i></p>
+                                      <p>votre reservation a deja ete traite <i class="mdi mdi-transit-detour:"></i></p>
 
 
                                      <a href="{{route('GETPAGEDOWNLOADFILE',['id'=>$_GET['id']])}} "  class="btn-telechargement">

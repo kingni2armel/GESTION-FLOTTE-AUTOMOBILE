@@ -14,15 +14,26 @@
         </section>
 
         @if($errors->any())
-      {
-          @foreach($errors->all() as $error)
-               <div class="text-red-500">
-                          <p> {{$error}}</p>
-               </div>
-          @endforeach
-      } 
+        {
+          <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                <div class="text-red-500 ">
+                            <p> {{$error}}</p>
+                </div>
+            @endforeach
+          </div>
+    
+        } 
+
 
   @endif
+
+
+      @if (session()->has('notification.message'))
+              <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                      {{session('notification.message')}}
+              </div>
+      @endif
 
         <form action="{{route('CREATERSERVATION')}}"  method="post">
 

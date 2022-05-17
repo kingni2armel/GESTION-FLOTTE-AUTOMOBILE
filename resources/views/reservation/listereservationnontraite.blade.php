@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">LISTE DE MES RESERVATIONS</h3>
+          <h3 class="card-title">LISTE DES RESERVATIONS NON TRAITES</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body"> 
@@ -95,7 +95,7 @@
                             </table>
                             {{-- <span>{{$listeuser->links()}}</span> --}}
                         @else
-                                <span> Vous n'avez effectue aucune reservation</span>
+                                <span>Il ya pas de reservation pour le moment</span>
                      @endif
         </div>
         <!-- /.card-body -->

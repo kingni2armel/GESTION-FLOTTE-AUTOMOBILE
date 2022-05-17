@@ -193,6 +193,41 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
+
+               <li class="nav-item">
+                @if(auth()->user()->role == 'chauffeur')
+
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                          
+                    <p>
+                       Gestion reservation
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="{{url('addchauffeur')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Creer  chauffeur</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{route('GETRESERVATIONBYCHAUFFEUR')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p> Liste  reservations</p>
+                      </a>
+      
+                  </ul>
+
+
+                
+                @endif
+      </li>
+
+
+
           <li class="nav-item">
                     @if(auth()->user()->role == 'admin' || auth()->user()->role == 'dispatcheur' || auth()->user()->role == 'superviseur')
 
@@ -233,14 +268,14 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                     <a href="../tables/simple.html" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Supprimer compte</p>
                     </a>
-                  </li>
+                  </li> --}}
                   <li class="nav-item">
-                    <a href="../tables/data.html" class="nav-link">
+                    <a href="{{route('GETPAGESHOWMYINFORMATION')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Mise a jour</p>
                     </a>

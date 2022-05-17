@@ -39,7 +39,7 @@ class ChauffeurController extends Controller
             'email'=>['required','max:250','min:3'],
             'numcni'=>['required','max:250','min:3'],
             'numpermis'=>['required','max:250','min:3'],
-            'status'=>['required','max:250','min:3'],
+            'status'=>['required','max:1','min:1'],
             'password'=>['required','max:250','min:3'],
             
 
@@ -155,7 +155,29 @@ class ChauffeurController extends Controller
         return redirect()->route('GETLISTECHAUFFEUR');
 
       }
+
+
+      /*** funtion qui renvoie les   reservations du chauffeur connecte */
+
+      public function GETRESERVATIONBYCHAUFFEUR()
+      {
+              /** recuperation de l'id du l'utilisateur ayant le role de chauffeur */
+                 $iduser = auth()->user()->id;
+
+             /**recuperation de l'id du chauffeur */
+                $idchauffeur =  Chauffeur::where('chauffeurs.user_id',$iduser);
+
+                $reservations = DB::table('chauffeurs')
+                ->join('reservation_traites','reservation_traites.chauffeur_id','=','chauffeurs.id')
+                ->where('chauffeurs.id',$idchauffeur)
+                ->select('chauffeurs.*')
+                ->get();
+            return view ('chauffeur.listeseechauffeur')
+            ;
+      }
 }
+
+
 
 
 

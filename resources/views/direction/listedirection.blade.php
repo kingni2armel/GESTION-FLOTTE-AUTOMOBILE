@@ -38,7 +38,7 @@
                                                                                        @csrf
                                                                                         <button type="su" class="btn btn-navbar items-but" style=
                                                                                         "background-color:red !important;color:white;pa"type="submit">
-                                                                                        <i class="fas fa-trash"></i>
+                                                                                         <i class="fas fa-trash"></i>
                                                                                         
                                                                                           </button>
                                                                                     </form>

@@ -3,7 +3,14 @@
     <div class="card">
         <div class="card-header">
           <h3 class="card-title">LISTE DE MES RESERVATIONS</h3>
+          
         </div>
+        @if (session()->has('notification.message'))
+        <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                {{session('notification.message')}}
+        </div>
+@endif
+
         <!-- /.card-header -->
         <div class="card-body"> 
                     @if($infomesreservation->count()>0)

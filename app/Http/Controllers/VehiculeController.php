@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Modele;
 use App\Models\Marque;
@@ -63,10 +64,22 @@ class VehiculeController extends Controller
                     'numerochassivehicule'=>['required','max:50','min:3'],
                     'datedebutasurancevehicule'=>['required'],
                     'datefinasurancevehicule'=>['required'],
+                    'avatar'=>['required'],
                     
                 ]); 
 
+                   // $name = Storage::disk('local')->put('avatars',$request->avatar);
 
+                 ///donner un nom dynamique aux fichiers
+                    $filename = time(). '.'.$request->avatar->extension();
+
+                    $path =$request->file('avatar')->storeAs(
+                        'avatars',
+                        $filename,
+                        'public'
+                    
+                    )
+                    ;
 
                 $createvehicule = Vehicule::create([
                   
@@ -80,6 +93,7 @@ class VehiculeController extends Controller
                     'numero_chassi'=>$request->numerochassivehicule,
                     'date_debut_assurance'=>$datedebut,
                     'date_fin_assurance'=>$datefin,
+                    'path'=>$path,
 
     
                     

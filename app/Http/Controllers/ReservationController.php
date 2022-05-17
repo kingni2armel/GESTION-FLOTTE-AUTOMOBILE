@@ -41,7 +41,7 @@ class ReservationController extends Controller
                 'statutconvoiture'=>['required'],
                 'villedepart'=>['required'],
                 'villedestination'=>['required'],
-                'nombredeplace'=>['required','max:1','min:8'],
+                'nombredeplace'=>['required'],
                 'statutchauffeur'=>['required'],        
             ]);
 
@@ -63,6 +63,8 @@ class ReservationController extends Controller
 
 
             ]);
+            session()->flash('notification.message',sprintf("Reservation crée avec succes!"));
+            session()->flash('notification.type','succes');
             return redirect()->route('GETPAGECREATERESERVATION');
      }
 
@@ -119,7 +121,7 @@ class ReservationController extends Controller
 
 
     /**\
-     * function qui permet de mette a hour une reservation abe le commentaire de la sessioon en cour de productiom 
+     * function qui permet de mette a jour une reservation abe le commentaire de la sessioon en cour de productiom 
      */
 
      public function UPDATERESERVATION(Request $request,$id)
@@ -169,6 +171,8 @@ class ReservationController extends Controller
       {
             $reservationdelete = Reservation::find($id);
             $reservationdelete->delete();
+            session()->flash('notification.message',sprintf("Réservation supprimé avec succes!"));
+            session()->flash('notification.type','danger');
             return redirect()->route('GETPAGELISTERESERVATIONBYID');
 
       }
@@ -203,7 +207,7 @@ class ReservationController extends Controller
 
                 $listechauffeurlibre = DB::table('users')
                 ->join('chauffeurs','users.id','=','chauffeurs.user_id')
-                ->select('users.nom','users.prenom','users.numero_telephone','users.email','users.password','chauffeurs.id','chauffeurs.numero_cni','chauffeurs.numero_permis')
+                ->select('users.nom','users.prenom','users.numero_telephone','users.email','users.password','chauffeurs.id','chauffeurs.numero_cni','chauffeurs.numero_permis') 
                 ->where('chauffeurs.statut_chauffeur',1)
                 ->get();
 
@@ -252,11 +256,24 @@ class ReservationController extends Controller
                     'chauffeur_id'=>$request->nomchauffeur,
                     'vehicule_id'=>$request->nomvehicule,
             ]);
+          /**modification du statut du vehicule */
 
-            $reservation->update([
-                'statut_traitement'=>'1'
+           $vehicule = Vehicule::find($request->nomvehicule);
+            $vehicule->update([
+                'statut_vehicule'=>'0'
             ]);
-        
+                 /**modification du statut du chauffeur */
+            $chauffeur = Chauffeur::find($request->nomchauffeur);
+ 
+                $chauffeur->update([
+                    'statut_chauffeur'=>'0'
+                ]);
+
+                /**modification du statut du traitement */
+                    $reservation->update([
+                        'statut_traitement'=>'1'
+                    ]);
+                
             return redirect()->route('GETLISTERESERVATIONONTRAITE');
        }
 
@@ -297,6 +314,16 @@ class ReservationController extends Controller
                 ]
             );
         }
+
+        /*** function qui renvoie la liste de notification d'un utilisateur
+         * @param
+         */
+
+       
+
 }
+
+
+
 
 

@@ -6,7 +6,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1> Creer un utilisateur</h1>
+                <h1> Mes informations</h1>
               </div>
            
             </div>
@@ -34,7 +34,7 @@
         </div>
     @endif
 
-        <form action="{{route('ADDUSER')}}"  method="post">
+        <form action="{{route('UPDATEOINFOUSER')}}"  method="post">
 
           @csrf
 
@@ -66,41 +66,40 @@
                       <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Nom</label>
-                          <input name="nom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre nom">
+                          <input name="mynom" type="text" class="form-control" id="exampleInputEmail1" value="{{auth()->user()->nom }}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Prenom</label>
-                            <input name="prenom" type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre prenom">
+                            <input name="myprenom" type="text" class="form-control" id="exampleInputEmail1" value="{{auth()->user()->prenom }}">
                           </div>
                        
                         <div class="form-group">
                           <label for="exampleInputPassword1">Numero de telephone</label>
-                          <input name="numero" type="number" class="form-control" id="exampleInputPassword1" placeholder="Entrer votre numero">
+                          <input name="mynumero" type="number" class="form-control" id="exampleInputPassword1" value="{{auth()->user()->numero_telephone}}">
                         </div>
                         <p class="btn btn-primary" onclick="stepper.next()">Suivant</p>
                       </div>
                       <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre email">
+                            <input name="myemail" type="email" class="form-control" id="exampleInputEmail1" value="{{auth()->user()->email }}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
-                            <input  name = "password" type="password" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre password">
+                            <input  name = "mypassword" type="password" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre password">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Role</label>
-                                <select name="role" class="form-control select2" style="width: 100%;">
-                                    <option value="dispatcheur" >dispatcheur</option>
-                                    <option value="superviseur">superviseur</option>
-                                   
+                                <select name="myrole" class="form-control select2" style="width: 100%;">
+                                    <option value="{{auth()->user()->role }}" >dispatcheur</option>
+                                    
                                 </select> 
                        </div>
                         <p class="btn btn-primary" onclick="stepper.previous()">Precedent</p>
-                        <button type="submit" class="btn btn-primary" style="margin-top: -15px">Creer</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top: -15px">Mettre a jour</button>
                       </div>
                     </div>
-                  </div>
+                  </div>    
                 </div>
                 <!-- /.card-body -->
                 

@@ -47,9 +47,9 @@ class ClientController extends Controller
                      'prenomclient'=>['required','max:250','min:3'],
                      'numeroclient'=>['required','max:250','min:3'],
                      'emailclient'=>['required','max:250','min:3'],
-                     'nomdirectionclient'=>['required','max:250','min:3'],
-                     'nomdepartementclient'=>['required','max:250','min:3'],
-                     'nomserviceclient'=>['required','max:250','min:3'],
+                     'nomdirectionclient'=>['required'],
+                     'nomdepartementclient'=>['required'],
+                     'nomserviceclient'=>['required'],
                      'passwordclient'=>['required','max:250','min:3'],
                    
               ]);
@@ -167,10 +167,10 @@ class ClientController extends Controller
                             'prenomclientupdate'=>['required','max:250','min:3'],
                             'numeroclientupdate'=>['required','max:250','min:3'],
                             'emailclientupdate'=>['required','max:250','min:3'],
-                            'nomdirectionclientupdate'=>['required','max:250','min:3'],
-                            'nomdepartementclientupdate'=>['required','max:250','min:3'],
-                            'nomserviceclientupdate'=>['required','max:250','min:3'],
-                            'passwordclientupdate'=>['required','max:250','min:3'],
+                            'nomdirectionclientupdate'=>['required'],
+                            'nomdepartementclientupdate'=>['required'],
+                            'nomserviceclientupdate'=>['required'],
+                            'passwordclientupdate'=>['required'],
                           
                      ]);
 

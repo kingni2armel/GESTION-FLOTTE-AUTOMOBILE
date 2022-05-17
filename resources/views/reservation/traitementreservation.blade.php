@@ -50,7 +50,7 @@
                                                 <div class="line"></div>
                                         
                                             </div> 
-                                            <div class="bs-stepper-content">
+                                            <div class="bs-stepper-content">    
                                                 <!-- your steps content here -->
                                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
                                                     <div class="form-group">

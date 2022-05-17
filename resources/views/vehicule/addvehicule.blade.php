@@ -28,7 +28,7 @@
 
         @endif
 
-        <form action="{{route('CREATEVEHICULE')}}"  method="post">
+        <form action="{{route('CREATEVEHICULE')}}"  method="post" enctype="multipart/form-data">
 
           @csrf
 
@@ -138,6 +138,10 @@
                             <label for="exampleInputEmail1">Date debut assurance</label>
                             <input  name = "datefinasurancevehicule" type="date" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre password">
                         </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Photo du vehicule</label>
+                          <input  type="file" id="avatar"  name="avatar"class="form-control" id="exampleInputEmail1" accept="image/png, image/jpeg">
+                      </div>
                       
                         <p class="btn btn-primary" onclick="stepper.previous()">Precedent</p>
                         <button type="submit" class="btn btn-primary" style="margin-top: -15px">Creer</button>

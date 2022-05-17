@@ -18,6 +18,7 @@ class Vehicule extends Model
             'numero_chassi',
             'date_debut_assurance',
             'date_fin_assurance',
+            'path'
 
 
     ];

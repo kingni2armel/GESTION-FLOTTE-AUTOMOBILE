@@ -67,6 +67,13 @@ Route::post('userupdate/{id}',[UserController::class,'UPDATEUSER'])->name('UPDAT
 ->middleware('auth');
 Route::post('deleteuser/{id}',[UserController::class,'DELETEUSER'])->name('DELETEUSER')
 ->middleware('auth');
+
+Route::get('/information',[UserController::class,'GETPAGESHOWMYINFORMATION'])->name('GETPAGESHOWMYINFORMATION')
+->middleware('auth');
+
+
+Route::post('/information',[UserController::class,'UPDATEOINFOUSER'])->name('UPDATEOINFOUSER')
+->middleware('auth');
 /*
 
 * les controlleurs de du chauffeur
@@ -84,6 +91,10 @@ Route::get('/updatechauffeur',[ChauffeurController::class,'GETPAGEUPDATECHAUFFEU
 
 Route::post('updatechauffeur/{id}/{idu}',[ChauffeurController::class,'UPDATECHAUFFEUR'])->name('UPDATECHAUFFEUR')
 ->middleware('auth');
+
+Route::get('reservation-chauffeur',[ChauffeurController::class,'GETRESERVATIONBYCHAUFFEUR'])->name('GETRESERVATIONBYCHAUFFEUR')
+->middleware('auth');
+
 Route::post('deletechauffeur/{id}',[ChauffeurController::class,'DELETECHAUFFEUR'])->name('DELETECHAUFFEUR')
 ->middleware('auth');
 

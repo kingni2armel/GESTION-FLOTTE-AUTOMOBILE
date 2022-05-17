@@ -70,7 +70,7 @@
 
                                 </div>
                             
-                                        <img src="{{url('assets/img/tesla.png')}}" alt="">
+                                        <img src="{{Storage::url($items->path)}}" alt="">
                             
 
                                 @endforeach

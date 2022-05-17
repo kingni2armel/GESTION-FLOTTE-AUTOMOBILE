@@ -100,7 +100,7 @@ class UserController extends Controller
     public function Authenticate(Request $request)
     {
             $request->validate([
-                'email'=>['required','max:10','min:1'],
+                'email'=>['required','max:25','min:1'],
                 'password'=>['required','max:10','min:1'],
             ]);
 
@@ -233,6 +233,48 @@ class UserController extends Controller
 
      }
 
+     /**
+      *  funtion qui renvoie a la page de consultation des donnees de l'utilisateur dont la session est ouvers
+      */
+
+      public function GETPAGESHOWMYINFORMATION()
+      {
+           return view('user.myinfo');
+      }
+
+      /*** function qui permet a un utilisateur de se mettre a jour */
+
+
+      public function UPDATEOINFOUSER(Request $request)
+
+      {
+           $id = auth()->user()->id;
+           $userfind = User::find($id);
+
+           $request->validate([
+            'mynom'=>['required','max:250','min:3'],
+            'myprenom'=>['required','max:250','min:3'],
+            'mynumero'=>['required','max:250','min:3'],
+            'myemail'=>['required','max:50','min:8'],
+            'mypassword'=>['required','max:8','min:4'],
+            'myrole'=>['required'],
+           ]);
+
+           $userfind->update([
+                'nom'=>$request->mynom,
+                'prenom'=>$request->myprenom,
+                'numero'=>$request->mynumero,
+                'email'=>$request->myemail,
+                'password'=>$request->mypassword,
+                'role'=>$request->myrole
+           ]);
+
+           session()->flash('notification.message','Vos informations ont été modifié avec success');
+           session()->flash('notification.type','success');
+           return redirect()->route('GETPAGESHOWMYINFORMATION');
+
+           
+      }
    
 
 }
