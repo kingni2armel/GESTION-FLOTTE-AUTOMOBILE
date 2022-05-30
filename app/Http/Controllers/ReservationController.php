@@ -102,8 +102,9 @@ class ReservationController extends Controller
             $idreservation  =  $_GET['id'];
             $informationdelareservation = DB::table('reservations')
             ->where('id',$idreservation)
+            ->select('reservations.*')
             ->get();
-
+           // die($informationdelareservation);
             $statutraitement = DB::table('reservation_traites')
             ->where('reservation_traites.reservation_id',$idreservation)
             ->get();
@@ -161,6 +162,19 @@ class ReservationController extends Controller
             return redirect()->route('GETPAGELISTERESERVATIONBYID');
      }
 
+       /***  function qui renvoie la liste de  toute les reservations  */
+
+        public function GETLISTEALLRESERVATION()
+
+        {
+                 $numero = 1;
+                 $reservation = Reservation::paginate(10);
+                 return view('reservation.listereservation',[
+                    'reservation'=>$reservation,
+                    'numero'=>$numero
+                     ]);
+        }
+
      /***
       * annuler ou encore supprimer une reservation par le client
       */
@@ -195,6 +209,18 @@ class ReservationController extends Controller
            return view('reservation.listereservationnontraite',['listereservation'=>$listereservation,'nombrereservation'=>$nombrereservation]);
        }
 
+
+       public function GETLISTERESERVATIONTRAITE()
+
+       {
+        $nombrereservation=1;
+        $listereservation = DB::table('reservations')
+        ->select('reservations.*')
+        ->where('statut_traitement',1)
+        ->get(); 
+       return view('reservation.listereservationtraite',['listereservation'=>$listereservation,'nombrereservation'=>$nombrereservation]);
+       }
+
        /**
         *   function qui renvoie a la page de traitement d'une reservation
         */
@@ -207,7 +233,7 @@ class ReservationController extends Controller
 
                 $listechauffeurlibre = DB::table('users')
                 ->join('chauffeurs','users.id','=','chauffeurs.user_id')
-                ->select('users.nom','users.prenom','users.numero_telephone','users.email','users.password','chauffeurs.id','chauffeurs.numero_cni','chauffeurs.numero_permis') 
+                ->select('users.nom','users.prenom','users.numero_telephone','users.email','users.password','chauffeurs.id','chauffeurs.numero_cni','chauffeurs.numero_permis')     
                 ->where('chauffeurs.statut_chauffeur',1)
                 ->get();
 
@@ -292,6 +318,19 @@ class ReservationController extends Controller
         {
             $idreservation = $_GET['id'];
             $iduser  = auth()->user()->id;
+// requete qui recupere la direction,departement,et le service du client
+            $informationdirection = DB::table('users')
+            ->join('clients','users.id','=','clients.user_id')
+            ->join('directions','directions.id','clients.direction_id')
+            ->join('departements','clients.departement_id','=','departements.id')
+            ->join('services','clients.service_id','=','services.id')
+            ->select('directions.*','departements.*','services.*')
+            ->where('users.id',$iduser)
+            ->get();
+//  die($informationdirection);
+
+//requete qui recupere le reste des informations a afficher sur le billet a imprimer
+
             $informationreservationfiledownload= DB::table('reservation_traites')
             ->join('vehicules','reservation_traites.vehicule_id','=','vehicules.id')
             ->join('reservations','reservation_traites.reservation_id','=','reservations.id')
@@ -311,13 +350,30 @@ class ReservationController extends Controller
                 return view('reservation.telechargement',
                 [
                     'informationreservationfiledownload'=>$informationreservationfiledownload,
+                    'informationdirection'=>$informationdirection
                 ]
             );
         }
 
-        /*** function qui renvoie la liste de notification d'un utilisateur
+        /*** function qui renvoie le nombre des reservations non traite
          * @param
          */
+
+         public  function GETNOMBRERESERVATIONNONTRAITE()
+
+         {
+            $nombrereservation=1;
+                $listereservation = DB::table('reservations')
+                ->select('reservations.*')
+                ->where('statut_traitement',0)
+                ->get(); 
+               return view('layout.header',
+               [
+                   'listereservation'=>$listereservation,
+                   'nombrereservation'=>$nombrereservation,
+                   
+            ]);
+         }
 
        
 

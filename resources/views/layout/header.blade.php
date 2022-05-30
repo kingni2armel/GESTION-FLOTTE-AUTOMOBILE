@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{url('plug/fontawesome-free/css/all.min.css')}}">
   <link rel="stylesheet" href="{{url('plug/daterangepicker/daterangepicker.css')}}">
@@ -193,7 +193,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
+               <li class="nav-item">
+                <a href="{{route('GetPage')}}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
 
                <li class="nav-item">
                 @if(auth()->user()->role == 'chauffeur')
@@ -207,12 +214,7 @@
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="{{url('addchauffeur')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Creer  chauffeur</p>
-                      </a>
-                    </li>
+                
                     <li class="nav-item">
                       <a href="{{route('GETRESERVATIONBYCHAUFFEUR')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -583,7 +585,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../forms/general.html" class="nav-link">
+                <a href="{{route('GETLISTEALLRESERVATION')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 13px">Liste reservations</p>
                 </a>
@@ -593,7 +595,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../forms/general.html" class="nav-link">
+                <a href="{{route('GETLISTERESERVATIONTRAITE')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 13px">Liste reservations  traite</p>
                 </a>

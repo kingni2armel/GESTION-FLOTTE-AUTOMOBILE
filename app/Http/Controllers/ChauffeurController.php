@@ -163,17 +163,24 @@ class ChauffeurController extends Controller
       {
               /** recuperation de l'id du l'utilisateur ayant le role de chauffeur */
                  $iduser = auth()->user()->id;
-
-             /**recuperation de l'id du chauffeur */
-                $idchauffeur =  Chauffeur::where('chauffeurs.user_id',$iduser);
-
-                $reservations = DB::table('chauffeurs')
+              
+               /**recuperation de l'id du chauffeur */
+                $idchauffeur =  Chauffeur::where('chauffeurs.user_id',$iduser)->get();
+                
+                $ids= $idchauffeur->first();      
+                $idc = $ids->id;
+              
+                $numero = 1;
+                $reservation = DB::table('chauffeurs')
                 ->join('reservation_traites','reservation_traites.chauffeur_id','=','chauffeurs.id')
-                ->where('chauffeurs.id',$idchauffeur)
-                ->select('chauffeurs.*')
+                ->join('reservations','reservations.id','=','reservation_traites.reservation_id')
+                ->where('reservation_traites.chauffeur_id',$idc)
+                ->select('chauffeurs.*','reservations.*')
                 ->get();
-            return view ('chauffeur.listeseechauffeur')
-            ;
+                return view ('chauffeur.listeseechauffeur',[
+                    'reservation'=>$reservation,
+                    'numero'=>$numero
+                ]);
       }
 }
 

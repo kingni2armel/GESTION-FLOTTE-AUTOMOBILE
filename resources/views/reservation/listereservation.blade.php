@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">LISTE DES RESERVATIONS AUX QUELLES SUIS AFFECTES</h3>
+          <h3 class="card-title">LISTE DES RESERVATIONS TOUTE LES RESERVATIONS</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body "> 
@@ -13,6 +13,7 @@
                                     <thead>
                                             <tr>
                                             <th>numero</th>
+                                            <th>Motif reservation</th>
                                             <th>Ville depart</th>
                                             <th>Ville destination</th>
                                             <th>Date depart</th>
@@ -28,6 +29,7 @@
                                     <tbody>
                                                 @foreach ($reservation as $reservations )
                                                                <td>{{$numero ++}}</td>
+                                                                <td>{{$reservations->motif_demande }}</td>
                                                                 <td>{{$reservations->ville_depart}}</td>
 
                                                                 <td>{{$reservations->ville_destination}}</td>
@@ -65,7 +67,7 @@
                                     </tbody>
                         </table>
                             </div>
-                            {{-- <span>{{$reservation->links()}}</span> --}}
+                            <span>{{$reservation->links()}}</span>
                         @else
                                 <span>Il ya pas de reservation pour le moment</span>
                      @endif

@@ -8,11 +8,24 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
 use Illuminate\Support\Facades\DB;
+use App\Models\Reservation;
 use App\Models\User;
-use App\Models\Dispactcheur;
+use App\Models\Client;
+use App\Models\Vehicule;
+use App\Models\Chauffeur;
+use App\Models\Ville;
+use App\Models\Parking;
+use App\Models\Dispatcheur;
 use App\Models\Superviseur;
+use App\Models\Region;
+use App\Models\Direction;
+use App\Models\Service;
+use App\Models\Departement;
+use App\Models\Marque;
+use App\Models\Modele;
+use App\Models\TypeCarburant;
+use App\Models\ReservationTraite;
 
 
 
@@ -35,7 +48,7 @@ class UserController extends Controller
     
     /*
 
-     function qui renvoie a la page de creation d'un utilisateur
+     function qui renvoie au dashboard
 
     */
 
@@ -43,7 +56,122 @@ class UserController extends Controller
 
     public function GetPage()
     {
-        return view('dashboard.dashboard');
+        /** les reservations du clients */
+        if(auth()->user()->role =='client')
+        {
+            $idusers = auth()->user()->id;   
+            // $idclient =DB::table('users')
+            // ->join('clients','users.id','=','clients.user_id')
+            // ->select('clients.*')
+            // ->where('users.id',$idusers)
+            // ->get() ;
+            // $id_item= $idclient->first();
+            // $idd =$id_item->id;
+
+            $reservationclient = Reservation::where('reservations.user_id',$idusers)->get();
+          
+        }
+
+
+        /** selection du nombre total de reservation */
+            $Allreservation = Reservation::all();
+        /** selection de la liste des reservations non traites   */
+        $listereservationnontraite = DB::table('reservations')
+        ->select('reservations.*')
+        ->where('statut_traitement',0)
+        ->get(); 
+
+        /** selection des reservations  traites */
+        $listereservationtraite = DB::table('reservations')
+        ->select('reservations.*')
+        ->where('statut_traitement',1)
+        ->get();
+
+        /** selection de tout les utilisteurs  */
+
+        $AllUser = User::All();
+
+        /** selection de tout les client */
+
+        $Allclients  = User::where('role','client')->get();
+
+        /** selection de tout les superviseur */
+
+        $Allsuperviseur = User::where('role','superviseur')->get();
+       
+        /** selection de tout les dispatcheur */
+
+        $Alldispatcheur  = User::where('role','dispatcheur')->get();
+
+        /** selection de tout les chauffeurs */
+
+        $Allchauffeur = User::where('role','chauffeur')->get();
+        
+        /** selection de tout les parkings */
+
+        $Allparking = Parking::All();
+
+        /** selection de tout les modeles */
+
+        $Allmodels = Modele::All();
+       
+        /** selection de tout les villes */
+        $Allmarque = Marque::All();
+       
+        /** selection de tout les villes */
+
+        $Allvilles = Ville::All();
+
+        /** selection de tout les regions */
+
+        $Allregion = Region::All();
+
+        /** selection de tout les departements */
+
+        $Alldepartement = Departement::All();
+       
+        /** selection de tout les directions */
+
+        $Alldirection = Direction::All();
+        /** selection de tout les directions */
+
+        $Allservice = Service::All();
+
+        /** selection de tout les type carburants */
+
+        $Allvehicule= Vehicule::All();
+
+        /** selection de tout les type carburants */
+
+        $listedirection = TypeCarburant::All();
+
+        return view('dashboard.dashboard',[
+            'AllUser'=>$AllUser,
+            'Allclients'=>$Allclients,
+            'Allchauffeur'=>$Allchauffeur,
+            'Alldispatcheur'=>$Alldispatcheur,
+            'Allsuperviseur'=>$Allsuperviseur,
+            'Allreservation'=>$Allreservation,
+            'listereservationtraite'=>$listereservationtraite,
+            'listereservationnontraite'=>$listereservationnontraite,
+            'Alldirection'=>$Alldirection,
+            'Alldepartement'=>$Alldepartement,
+            'Allservice'=>$Allservice,
+            'Allparking'=>$Allparking,
+            'Allmodels'=>$Allmodels,
+            'Allvilles'=>$Allvilles,
+            'Allregion'=>$Allregion,
+            'Allmarque'=>$Allmarque,
+            'Allvehicule'=>$Allvehicule,
+          //  'reservationclient'=>$reservationclient
+
+
+
+        ]
+    
+    );
+
+        
     }
 
     /*** 
@@ -164,9 +292,7 @@ class UserController extends Controller
         session()->flash('notification.message','Utilisateur crée  avec sucess!');
         session()->flash('notification.type','success');
 
-
         return redirect()->route('GETLISTEUSER');
-
 
     }
 

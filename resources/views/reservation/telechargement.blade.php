@@ -47,14 +47,7 @@
 
                                 <div class="datas">
 
-                                        <div class="data">          
-                                            <h1 class="title-information">Informations sur le client</h1>
-                                            <p class="data-information">Nom et prenom: {{$items->nom_client}}  {{$items->prenom_client}}</p>
-                                            <p class="data-information">Numero de telephone: +237 956 602 696</p>
-                                            <p class="data-information">Direction:</p>
-                                            <p class="data-information">Departement:</p>
-                                            <p class="data-information">Service:</p>
-                                        </div>
+                                      
                                     
                                     
                                             <div class="data">          
@@ -68,12 +61,29 @@
                                     
                                             </div>
 
+                                            <div class="data data-items">          
+                                                            <h1 class="title-information">Informations sur le client</h1>
+                                                            <p class="data-information">Nom et prenom: {{$items->nom_client}}  {{$items->prenom_client}}</p>
+                                                            <p class="data-information">Numero de telephone: +237 956 602 696</p>
+                                                    @foreach ($informationdirection as $itemsclients )
+
+                                                            <p class="data-information">Direction:{{$itemsclients->nomdirection}}</p>
+                                                            <p class="data-information">Departement:{{$itemsclients->nom_departement}}</p>
+                                                            <p class="data-information">Service:{{$itemsclients->nom_service}}</p>
+                                                    @endforeach
+
+                                            </div>
+
                                 </div>
                             
-                                        <img src="{{Storage::url($items->path)}}" alt="">
                             
 
                                 @endforeach
+
+                             
+
+                                <img  class="image-download" src="{{Storage::url($items->path)}}" alt="">
+
                         
                             </div>
                 

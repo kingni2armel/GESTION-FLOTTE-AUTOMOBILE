@@ -79,7 +79,10 @@ class DepartementController extends Controller
              ->where('id',$id)
              ->get();
              $listedirection  = Direction::All();
-             return view('departement.updatedepartement',['infodepartement'=>$infodepartement,'listedirection'=>$listedirection]);
+             return view('departement.updatedepartement',
+             ['infodepartement'=>$infodepartement,
+             'listedirection'=>$listedirection
+            ]);
          }
 
          /**

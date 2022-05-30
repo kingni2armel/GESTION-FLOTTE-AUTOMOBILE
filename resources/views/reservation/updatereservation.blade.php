@@ -6,26 +6,37 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                            @foreach ( $informationdelareservation as $informationdelareservations )
-                                 <h1> Motif {{$informationdelareservations->motif_demande}}</h1>
+                             @foreach ( $informationdelareservation as $informationdelareservations )
+                                 <h1> MOTIF: {{$informationdelareservations->motif_demande}}</h1>
     
                                @endforeach
 
-                               <p>Votre reservation est encour de traitement</p>
 
-                               @if($statutraitement->count()>0)
+                               @if($informationdelareservations->statut_traitement == 1)
 
 
                                       <p>votre reservation a deja ete traite <i class="mdi mdi-transit-detour:"></i></p>
-
+                                        
 
                                      <a href="{{route('GETPAGEDOWNLOADFILE',['id'=>$_GET['id']])}} "  class="btn-telechargement">
                                                    
                                               <button class="btn btn-primary">VOIR MON RECU</button>
                                         
                                      </a>
+
+                                    @else 
+                                    <p>Votre reservation est encour de traitement</p>
+
                
                                 @endif
+
+
+
+                                @if($informationdelareservations->statut_reservation == 1)
+                                <a href="">Noter le chauffeur</a>
+
+                                @endif
+
               </div>
            
             </div>
@@ -42,6 +53,10 @@
       } 
 
   @endif
+
+
+
+  @if($informationdelareservations->statut_traitement == 0)
 
         @foreach ($informationdelareservation as $informationdelareservations)
                             <form action="{{route('UPDATERESERVATION',['id'=>$informationdelareservations->id])}}"  method="post">
@@ -155,7 +170,7 @@
           
         @endforeach                         
 
-
+    @endif                       
 
 
     

@@ -99,6 +99,7 @@ Route::post('deletechauffeur/{id}',[ChauffeurController::class,'DELETECHAUFFEUR'
 ->middleware('auth');
 
 
+
 /***
  *  lea routes de la region
  * 
@@ -338,4 +339,12 @@ Route::get('listereservation',[ReservationController::class,'GETLISTERESERVATION
 ->middleware('auth');
 
  Route::post('traitement/{id}',[ReservationController::class,'TraitementReservation'])->name('TraitementReservation')
+ ->middleware('auth');
+
+ /** function qui renvoie la liste des reservations */
+
+ Route::get('listereservations',[ReservationController::class,'GETLISTEALLRESERVATION'])->name('GETLISTEALLRESERVATION')
+ ->middleware('auth');
+
+ Route::get('listereservation-traite',[ReservationController::class,'GETLISTERESERVATIONTRAITE'])->name('GETLISTERESERVATIONTRAITE')
  ->middleware('auth');

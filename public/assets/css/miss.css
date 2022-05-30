@@ -57,3 +57,17 @@
 .but-imprimer{
     margin-left: 18px;
 }
+/* .btn-primary{
+    margin-top: 7px !important;
+} */
+
+.image-download{
+    width: 520px;
+    height: 350px;
+    margin-left: 20px;
+
+}
+
+.data-items {
+    margin-right: 115px !important;
+}
