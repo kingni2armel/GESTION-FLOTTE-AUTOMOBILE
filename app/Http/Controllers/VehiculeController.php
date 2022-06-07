@@ -71,6 +71,7 @@ class VehiculeController extends Controller
                    // $name = Storage::disk('local')->put('avatars',$request->avatar);
 
                  ///donner un nom dynamique aux fichiers
+                 
                     $filename = time(). '.'.$request->avatar->extension();
 
                     $path =$request->file('avatar')->storeAs(
@@ -78,8 +79,7 @@ class VehiculeController extends Controller
                         $filename,
                         'public'
                     
-                    )
-                    ;
+                    );
 
                 $createvehicule = Vehicule::create([
                   
@@ -94,10 +94,6 @@ class VehiculeController extends Controller
                     'date_debut_assurance'=>$datedebut,
                     'date_fin_assurance'=>$datefin,
                     'path'=>$path,
-
-    
-                    
-
                 ]);
                 // die($datedebut);
                 session()->flash('notification.message','Véhicule crée  avec sucess!');

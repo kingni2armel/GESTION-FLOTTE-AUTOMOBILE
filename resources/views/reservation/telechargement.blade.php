@@ -82,7 +82,8 @@
 
                              
 
-                                <img  class="image-download" src="{{Storage::url($items->path)}}" alt="">
+                                <img  class="image-download" src="{{Storage::url($
+                                ->path)}}" alt="">
 
                         
                             </div>
