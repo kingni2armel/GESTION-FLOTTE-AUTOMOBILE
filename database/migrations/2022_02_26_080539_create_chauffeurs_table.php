@@ -22,6 +22,7 @@ class CreateChauffeursTable extends Migration
             $table->string('numero_cni')->unique();
             $table->string('numero_permis')->unique();
             $table->boolean('statut_chauffeur');
+            $table->boolean('statut_active');
             $table->timestamps();
         });
     

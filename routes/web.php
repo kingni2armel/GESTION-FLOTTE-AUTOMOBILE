@@ -15,6 +15,8 @@ use  App\Http\Controllers\DepartementController;
 use  App\Http\Controllers\ServiceController;
 use  App\Http\Controllers\ClientController;
 use  App\Http\Controllers\ReservationController;
+use  App\Http\Controllers\NotechauffeurControlleur;
+
 
 
 
@@ -82,22 +84,31 @@ Route::post('/information',[UserController::class,'UPDATEOINFOUSER'])->name('UPD
 
 Route::get('/addchauffeur',[ChauffeurController::class,'GETPAGE'])->name('GETPAGE')
 ->middleware('auth');
-Route::post('/addchauffeur',[ChauffeurController::class,'CREATECHAUFFEUR'])->name('CREATECHAUFFEUR')
-->middleware('auth');
 Route::get('/listechauffeur',[ChauffeurController::class,'GETLISTECHAUFFEUR'])->name('GETLISTECHAUFFEUR')
 ->middleware('auth');
 Route::get('/updatechauffeur',[ChauffeurController::class,'GETPAGEUPDATECHAUFFEUR'])->name('GETPAGEUPDATECHAUFFEUR')
 ->middleware('auth');
-
-Route::post('updatechauffeur/{id}/{idu}',[ChauffeurController::class,'UPDATECHAUFFEUR'])->name('UPDATECHAUFFEUR')
+Route::get('reservation-chauffeur',[ChauffeurController::class,'GETRESERVATIONBYCHAUFFEUR'])->name('GETRESERVATIONBYCHAUFFEUR')
+->middleware('auth');
+Route::get('voir-ma-note',[ChauffeurController::class,'SEEMYNOTE'])->name('SEEMYNOTE')
 ->middleware('auth');
 
-Route::get('reservation-chauffeur',[ChauffeurController::class,'GETRESERVATIONBYCHAUFFEUR'])->name('GETRESERVATIONBYCHAUFFEUR')
+Route::get('liste-chauffeur-désactivé',[ChauffeurController::class,'GETLISTECHAUFFEURDESACTIVE'])->name('GETLISTECHAUFFEURDESACTIVE')
+->middleware('auth');
+
+Route::post('/addchauffeur',[ChauffeurController::class,'CREATECHAUFFEUR'])->name('CREATECHAUFFEUR')
+->middleware('auth');
+Route::post('updatechauffeur/{id}/{idu}',[ChauffeurController::class,'UPDATECHAUFFEUR'])->name('UPDATECHAUFFEUR')
 ->middleware('auth');
 
 Route::post('deletechauffeur/{id}',[ChauffeurController::class,'DELETECHAUFFEUR'])->name('DELETECHAUFFEUR')
 ->middleware('auth');
 
+Route::post('activer-chauffeur/{id}',[ChauffeurController::class,'ACTIVERCHAUFFEUR'])->name('ACTIVERCHAUFFEUR')
+->middleware('auth');
+
+Route::post('update-statut/{id}',[ChauffeurController::class,'MODIFIERMONSTATUT'])->name('MODIFIERMONSTATUT')
+->middleware('auth');
 
 
 /***
@@ -236,15 +247,16 @@ Route::post('deleteville/{id}',[VilleController::class,'DELETEVILLE'])->name('DE
 
   Route::get('adddirection',[DirectionController::class,'GETPAGECREATEDIRECTION'])->name('GETPAGECREATEDIRECTION')
   ->middleware('auth');
-  Route::post('createdirection',[DirectionController::class,'CREATEVEDIRECTION'])->name('CREATEVEDIRECTION')
-  ->middleware('auth');
   Route::get('listedirection',[DirectionController::class,'GETLISTEDIRECTION'])->name('GETLISTEDIRECTION')
   ->middleware('auth');
   Route::get('updatedirection',[DirectionController::class,'GETPAGEUPDATEDIRECTION'])->name('GETPAGEUPDATEDIRECTION')
   ->middleware('auth');
+
   Route::post('updatedirection/{id}',[DirectionController::class,'UPDATEDIRECTION'])->name('UPDATEDIRECTION')
   ->middleware('auth');
   Route::post('deletedirection/{id}',[DirectionController::class,'DELETEDIRECTION'])->name('DELETEDIRECTION')
+  ->middleware('auth');
+  Route::post('createdirection',[DirectionController::class,'CREATEVEDIRECTION'])->name('CREATEVEDIRECTION')
   ->middleware('auth');
 
 
@@ -347,4 +359,9 @@ Route::get('listereservation',[ReservationController::class,'GETLISTERESERVATION
  ->middleware('auth');
 
  Route::get('listereservation-traite',[ReservationController::class,'GETLISTERESERVATIONTRAITE'])->name('GETLISTERESERVATIONTRAITE')
+ ->middleware('auth');
+
+ /**** les routes du controlleur Notechauffeur */
+
+ Route::post('addnote/{idr}/{idc}',[NotechauffeurControlleur::class,'GIVENOTECHAUFFEUR'])->name('GIVENOTECHAUFFEUR')
  ->middleware('auth');

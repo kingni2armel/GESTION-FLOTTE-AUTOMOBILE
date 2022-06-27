@@ -88,13 +88,7 @@
                             <label for="exampleInputEmail1">Password</label>
                             <input  name = "mypassword" type="password" class="form-control" id="exampleInputEmail1" placeholder="Entrer  votre password">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Role</label>
-                                <select name="myrole" class="form-control select2" style="width: 100%;">
-                                    <option value="{{auth()->user()->role }}" >dispatcheur</option>
-                                    
-                                </select> 
-                       </div>
+                 
                         <p class="btn btn-primary" onclick="stepper.previous()">Precedent</p>
                         <button type="submit" class="btn btn-primary" style="margin-top: -15px">Mettre a jour</button>
                       </div>

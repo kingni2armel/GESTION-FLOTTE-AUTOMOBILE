@@ -66,7 +66,8 @@ class ClientController extends Controller
                      'user_id'=>$user->id,
                      'direction_id'=>$request->nomdirectionclient,
                      'departement_id'=>$request->nomdepartementclient,
-                     'service_id'=>$request->nomserviceclient
+                     'service_id'=>$request->nomserviceclient,
+                     'statut_actif'=>1
 
               ]);
               session()->flash('notification.message',sprintf("Client   crée avec succes!"));
@@ -185,7 +186,7 @@ class ClientController extends Controller
                             'prenom'=>$request->prenomclientupdate,
                             'numero_telephone'=>$request->numeroclientupdate,
                             'email'=>$request->emailclientupdate,
-                            'password'=>$request->passwordclientupdate,
+                            'password'=>Hash::make($request->passwordclientupdate),
                      ]);
 
                      session()->flash('notification.message',sprintf(" Client modifié avec succes!"));
@@ -202,8 +203,10 @@ class ClientController extends Controller
 
        {
               $client = Client::find($id);
-              $client->delete();
-              session()->flash('notification.message',sprintf("Suppresion du client éffectué avec sucess !"));
+              $client->update([
+                     'statut_actif'=>0
+              ]);
+              session()->flash('notification.message',sprintf("Le client est maintenant  inactif !"));
               session()->flash('notification.type','danger');
               return redirect()->route('GETLISTECLIENT');
 

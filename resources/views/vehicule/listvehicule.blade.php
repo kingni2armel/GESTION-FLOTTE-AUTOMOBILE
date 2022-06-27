@@ -16,9 +16,10 @@
         <div class="card-body"> 
                     @if($informationvehicule->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped table-responsive">
                                         <thead>
                                                 <tr>
+                                                  <th>#</th>
                                                 <th>Marque</th>
                                                 <th>Modele</th>
                                                 <th>Type carburant</th>
@@ -36,6 +37,7 @@
                                         <tbody>
                                                     @foreach ($informationvehicule as $informationvehiculeS )
                                                             <tr>
+                                                                      <td>{{$row++}}</td>
                                                                     <td>{{$informationvehiculeS->nommarque }} </td>
                                                                     <td>{{$informationvehiculeS->nommodele}}</td>    
                                                                     <td>{{$informationvehiculeS->nomtypecarburant}}</td>
@@ -52,7 +54,9 @@
                                                                                  <div class="parent_items">
                                                                                     <form action="{{route('DELETEVEHICULE',['id'=>$informationvehiculeS->id])}}" method="post">
                                                                                        @csrf
-                                                                                        <button type="su" class="btn btn-navbar items-but" style=
+                                                                                        <button type="su" class="btn btn-navbar items-but"
+                                                                                        title="Supprimer"
+                                                                                        style=
                                                                                         "background-color:red !important;color:white;pa"type="submit">
                                                                                         <i class="fas fa-trash"></i>
                                                                                         
@@ -64,7 +68,8 @@
                                                                                     <a 
                                                                                     href="{{route('GETPAGEUPDATEVEHICULE',['id'=>$informationvehiculeS->id])}}"
                                                                                        class="btn btn-navbar items-but" style=
-                                                                                         "  background-color: #212529;!important;color:white"
+                                                                                          "background-color: #212529;!important;color:white"
+                                                                                          title="Modifier"
                                                                                              type="button"
                                                                                             >
                                                                                             <i class="fas fa-pen"></i>

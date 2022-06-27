@@ -11,7 +11,8 @@ class Client extends Model
         'user_id',
         'direction_id',
         'departement_id',
-        'service_id'
+        'service_id',
+        'statut_actif'
     ];
     use HasFactory;
 }

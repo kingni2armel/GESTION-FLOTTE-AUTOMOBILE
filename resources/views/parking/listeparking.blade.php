@@ -13,10 +13,10 @@
 
 
         <!-- /.card-header -->
-        <div class="card-body"> 
+        <div class="card-body table-responsive p-0"> 
                     @if($infoville->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered  table-hover text-nowrap">
                                         <thead>
                                                 <tr>
                                                     <th>Nom </th>
@@ -40,8 +40,11 @@
                                                                                  <div class="parent_items">
                                                                                     <form action="{{route('DELETEPARKING',['id'=>$infovilles->id])}}" method="post">
                                                                                        @csrf
-                                                                                        <button type="su" class="btn btn-navbar items-but" style=
-                                                                                        "background-color:red !important;color:white;pa"type="submit">
+                                                                                        <button type="submit" 
+                                                                                        class="btn btn-navbar items-but" style=
+                                                                                        "background-color:red !important;color:white;"
+                                                                                        title="Supprimer"
+                                                                                        type="submit">
                                                                                         <i class="fas fa-trash"></i>
                                                                                         
                                                                                           </button>
@@ -54,6 +57,7 @@
                                                                                        class="btn btn-navbar items-but" style=
                                                                                          "  background-color: #212529;!important;color:white"
                                                                                              type="button"
+                                                                                             title="Modifier"
                                                                                             >
                                                                                             <i class="fas fa-pen"></i>
          

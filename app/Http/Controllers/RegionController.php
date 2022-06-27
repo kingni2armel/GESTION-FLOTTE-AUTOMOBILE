@@ -25,8 +25,13 @@ class RegionController extends Controller
     */
     public function GETLISTEREGION(Request $request)
     {
+
+        $row = 1;
          $listeregion = Region::paginate(5);
-         return view('region.listeregion',['listeregion'=>$listeregion]);
+         return view('region.listeregion',[
+            'listeregion'=>$listeregion,
+            'row'=>$row
+        ]);
     }
 
     /***

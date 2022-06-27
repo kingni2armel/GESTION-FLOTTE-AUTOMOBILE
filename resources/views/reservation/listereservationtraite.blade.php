@@ -5,10 +5,10 @@
           <h3 class="card-title">LISTE DES RESERVATIONS  TRAITES</h3>
         </div>
         <!-- /.card-header -->
-        <div class="card-body"> 
+        <div class="card-body table-responsive p-0"> 
                     @if($listereservation->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-hover text-nowrap">
                                         <thead>
                                                 <tr>
                                                 <th>numero</th>

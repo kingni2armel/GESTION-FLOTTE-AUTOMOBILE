@@ -13,10 +13,10 @@
 
 
         <!-- /.card-header -->
-        <div class="card-body"> 
+        <div class="card-body table-responsive p-0"> 
                     @if($listemodele->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered  table-hover text-nowrap">
                                         <thead>
                                                 <tr>
                                                     <th>Nom </th>

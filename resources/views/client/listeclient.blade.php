@@ -1,4 +1,4 @@
-@include('layout.header');
+@include('layout.header')
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
@@ -10,10 +10,10 @@
             </div>
         @endif
         <!-- /.card-header -->
-        <div class="card-body"> 
+        <div class="card-body table-responsive p-0 "> 
                     @if($listeclient->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered  table-hover text-nowrap">
                                         <thead>
                                                 <tr>
                                                     <th>Numero</th>
@@ -43,8 +43,14 @@
                                                                                  <div class="parent_items">
                                                                                     <form action="{{route('DELETECLIENT',['id'=>$listeclientS->id])}}" method="post">
                                                                                        @csrf
-                                                                                        <button type="su" class="btn btn-navbar items-but" style=
-                                                                                        "background-color:red !important;color:white;pa"type="submit">
+                                                                                        <button
+                                                                                         type="su" class="btn btn-navbar items-but"
+                                                                                          style=
+                                                                                        "background-color:red !important;
+                                                                                        color:white"
+                                                                                        title="Rendre inactif"
+                                                                                        type="submit"
+                                                                                        >
                                                                                         <i class="fas fa-trash"></i>
                                                                                         
                                                                                           </button>
@@ -54,11 +60,14 @@
                                                                                  <div class="parent_items">
                                                                                     <a 
                                                                                     href="{{route('GETPAGEUPDATECLIENT',['id'=>$listeclientS->id])}}"
-                                                                                       class="btn btn-navbar items-but" style=
-                                                                                         "  background-color: #212529;!important;color:white"
+                                                                                       class="btn btn-navbar items-but"
+                                                                                        style=
+                                                                                               "background-color: #212529;
+                                                                                               !important;color:white"
+                                                                                               title="Modifier"
                                                                                              type="button"
                                                                                             >
-                                                                                            <i class="fas fa-pen"></i>
+                                                                                            <i title="Modifier"class="fas fa-pen"></i>
          
                                                                                   </a>
                                                                                  </div>
@@ -74,7 +83,7 @@
                             </table>
                             {{-- <span>{{$listeuser->links()}}</span> --}}
                         @else
-                                <span> Il n'existe aucun utilisateur</span>
+                                <span> Il n'existe aucun client </span>
                      @endif
         </div>
         <!-- /.card-body -->

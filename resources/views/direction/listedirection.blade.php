@@ -13,10 +13,10 @@
                  @endif
 
                  
-        <div class="card-body"> 
+        <div class="card-body table-responsive p-0"> 
                     @if($listedirection->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered  table-hover text-nowrap">
                                         <thead>
                                                 <tr>
                                                     <th>Nom </th>
@@ -36,8 +36,13 @@
                                                                                  <div class="parent_items">
                                                                                     <form action="{{route('DELETEDIRECTION',['id'=>$listedirections->id])}}" method="post">
                                                                                        @csrf
-                                                                                        <button type="su" class="btn btn-navbar items-but" style=
-                                                                                        "background-color:red !important;color:white;pa"type="submit">
+                                                                                        <button type="su" 
+                                                                                            class="btn btn-navbar items-but"
+                                                                                            style=
+                                                                                            "background-color:red !important;color:white;"
+                                                                                            title="Supprimer"
+                                                                                            type="submit"
+                                                                                        >
                                                                                          <i class="fas fa-trash"></i>
                                                                                         
                                                                                           </button>
@@ -47,8 +52,10 @@
                                                                                  <div class="parent_items">
                                                                                     <a 
                                                                                     href="{{route('GETPAGEUPDATEDIRECTION',['id'=>$listedirections->id])}}"
-                                                                                       class="btn btn-navbar items-but" style=
-                                                                                         "  background-color: #212529;!important;color:white"
+                                                                                       class="btn btn-navbar items-but"
+                                                                                        style=
+                                                                                          "background-color: #212529;!important;color:white"
+                                                                                          title="Modifier"
                                                                                              type="button"
                                                                                             >
                                                                                             <i class="fas fa-pen"></i>

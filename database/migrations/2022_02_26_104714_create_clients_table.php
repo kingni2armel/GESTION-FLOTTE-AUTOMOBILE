@@ -31,6 +31,8 @@ class CreateClientsTable extends Migration
             $table->foreign('service_id')->references('id')->on('services')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+
+            $table->boolean('statut_actif');
             $table->timestamps();
         });
     }

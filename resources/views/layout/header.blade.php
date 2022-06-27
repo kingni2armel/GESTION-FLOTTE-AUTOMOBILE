@@ -253,6 +253,15 @@
                             <i class="far fa-circle nav-icon"></i>
                             <p> Liste  chauffeurs</p>
                           </a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a href="{{route('GETLISTECHAUFFEURDESACTIVE')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p> Liste  chauffeurs désactivé</p>
+                          </a>
+                        </li>
+          
           
                       </ul>
 

@@ -11,7 +11,9 @@ class Chauffeur extends Model
         'user_id',
         'numero_cni',
         'numero_permis',
-        'statut_chauffeur'
+        'statut_chauffeur',
+        'statut_active'
+        
     ];
     use HasFactory;
 }

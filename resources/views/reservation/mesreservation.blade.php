@@ -12,10 +12,10 @@
 @endif
 
         <!-- /.card-header -->
-        <div class="card-body"> 
+        <div class="card-body table-responsive"> 
                     @if($infomesreservation->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-hover text-nowrap">
                                         <thead>
                                                 <tr>
                                                 <th>numero</th>
@@ -69,7 +69,9 @@
                                                                           <div class="parent_items">
                                                                              <form action="{{route('DELETERESERVATION',['id'=>$infomesreservations->id])}}" method="post">
                                                                                 @csrf
-                                                                                 <button type="su" class="btn btn-navbar items-but" style=
+                                                                                 <button type="su" class="btn btn-navbar items-but"
+                                                                                 title ="Supprimer"
+                                                                                 style=
                                                                                  "background-color:red !important;color:white;pa"type="submit">
                                                                                  <i class="fas fa-trash"></i>
                                                                                  
@@ -82,6 +84,7 @@
                                                                              href="{{route('GETPAGEUPDATRESERVATION',['id'=>$infomesreservations->id])}}"
                                                                                 class="btn btn-navbar items-but" style=
                                                                                   "  background-color: #212529;!important;color:white"
+                                                                                  title="Modifier"
                                                                                       type="button"
                                                                                      >
                                                                                      <i class="fas fa-pen"></i>

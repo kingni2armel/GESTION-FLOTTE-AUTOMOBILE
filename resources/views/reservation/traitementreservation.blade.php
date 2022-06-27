@@ -5,7 +5,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
                 @foreach ( $infosurlareservation as $infosurlareservations )
-                                      <h1> traitement de la reservation de  {{$infosurlareservations->nom_client}}  {{$infosurlareservations->prenom_client}}</h1>
+                                      <h1> Traitement de la reservation de  {{$infosurlareservations->nom_client}}  {{$infosurlareservations->prenom_client}}</h1>
                     
                 @endforeach
             </div>
@@ -16,11 +16,14 @@
 
       @if($errors->any())
     {
-        @foreach($errors->all() as $error)
-             <div class="text-red-500">
-                        <p> {{$error}}</p>
-             </div>
-        @endforeach
+        <div class="alert alert-danger">
+
+                @foreach($errors->all() as $error)
+                    <div class="text-red-500">
+                                <p> {{$error}}</p>
+                    </div>
+                @endforeach
+        </div>
     } 
 
 @endif
@@ -57,7 +60,7 @@
                                                         <label for="exampleInputEmail1">Nom du chauffeur    </label>
                                                         <select name="nomchauffeur" type="text" class="form-control" id="exampleInputEmail1">
                                                                     @foreach ($listechauffeurlibre as $listechauffeurlibres)
-                                                                            <option value="{{$listechauffeurlibres->id}}">{{$listechauffeurlibres->nom}}</option>
+                                                                            <option value="{{$listechauffeurlibres->id}}">{{$listechauffeurlibres->nom}} {{$listechauffeurlibres->prenom}}</option>
                                                                     @endforeach
                                                         </select>
                                                     </div>

@@ -1,4 +1,4 @@
-@include('layout.header');
+@include('layout.header')
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
@@ -13,12 +13,13 @@
 
 
         <!-- /.card-header -->
-        <div class="card-body"> 
+        <div class="card-body table-responsive p-0"> 
                     @if($listeregion->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-hover text-nowrap">
                                         <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Nom </th>
                                                     <th>Commentaire</th>
                                                     <th>Operation</th>
@@ -28,6 +29,7 @@
                                         <tbody>
                                                     @foreach ($listeregion as $listeregions )
                                                             <tr>
+                                                                <td>{{$row++}}</td>
                                                                     <td>{{$listeregions->nom }}</td>
                                                                     <td>{{$listeregions->commentaire}}</td>    
                                                                     
@@ -37,7 +39,9 @@
                                                                                     <form action="{{route('DELETEREGION',['id'=>$listeregions->id])}}" method="post">
                                                                                        @csrf
                                                                                         <button type="su" class="btn btn-navbar items-but" style=
-                                                                                        "background-color:red !important;color:white;pa"type="submit">
+                                                                                        "background-color:red !important;color:white;"
+                                                                                        title="Supprimer"
+                                                                                        type="submit">
                                                                                         <i class="fas fa-trash"></i>
                                                                                         
                                                                                           </button>
@@ -47,7 +51,9 @@
                                                                                  <div class="parent_items">
                                                                                     <a 
                                                                                     href="{{route('GETPAGEUPDATEREGION',['id'=>$listeregions->id])}}"
-                                                                                       class="btn btn-navbar items-but" style=
+                                                                                       class="btn btn-navbar items-but" 
+                                                                                       title="Modifier"
+                                                                                       style=
                                                                                          "  background-color: #212529;!important;color:white"
                                                                                              type="button"
                                                                                             >

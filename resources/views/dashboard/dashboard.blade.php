@@ -1,6 +1,4 @@
-@include('layout.header');
-
-
+@include('layout.header')
 
         
 <div class="content-wrapper">
@@ -47,24 +45,24 @@
               <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-success">
-                  <div class="inner">
-  
-  
-                          @if ($Allclients->count()>0)
-                              <h3>{{$Allclients->count()}}</h3>
-                              @else
-                                  <h3>0</h3>
-                         @endif    
-  
-                    <p>Nombre de clients</p>
-                  </div>
-                  <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                  </div>
-                  <a href="{{route('GETLISTECLIENT')}}" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
+                    <div class="inner">
+    
+    
+                            @if ($Allclients->count()>0)
+                                <h3>{{$Allclients->count()}}</h3>
+                                @else
+                                    <h3>0</h3>
+                          @endif    
+    
+                      <p>Nombre de clients</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="{{route('GETLISTECLIENT')}}" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
 
+                  </div>
                 </div>
-              </div>
   
   
               <!-- ./col -->
@@ -319,6 +317,26 @@
                               </div>
                             </div>
                           </div>
+
+                          <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                              <div class="inner">
+      
+                                  @if ($Allregion->count()>0)
+                                  <h3>{{$Allregion->count()}}</h3>
+                                  @else
+                                      <h3>0</h3>
+                                  @endif              
+                                <p>Nombre de regions</p>
+                              </div>
+                              <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                              </div>
+                            </div>
+                          </div>
+
+
                           <!-- ./col -->
                   
               @endif
@@ -380,8 +398,8 @@
                               <div class="small-box bg-danger">
                                 <div class="inner">
                              
-                                    @if ($Alldispatcheur->count()>0)
-                                    <h3>{{$Alldispatcheur->count()}}</h3>
+                                    @if ($reservationclient->count()>0)
+                                    <h3>{{$reservationclient->count()}}</h3>
                                     @else
                                         <h3>0</h3>
                                   @endif

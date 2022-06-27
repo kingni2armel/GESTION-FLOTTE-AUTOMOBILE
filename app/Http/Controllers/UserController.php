@@ -69,7 +69,9 @@ class UserController extends Controller
             // $idd =$id_item->id;
 
             $reservationclient = Reservation::where('reservations.user_id',$idusers)->get();
-          
+  
+        } else {
+            $reservationclient = 0;
         }
 
 
@@ -93,7 +95,7 @@ class UserController extends Controller
 
         /** selection de tout les client */
 
-        $Allclients  = User::where('role','client')->get();
+        $Allclients  = Client::all();
 
         /** selection de tout les superviseur */
 
@@ -163,8 +165,7 @@ class UserController extends Controller
             'Allregion'=>$Allregion,
             'Allmarque'=>$Allmarque,
             'Allvehicule'=>$Allvehicule,
-          //  'reservationclient'=>$reservationclient
-
+            'reservationclient'=>$reservationclient
 
 
         ]
@@ -330,7 +331,7 @@ class UserController extends Controller
             'prenom'=>$request->prenomupdate,
             'numero_telephone'=>$request->numeroupdate,
             'email'=>$request->emailupdate,
-            'password'=>$request->passwordupdate,
+            'password'=>Hash::make($request->passwordupdate),
             'role'=>$request->roleupdate
          ]);
 
@@ -383,7 +384,6 @@ class UserController extends Controller
             'mynumero'=>['required','max:250','min:3'],
             'myemail'=>['required','max:50','min:8'],
             'mypassword'=>['required','max:8','min:4'],
-            'myrole'=>['required'],
            ]);
 
            $userfind->update([
@@ -392,7 +392,6 @@ class UserController extends Controller
                 'numero'=>$request->mynumero,
                 'email'=>$request->myemail,
                 'password'=>$request->mypassword,
-                'role'=>$request->myrole
            ]);
 
            session()->flash('notification.message','Vos informations ont été modifié avec success');

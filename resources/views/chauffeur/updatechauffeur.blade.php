@@ -30,6 +30,14 @@
 
 
      @endif
+
+        @if (session()->has('notification.message'))
+            <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                    {{session('notification.message')}}
+            </div>
+       @endif
+
+
         @foreach ( $infochauffeur as $infochauffeurs )
                   <form action="{{route('UPDATECHAUFFEUR',['id'=>$id=$_GET['id'],'idu'=>$idu=$infochauffeurs->user_id])}}"  method="post">
 

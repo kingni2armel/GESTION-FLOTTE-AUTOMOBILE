@@ -28,7 +28,12 @@ class ReservationController extends Controller
      public function GETPAGECREATERESERVATION()
      {
         $listedesville = Ville::all();
-         return view('reservation.createreservation',['listedesville'=>$listedesville]);
+        $iduser = auth()->user()->id;
+        $client= Client::where('clients.user_id',$iduser)->get();
+         return view('reservation.createreservation',[
+             'listedesville'=>$listedesville,
+            'client'=>$client
+            ]);
      }
 
      public function CREATERSERVATION(Request $request)
@@ -77,6 +82,7 @@ class ReservationController extends Controller
         {
              $nombrereservation = 1;
              $idUser = auth()->user()->id;
+         
              $infomesreservation= DB::table('reservations')
              ->where('reservations.user_id',$idUser)
              ->get();
@@ -98,6 +104,17 @@ class ReservationController extends Controller
 
         public function  GETPAGEUPDATRESERVATION()
         {
+            $iduser = auth()->user()->id;
+            $idreservation =  $_GET['id'];
+
+            $reservation =  DB::table('reservations')
+            ->join('reservation_traites','reservations.id','=','reservation_traites.reservation_id')
+            ->select('reservation_traites.chauffeur_id')
+            ->where('reservations.id',$idreservation)
+            ->get();
+       
+
+
             $listedesville = Ville::all();
             $idreservation  =  $_GET['id'];
             $informationdelareservation = DB::table('reservations')
@@ -114,6 +131,7 @@ class ReservationController extends Controller
                 'informationdelareservation'=>$informationdelareservation,
                 'listedesville'=>$listedesville,
                 'statutraitement'=>$statutraitement,
+                'chauffeurreservationid'=>$reservation
             
             ]);
         }
@@ -158,7 +176,8 @@ class ReservationController extends Controller
                 'statut_traitement'=>'0',
 
             ]);
-
+            session()->flash('notification.message',sprintf("Réservation modifié avec succes!"));
+            session()->flash('notification.type','danger');
             return redirect()->route('GETPAGELISTERESERVATIONBYID');
      }
 
@@ -175,9 +194,10 @@ class ReservationController extends Controller
                      ]);
         }
 
-     /***
-      * annuler ou encore supprimer une reservation par le client
-      */
+
+         /***
+           * annuler ou encore supprimer une reservation par le client
+         */
 
 
       public function DELETERESERVATION(Request $request,$id)
@@ -206,19 +226,28 @@ class ReservationController extends Controller
             ->select('reservations.*')
             ->where('statut_traitement',0)
             ->get(); 
-           return view('reservation.listereservationnontraite',['listereservation'=>$listereservation,'nombrereservation'=>$nombrereservation]);
+           return view('reservation.listereservationnontraite',[
+            'listereservation'=>$listereservation,
+            'nombrereservation'=>$nombrereservation
+        ]);
        }
 
+       /*** 
+        *  function  qui renvoie la page pour lister des reservations deja traites 
+        */
 
        public function GETLISTERESERVATIONTRAITE()
 
        {
-        $nombrereservation=1;
-        $listereservation = DB::table('reservations')
-        ->select('reservations.*')
-        ->where('statut_traitement',1)
-        ->get(); 
-       return view('reservation.listereservationtraite',['listereservation'=>$listereservation,'nombrereservation'=>$nombrereservation]);
+            $nombrereservation=1;
+            $listereservation = DB::table('reservations')
+            ->select('reservations.*')
+            ->where('statut_traitement',1)
+            ->get(); 
+        return view('reservation.listereservationtraite',[
+            'listereservation'=>$listereservation,
+            'nombrereservation'=>$nombrereservation
+    ]);
        }
 
        /**
@@ -233,8 +262,16 @@ class ReservationController extends Controller
 
                 $listechauffeurlibre = DB::table('users')
                 ->join('chauffeurs','users.id','=','chauffeurs.user_id')
-                ->select('users.nom','users.prenom','users.numero_telephone','users.email','users.password','chauffeurs.id','chauffeurs.numero_cni','chauffeurs.numero_permis')     
+                ->select('users.nom',
+                'users.prenom',
+                'users.numero_telephone',
+                'users.email',
+                'users.password',
+                'chauffeurs.id',
+                'chauffeurs.numero_cni',
+                'chauffeurs.numero_permis')     
                 ->where('chauffeurs.statut_chauffeur',1)
+                ->where('chauffeurs.statut_active',1)
                 ->get();
 
                 /** collection de la liste des vehicules libres */

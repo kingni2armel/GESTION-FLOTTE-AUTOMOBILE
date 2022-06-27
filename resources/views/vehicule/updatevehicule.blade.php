@@ -138,7 +138,7 @@
                                         </div>
                                         
                                         <p class="btn btn-primary" onclick="stepper.previous()">Precedent</p>
-                                        <button type="submit" class="btn btn-primary" style="margin-top: -15px">Creer</button>
+                                        <button type="submit" class="btn btn-primary" style="margin-top: -15px">Modifier</button>
                                         </div>
                                     </div>
                                     </div>

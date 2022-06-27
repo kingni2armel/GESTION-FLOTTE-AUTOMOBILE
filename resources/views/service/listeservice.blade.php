@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">LISTE DES SERVICES</h3>
+          <h3 class="card-title table-responsive">LISTE DES SERVICES</h3>
         </div>
 
             @if (session()->has('notification.message'))
@@ -16,7 +16,7 @@
         <div class="card-body"> 
                     @if($listeservice->count()>0)
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-hover text-nowrap">
                                         <thead>
                                                 <tr>
                                                     <th>Nom </th>
@@ -37,8 +37,12 @@
                                                                                  <div class="parent_items">
                                                                                     <form action="{{route('DELETESERVICE',['id'=>$infoservices->id])}}" method="post">
                                                                                        @csrf
-                                                                                        <button type="su" class="btn btn-navbar items-but" style=
-                                                                                        "background-color:red !important;color:white;pa"type="submit">
+                                                                                        <button
+                                                                                                title="Supprimer"
+                                                                                                class="btn btn-navbar items-but" style=
+                                                                                                "background-color:red !important;color:white;
+                                                                                                "type="submit"
+                                                                                        >
                                                                                         <i class="fas fa-trash"></i>
                                                                                         
                                                                                           </button>
@@ -48,10 +52,13 @@
                                                                                  <div class="parent_items">
                                                                                     <a 
                                                                                     href="{{route('GETPAGEUPDATESERVICE',['id'=>$infoservices->id])}}"
-                                                                                       class="btn btn-navbar items-but" style=
+                                                                                       class="btn btn-navbar items-but" 
+                                                                                       title="Modifier"
+                                                                                       style=
                                                                                          "  background-color: #212529;!important;color:white"
                                                                                              type="button"
                                                                                             >
+                                                                                            
                                                                                             <i class="fas fa-pen"></i>
          
                                                                                   </a>

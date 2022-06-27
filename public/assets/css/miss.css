@@ -4,6 +4,10 @@
 }
 .parent {
     display: flex;
+    justify-content: space-around;
+}
+.parents:{
+    display: flex;
     justify-content: space-between;
 }
 .nameuppercae{
@@ -71,3 +75,6 @@
 .data-items {
     margin-right: 115px !important;
 }
+
+
+

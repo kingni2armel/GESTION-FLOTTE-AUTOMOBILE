@@ -4,7 +4,7 @@
     
 
                             <div class="" id="print">
-                                <div class="parent">
+                                <div class="parents">
                                     <h1 class="nameagence">LIGHT RESERVATION</h1>
                         
                                     <div class="conteiner_information">
@@ -82,8 +82,7 @@
 
                              
 
-                                <img  class="image-download" src="{{Storage::url($
-                                ->path)}}" alt="">
+                                <img  class="image-download" src="{{Storage::url($items->path)}}" alt="">
 
                         
                             </div>

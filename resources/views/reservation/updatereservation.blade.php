@@ -11,6 +11,16 @@
     
                                @endforeach
 
+                               {{-- affichage des messages de  --}}
+
+                               @if (session()->has('notification.message'))
+                               <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                                       {{session('notification.message')}}
+                               </div>
+                               @endif
+
+                          
+
 
                                @if($informationdelareservations->statut_traitement == 1)
 
@@ -33,7 +43,48 @@
 
 
                                 @if($informationdelareservations->statut_reservation == 1)
-                                <a href="">Noter le chauffeur</a>
+                                  <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                                Noter le chauffeur 
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            @foreach($chauffeurreservationid as $data)
+
+                                            
+                                                        <form action= "{{route('GIVENOTECHAUFFEUR',['idr'=>$_GET['id'],'idc'=>$data->chauffeur_id])}}" method="post">
+                                                            @csrf
+                                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Noter le chauffeur</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                                    <div class="form-group">
+                                                                                            <label for="">Note du chauffeur sur 20</label>
+                                                                                            <input type="number" name="note" class="form-control" id="">
+                                                                                    </div>
+                
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Laisser un commentaire</label>
+                                                                                        <textarea name="commentaire" class="form-control" id="" cols="30" rows="10"></textarea>
+                                                                                </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        
+                                                        </form>
+                                            @endforeach 
 
                                 @endif
 
@@ -45,14 +96,14 @@
 
         @if($errors->any())
       {
-          @foreach($errors->all() as $error)
-               <div class="text-red-500">
-                          <p> {{$error}}</p>
-               </div>
-          @endforeach
+            @foreach($errors->all() as $error)
+                <div class="text-red-500">
+                            <p> {{$error}}</p>
+                </div>
+            @endforeach
       } 
 
-  @endif
+      @endif
 
 
 

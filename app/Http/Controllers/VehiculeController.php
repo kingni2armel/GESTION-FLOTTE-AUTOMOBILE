@@ -94,6 +94,7 @@ class VehiculeController extends Controller
                     'date_debut_assurance'=>$datedebut,
                     'date_fin_assurance'=>$datefin,
                     'path'=>$path,
+                    'statut_vehicule'=>1
                 ]);
                 // die($datedebut);
                 session()->flash('notification.message','Véhicule crée  avec sucess!');
@@ -113,6 +114,7 @@ class VehiculeController extends Controller
 
      public function GETLISTEVEHICULE()
      {
+        $row =1;
    
         $informationvehicule = DB::table('vehicules')
         ->join('marques','vehicules.marque_id','=','marques.id')
@@ -132,7 +134,9 @@ class VehiculeController extends Controller
         ->get();
         //die($informationvehicule);
         return view('vehicule.listvehicule',[
-            'informationvehicule'=>$informationvehicule]);
+            'informationvehicule'=>$informationvehicule,
+            'row'=>$row
+        ]);
      }
 
 

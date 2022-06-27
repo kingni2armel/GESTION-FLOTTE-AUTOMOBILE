@@ -1,15 +1,23 @@
-@include('layout.header');
+@include('layout.header')
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
           <h3 class="card-title">LISTE DES RESERVATIONS AUX QUELLES SUIS AFFECTES</h3>
         </div>
         <!-- /.card-header -->
-        <div class="card-body "> 
+        <div class="card-body table-responsive p-0 "> 
+
+
+              @if (session()->has('notification.message'))
+                  <div class="alert alert-{{session('notification.type')}}" style="margin-top: 15px">
+                    {{session()->get('notification.message')}}
+                  </div>
+          
+              @endif
                     @if($reservation->count()>0)
 
-                            <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                            <div class="">
+                                <table id="example1" class="table table-bordered  table-hover text-nowrap">
                                     <thead>
                                             <tr>
                                             <th>numero</th>
@@ -22,6 +30,7 @@
                                             <th>Statut convoiture</th>
                                             <th>Date et heure de l'operation</th>
                                             <th>Statut</th>
+                                            <th>Operations</th>
 
                                             </tr>
                                     </thead>
@@ -55,7 +64,53 @@
 
 
                                                                 <td >
-                                                                        non                    
+                                                                    <div class="parent">
+                                                                            <div class="parent_items">
+
+                                                                                              @if ($reservations->statut_reservation==0)
+                                                                                                      Non
+                                                                                              @else
+                                                                                                      Oui
+                                                                                            @endif  
+                                                                            </div>
+                                                                            <div class="parent_items">
+                                                                                      <form action="{{route('MODIFIERMONSTATUT',['id'=>$reservations->id])}}" method="post">
+                                                                                              @csrf
+                                                                                                  <button
+                                                                                                        class="items-but"
+                                                                                                        style="border:red;background-color: red;!important;color:white"type="submit">
+                                                                                                        <i  title="Mettre fin a la reservation"class="fas fa-pen"></i>
+                                                                                                  </button>
+                                                                                      </form>
+                                                                            </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+
+                                                                  @if ($reservations->statut_reservation==1)
+                                                                        <div class="parent">
+
+
+                                                                          
+                                                
+                                                                          <div class="parent_items">
+                                                                                        <a 
+                                                                                        href="{{route('SEEMYNOTE',['id'=>$reservations->id])}}"
+                                                                                            class="btn btn-navbar items-but" style=
+                                                                                              "  background-color: #212529;!important;color:white"
+                                                                                                
+                                                                                                >
+                                                                                                <i  title="Voir ma note"class="fas fa-pen"></i>
+
+                                                                                          </a>
+                                                                          </div>
+                                                                   </div>
+                                                          @else 
+                                                              Note pas encore disponible
+                                                          @endif  
+                                                 
+                                                         </td>
+                                                                                         
                                                               
                                                         </tr>  
 

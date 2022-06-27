@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Chauffeur;
 use App\Models\User;
+use App\Models\Reservation;
+use App\Models\NoteChauffeur;
+
 
 
 
@@ -57,7 +60,8 @@ class ChauffeurController extends Controller
             'user_id'=>$createUser->id,
             'numero_cni'=>$request->numcni,
             'numero_permis'=>$request->numpermis,
-            'statut_chauffeur'=>$request->status
+            'statut_chauffeur'=>$request->status,
+            'statut_active'=>1
         ]);
         session()->flash('notification.message',sprintf("Chauffeur   crée avec succes!"));
         session()->flash('notification.type','success');
@@ -73,14 +77,24 @@ class ChauffeurController extends Controller
      public function GETLISTECHAUFFEUR(Request $request)
 
      {
+        $row = 1;
         $listechauffeur = DB::table('users')
         ->join('chauffeurs','users.id','=','chauffeurs.user_id')
-        ->select('users.*','chauffeurs.*')
+        ->select(
+        'users.nom',
+        'users.prenom',
+        'users.numero_telephone',
+        'users.email',        
+        'chauffeurs.*')
         ->get();
 
         $listepagination = Chauffeur::paginate(7);
         
-        return view('chauffeur.listechauffeur',['listechauffeur'=>$listechauffeur,'listepagination'=>$listepagination]);
+        return view('chauffeur.listechauffeur',[
+            'listechauffeur'=>$listechauffeur,
+            'listepagination'=>$listepagination,
+            'row'=>$row
+        ]);
      }
 
      /**
@@ -88,7 +102,7 @@ class ChauffeurController extends Controller
       */
 
       public function GETPAGEUPDATECHAUFFEUR()
-      {
+      { 
         $id = $_GET['id'];
         $infochauffeurs = DB::table('users')
         ->join('chauffeurs','users.id','=','chauffeurs.user_id')
@@ -125,7 +139,7 @@ class ChauffeurController extends Controller
             'prenom'=>$request->prenomupdate,
             'numero_telephone'=>$request->numeroupdate,
             'email'=>$request->emailupdate,
-            'password'=>$request->passwordupdate,
+            'password'=>Hash::make($request->passwordupdate),
             'role'=>'chauffeur'
          ]);
          $infochauffeurupdate->update([
@@ -148,9 +162,11 @@ class ChauffeurController extends Controller
       public function DELETECHAUFFEUR(Request $request,$id)
       {
 
-        $deleteuser = User::find($id);
-        $deleteuser->delete();
-        session()->flash('notification.message',sprintf("Chauffeur supprimé avec succes!"));
+        $deleteuser = Chauffeur::find($id);
+        $deleteuser->update([
+            'statut_active'=>0
+        ]);
+        session()->flash('notification.message',sprintf("Chauffeur désactivé avec succes!"));
         session()->flash('notification.type','danger');
         return redirect()->route('GETLISTECHAUFFEUR');
 
@@ -161,27 +177,109 @@ class ChauffeurController extends Controller
 
       public function GETRESERVATIONBYCHAUFFEUR()
       {
-              /** recuperation de l'id du l'utilisateur ayant le role de chauffeur */
-                 $iduser = auth()->user()->id;
+        /** recuperation de l'id du l'utilisateur ayant le role de chauffeur */
+            $iduser = auth()->user()->id;
               
-               /**recuperation de l'id du chauffeur */
-                $idchauffeur =  Chauffeur::where('chauffeurs.user_id',$iduser)->get();
-                
-                $ids= $idchauffeur->first();      
-                $idc = $ids->id;
-              
-                $numero = 1;
-                $reservation = DB::table('chauffeurs')
-                ->join('reservation_traites','reservation_traites.chauffeur_id','=','chauffeurs.id')
-                ->join('reservations','reservations.id','=','reservation_traites.reservation_id')
-                ->where('reservation_traites.chauffeur_id',$idc)
-                ->select('chauffeurs.*','reservations.*')
-                ->get();
-                return view ('chauffeur.listeseechauffeur',[
-                    'reservation'=>$reservation,
-                    'numero'=>$numero
-                ]);
+        /**recuperation de l'id du chauffeur */
+        $idchauffeur =  Chauffeur::where('chauffeurs.user_id',$iduser)->get();
+        $ids= $idchauffeur->first();      
+        $idc = $ids->id;   
+        $numero = 1;
+        $reservation = DB::table('chauffeurs')
+        ->join('reservation_traites','reservation_traites.chauffeur_id','=','chauffeurs.id')
+        ->join('reservations','reservations.id','=','reservation_traites.reservation_id')
+        ->where('reservation_traites.chauffeur_id',$idc)
+        ->select('chauffeurs.*','reservations.*')
+        ->get();
+        return view ('chauffeur.listeseechauffeur',[
+            'reservation'=>$reservation,
+            'numero'=>$numero
+        ]);
       }
+
+      /*** fuctiGETRESERVATIONBYCHAUFFEURon qui renvoie a la page qui permet de voir si un client a donne une note sur la reservation */
+
+
+
+      public function SEEMYNOTE()
+      {
+            $id = $_GET['id'];
+
+            $note =  NoteChauffeur::where('note_chauffeurs.reservation_id',$id)->get();
+           // die($note);
+
+            return view('chauffeur.manote',[
+                'note'=>$note
+            ]);
+            
+      }
+
+      /*** function qui permet a un chauffeur de modifier son statut apres une reservation */
+
+      public function MODIFIERMONSTATUT(Request $request,$id)
+      {
+            $iduser =  Chauffeur::where('chauffeurs.user_id',auth()->user()->id)->get();            
+            $idc = $iduser->first();
+            $reservation =  Reservation::find($id);
+            $reservation->update([
+                    'statut_reservation'=>1
+            ]);
+          
+            $idchauffeur = $idc->id;
+            $chauffeur =  Chauffeur::find($idchauffeur);
+
+            $chauffeur->update([
+                'statut_chauffeur'=>1
+            ]);
+            session()->flash('notification.message',sprintf("Vous avez modifié votre statut avec succes!"));
+            session()->flash('notification.type','success');
+            return redirect()->route('GETRESERVATIONBYCHAUFFEUR');
+
+      }
+
+      /*** function qui renvoie la liste des chauffeurs desactives */
+
+
+     public function GETLISTECHAUFFEURDESACTIVE()
+
+     {
+        $row= 1;
+        $listechauffeur = DB::table('users')
+        ->join('chauffeurs','users.id','=','chauffeurs.user_id')
+        ->select(
+        'users.nom',
+        'users.prenom',
+        'users.numero_telephone',
+        'users.email',        
+        'chauffeurs.*')
+        ->where('statut_active',0)
+        ->get();
+
+        $listepagination = Chauffeur::paginate(7);
+        
+        return view('chauffeur.listechauffeurdesactive',[
+            'listechauffeur'=>$listechauffeur,
+            'listepagination'=>$listepagination,
+            'row'=>$row
+        ]);
+     }
+
+     /*** functionn qui permet d'activer un chauffeur */
+
+     public function ACTIVERCHAUFFEUR(Request $request,$id)
+     {
+
+       $deleteuser = Chauffeur::find($id);
+       $deleteuser->update([
+           'statut_active'=>1
+       ]);
+       session()->flash('notification.message',sprintf("Chauffeur activé avec succes!"));
+       session()->flash('notification.type','success');
+       return redirect()->route('GETLISTECHAUFFEUR');
+
+     }
+
+     
 }
 
 

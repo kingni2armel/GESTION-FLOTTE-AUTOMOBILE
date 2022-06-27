@@ -61,11 +61,11 @@
                                                                                     @if($listechauffeurs->statut_chauffeur==0)
 
                                                                                     @else
-                                                                                    <form action="{{route('DELETECHAUFFEUR',['id'=>$listechauffeurs->id])}}" method="post">
+                                                                                    <form action="{{route('ACTIVERCHAUFFEUR',['id'=>$listechauffeurs->id])}}" method="post">
                                                                                         @csrf
-                                                                                         <button  title ="Désactiver" type="su" class="btn btn-navbar items-but" style=
+                                                                                         <button  title ="Activer" type="su" class="btn btn-navbar items-but" style=
                                                                                          "background-color:red !important;color:white;pa"type="submit">
-                                                                                         <i title ="Désactiver" class="fas fa-trash"></i>
+                                                                                         <i title ="Activer" class="fas fa-trash"></i>
                                                                                          
                                                                                            </button>
                                                                                      </form>
@@ -96,7 +96,7 @@
                             </table>
                             <span>{{$listepagination->links()}}</span>
                         @else
-                                <span> Il n'existe aucun chauffeur</span>
+                                <span style="margin-left:20px"> Il n'existe aucun chauffeur désactivé</span>
                      @endif
         </div>
         <!-- /.card-body -->
