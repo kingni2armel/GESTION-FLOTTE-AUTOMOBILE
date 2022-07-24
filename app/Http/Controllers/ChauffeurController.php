@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Chauffeur;
 use App\Models\User;
 use App\Models\Reservation;
+use App\Models\Vehicule;
+use App\Models\ReservationTraite;
 use App\Models\NoteChauffeur;
 
 
@@ -47,26 +49,36 @@ class ChauffeurController extends Controller
             
 
         ]);
-        $createUser = User::create([
-            'nom'=>$request->nom,
-            'prenom'=>$request->prenom,
-            'numero_telephone'=>$request->numero,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-            'role'=>'chauffeur'
-        ]);
+        $chauffeur = User::where('users.email',$request->email);
 
-        $createChauffeur = Chauffeur::create([
-            'user_id'=>$createUser->id,
-            'numero_cni'=>$request->numcni,
-            'numero_permis'=>$request->numpermis,
-            'statut_chauffeur'=>$request->status,
-            'statut_active'=>1
-        ]);
-        session()->flash('notification.message',sprintf("Chauffeur   crée avec succes!"));
-        session()->flash('notification.type','success');
-        return redirect()->route('GETPAGE');
-
+        if($chauffeur->count()>0)
+        {
+            session()->flash('notification.message',sprintf("Email existe deja!"));
+            session()->flash('notification.type','danger');
+            return redirect()->route('GETPAGE');
+    
+        } else {
+            
+            $createUser = User::create([
+                'nom'=>$request->nom,
+                'prenom'=>$request->prenom,
+                'numero_telephone'=>$request->numero,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password),
+                'role'=>'chauffeur'
+            ]);
+            $createChauffeur = Chauffeur::create([
+                'user_id'=>$createUser->id,
+                'numero_cni'=>$request->numcni,
+                'numero_permis'=>$request->numpermis,
+                'statut_chauffeur'=>$request->status,
+                'statut_active'=>1
+            ]);
+            session()->flash('notification.message',sprintf("Chauffeur   crée avec succes!"));
+            session()->flash('notification.type','success');
+            return redirect()->route('GETPAGE');
+    
+        }
     }
 
     /**
@@ -220,13 +232,25 @@ class ChauffeurController extends Controller
       {
             $iduser =  Chauffeur::where('chauffeurs.user_id',auth()->user()->id)->get();            
             $idc = $iduser->first();
+
             $reservation =  Reservation::find($id);
             $reservation->update([
                     'statut_reservation'=>1
             ]);
-          
+            
             $idchauffeur = $idc->id;
             $chauffeur =  Chauffeur::find($idchauffeur);
+
+            $reservationencour = ReservationTraite::where('reservation_id',$id)->get();
+            $reservationvehicule = $reservationencour->first();
+
+            $vehiculeId = $reservationvehicule->vehicule_id;
+
+            $vehicule =  Vehicule::find($vehiculeId);
+            
+            $vehicule->update([
+                'statut_vehicule'=>1
+            ]);
 
             $chauffeur->update([
                 'statut_chauffeur'=>1

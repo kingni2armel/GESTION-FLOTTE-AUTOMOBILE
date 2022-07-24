@@ -49,7 +49,6 @@ class ReservationController extends Controller
                 'nombredeplace'=>['required'],
                 'statutchauffeur'=>['required'],        
             ]);
-
               $clientcreatereservation  = Reservation::create([
                     'user_id'=>auth()->user()->id,
                     'nom_client'=>auth()->user()->nom,
@@ -65,11 +64,9 @@ class ReservationController extends Controller
                     'statut_convoiture'=>$request->statutconvoiture,
                     'statut_reservation'=>'0',
                     'statut_traitement'=>'0',
-
-
-            ]);
-            session()->flash('notification.message',sprintf("Reservation crée avec succes!"));
-            session()->flash('notification.type','succes');
+              ]);
+            session()->flash('notification.message','Reservation crée avec succes!');
+            session()->flash('notification.type','success');
             return redirect()->route('GETPAGECREATERESERVATION');
      }
 
@@ -176,7 +173,7 @@ class ReservationController extends Controller
                 'statut_traitement'=>'0',
 
             ]);
-            session()->flash('notification.message',sprintf("Réservation modifié avec succes!"));
+            session()->flash('notification.message','Réservation modifié avec succes!');
             session()->flash('notification.type','danger');
             return redirect()->route('GETPAGELISTERESERVATIONBYID');
      }
@@ -205,7 +202,7 @@ class ReservationController extends Controller
       {
             $reservationdelete = Reservation::find($id);
             $reservationdelete->delete();
-            session()->flash('notification.message',sprintf("Réservation supprimé avec succes!"));
+            session()->flash('notification.message','Réservation supprimé avec succes!');
             session()->flash('notification.type','danger');
             return redirect()->route('GETPAGELISTERESERVATIONBYID');
 

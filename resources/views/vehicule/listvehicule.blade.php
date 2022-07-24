@@ -24,7 +24,7 @@
                                                 <th>Modele</th>
                                                 <th>Type carburant</th>
                                                 <th>Nom parking</th>
-                                                <th>Statut</th>
+resources/views/user                                                <th>Statut</th>
                                                 <th>Immatriculation</th>
                                                 <th>Kilometrage</th>
                                                 <th>Numero de chassi</th>

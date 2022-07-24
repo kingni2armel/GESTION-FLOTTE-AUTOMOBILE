@@ -19,7 +19,11 @@ use App\Models\Parking;
 use App\Models\Dispatcheur;
 use App\Models\Superviseur;
 use App\Models\Region;
-use App\Models\Direction;
+use App\Models\Direction; // if(strlen($request->numeroclient)>9)
+// {
+//        session()->flash('notification.message',sprintf("Entrer un bon numero!"));
+//        session()->flash('notification.type','danger');
+// }
 use App\Models\Service;
 use App\Models\Departement;
 use App\Models\Marque;
@@ -36,7 +40,11 @@ class UserController extends Controller
     {
         
     }    
-    
+     // if(strlen($request->numeroclient)>9)
+              // {
+              //        session()->flash('notification.message',sprintf("Entrer un bon numero!"));
+              //        session()->flash('notification.type','danger');
+              // }
     /**
      * page de connexion
      */
@@ -267,33 +275,44 @@ class UserController extends Controller
 
 
         ]);
-        $createUser = User::create([
-            'nom'=>$request->nom,
-            'prenom'=>$request->prenom,
-            'numero_telephone'=>$request->numero,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-            'role'=>$request->role,
 
-        ]);
+        $user =  User::where('users.email',$request->email);
+        if($user->count()<0)
 
-        if($createUser->role =='dispatcheur')
-        
         {
-            Dispactcheur::create([
-                'user_id'=> $createUser->id,
+            $createUser = User::create([
+                'nom'=>$request->nom,
+                'prenom'=>$request->prenom,
+                'numero_telephone'=>$request->numero,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password),
+                'role'=>$request->role,
+    
             ]);
-        } else if ($createUser->role == "superviseur") 
+    
+            if($createUser->role =='dispatcheur')
+            
+            {
+                Dispactcheur::create([
+                    'user_id'=> $createUser->id,
+                ]);
+            } else if ($createUser->role == "superviseur") 
+            {
+                Superviseur::create([
+                        'user_id'=>$createUser->id,
+                ]);
+            }
+    
+            session()->flash('notification.message','Utilisateur crée  avec sucess!');
+            session()->flash('notification.type','success');
+    
+            return redirect()->route('GETLISTEUSER');
+        } else 
         {
-            Superviseur::create([
-                    'user_id'=>$createUser->id,
-            ]);
+            session()->flash('notification.message','Email existe  deja!');
+            session()->flash('notification.type','danger');
+            return redirect()->route('GETPAGES');
         }
-
-        session()->flash('notification.message','Utilisateur crée  avec sucess!');
-        session()->flash('notification.type','success');
-
-        return redirect()->route('GETLISTEUSER');
 
     }
 

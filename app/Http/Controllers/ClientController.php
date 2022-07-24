@@ -45,7 +45,7 @@ class ClientController extends Controller
               $request->validate([
                      'nomclient'=>['required','max:250','min:3'],
                      'prenomclient'=>['required','max:250','min:3'],
-                     'numeroclient'=>['required','max:250','min:3'],
+                     'numeroclient'=>['required','max:9','min:9'],
                      'emailclient'=>['required','max:250','min:3'],
                      'nomdirectionclient'=>['required'],
                      'nomdepartementclient'=>['required'],
@@ -54,27 +54,37 @@ class ClientController extends Controller
                    
               ]);
 
-              $user = User::create([
-                   'nom'=>$request->nomclient,
-                   'prenom'=>$request->prenomclient,
-                   'numero_telephone'=>$request->numeroclient,
-                   'email'=>$request->emailclient,
-                   'password'=>Hash::make($request->passwordclient),
-                   'role'=>"client"
-              ]);
-              $clienttable = Client::create([
-                     'user_id'=>$user->id,
-                     'direction_id'=>$request->nomdirectionclient,
-                     'departement_id'=>$request->nomdepartementclient,
-                     'service_id'=>$request->nomserviceclient,
-                     'statut_actif'=>1
+              $user =  User::where('users.email',$request->emailclient)->get();
 
-              ]);
-              session()->flash('notification.message',sprintf("Client   crée avec succes!"));
-              session()->flash('notification.type','success');
-
-
-              return redirect()->route('GETPAGECREATECLIENT');
+              if($user->count()>0){
+                     session()->flash('notification.message',sprintf("L'email exist deja!"));
+                     session()->flash('notification.type','danger'); 
+                     return redirect()->route('GETPAGECREATECLIENT');
+  
+                
+              } 
+              else { 
+                     $user = User::create([
+                            'nom'=>$request->nomclient,
+                            'prenom'=>$request->prenomclient,
+                            'numero_telephone'=>$request->numeroclient,
+                            'email'=>$request->emailclient,
+                            'password'=>Hash::make($request->passwordclient),
+                            'role'=>"client"
+                       ]);
+                       $clienttable = Client::create([
+                              'user_id'=>$user->id,
+                              'direction_id'=>$request->nomdirectionclient,
+                              'departement_id'=>$request->nomdepartementclient,
+                              'service_id'=>$request->nomserviceclient,
+                              'statut_actif'=>1
+         
+                       ]);
+                       session()->flash('notification.message',sprintf("Client   crée avec succes!"));
+                       session()->flash('notification.type','success');
+                       return redirect()->route('GETPAGECREATECLIENT');
+              }
+             
       }
 
            /**
